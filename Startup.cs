@@ -35,7 +35,7 @@ namespace CursoIdiomasAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CursoIdiomasAPI", Version = "v1" });
             });
 
-            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("Shop"));
+            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CursoIdiomasAPI"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
