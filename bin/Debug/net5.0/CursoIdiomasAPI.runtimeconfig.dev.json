@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\nando\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\nando\\.nuget\\packages"
-    ]
-  }
-}
