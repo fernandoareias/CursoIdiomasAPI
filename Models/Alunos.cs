@@ -8,12 +8,26 @@ namespace CursoIdiomasAPI.Models
     [Table("Alunos")]
     public class Aluno
     {
+
+        public Aluno()
+        {
+            // Matrícula do aluno não pode ser repetida
+            Matricula = Guid.NewGuid().ToString().Substring(0, 8).ToUpper();
+        }
         [Key]
-        public int Id { get; set; }
+        public int Id { get; private set; }
+
+        [Required(ErrorMessage = "Esse campo é obrigatório")]
+        public string Matricula { get; private set; }
+
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
         [MaxLength(80, ErrorMessage = "Esse campo deve conter até 60 caracteres")]
-        public string Name { get; set; }
+        public string Nome { get; set; }
+
+        [Required(ErrorMessage = "Esse campo é obrigatório")]
+        [MaxLength(80, ErrorMessage = "Esse campo deve conter até 60 caracteres")]
+        public string Sobrenome { get; set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
         [MaxLength(120, ErrorMessage = "Esse campo deve conter até 120 caracteres")]
@@ -24,13 +38,9 @@ namespace CursoIdiomasAPI.Models
         public string Telefone { get; set; }
 
 
-
-
-        // FK da tabela Matricula
-        [Required(ErrorMessage = "Esse campo é requerido")]
-        public int IdTurma { get; set; }
-        [ForeignKey("IdTurma")]
-        public Turma Turma { get; set; }
+        [Required(ErrorMessage = "Esse campo é obrigatório")]
+        public int TurmaId { get; set; }
+        public Turma Turma { get; private set; }
 
 
     }
