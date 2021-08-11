@@ -6,6 +6,7 @@ using CursoIdiomasAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+//Completo
 namespace CursoIdiomasAPI.Controllers
 {
     [Route("v1/cursos/")]
@@ -22,23 +23,22 @@ namespace CursoIdiomasAPI.Controllers
                 // Caso exista, retorna uma lista de cursos registrados
                 var cursos = await context.Cursos.AsNoTracking().ToListAsync();
                 if (cursos == null)
-                    // HTTP STATUS CODE => 404 
-                    return NotFound();
+                    return NotFound(new { message = "Não há curso registrado" });
                 // HTTP STATUS CODE => 200 
                 return Ok(cursos);
             }
             catch (System.Exception)
             {
-                // HTTP STATUS CODE => 400 
-                return BadRequest();
+                // HTTP STATUS CODE => 500 
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
 
-        // Busca o aluno pelo ID 
+        // Busca o curso pelo ID 
         [HttpGet]
         [AllowAnonymous]
-        [Route("{id:int}")] // HTTP GET => https://localhost:5001/v1/alunos/{id}
-        public async Task<ActionResult<List<Curso>>> GetById(int id, [FromServices] DataContext context)
+        [Route("{id:int}")] // HTTP GET => https://localhost:5001/v1/cursos/{id}
+        public async Task<ActionResult<Curso>> GetById(int id, [FromServices] DataContext context)
         {
             try
             {
@@ -46,15 +46,15 @@ namespace CursoIdiomasAPI.Controllers
                 var curso = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
 
                 if (curso == null)
-                    return NotFound(new { message = "Não foi possivel encontrar o aluno" });
+                    return NotFound(new { message = "Não foi possível encontrar o curso" });
 
                 // HTTP STATUS CODE => 200 
                 return Ok(curso);
             }
             catch (System.Exception)
             {
-                // HTTP STATUS CODE => 400 
-                return BadRequest(new { message = "" });
+                // HTTP STATUS CODE => 500 
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
 
@@ -63,15 +63,23 @@ namespace CursoIdiomasAPI.Controllers
         [Route("")] // HTTP POST => https://localhost:5001/v1/cursos/
         public async Task<ActionResult<Curso>> Post([FromServices] DataContext context, [FromBody] Curso model)
         {
-            if (!ModelState.IsValid)
-                // HTTP STATUS CODE => 400 
-                return BadRequest(ModelState);
+            try
+            {
+                if (!ModelState.IsValid)
+                    // HTTP STATUS CODE => 400 
+                    return BadRequest(ModelState);
 
-            context.Cursos.Add(model);
-            await context.SaveChangesAsync();
+                context.Cursos.Add(model);
+                await context.SaveChangesAsync();
 
-            // HTTP STATUS CODE => 200 
-            return Ok(model);
+                // HTTP STATUS CODE => 200 
+                return Ok(new { message = "Curso registrado com sucesso." });
+            }
+            catch (System.Exception)
+            {
+                // HTTP STATUS CODE => 500
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+            }
         }
 
         [HttpPut]
@@ -81,7 +89,7 @@ namespace CursoIdiomasAPI.Controllers
         {
             if (model.Id != id)
                 // HTTP STATUS CODE => 404 
-                return NotFound();
+                return NotFound(new { message = "Não foi possível encontrar o curso informado" });
 
             if (!ModelState.IsValid)
                 // HTTP STATUS CODE => 400 
@@ -94,16 +102,16 @@ namespace CursoIdiomasAPI.Controllers
                 // Salva no banco 
                 await context.SaveChangesAsync();
                 // HTTP STATUS CODE => 200 
-                return Ok(model);
+                return Ok(new { message = "Curso atualizado com sucesso." });
             }
             // Capturar o erro de concorrencia de escrita no banco, pode ser tratado posteriormente.
             catch (DbUpdateConcurrencyException)
             {
-                return BadRequest(new { message = "Esse curso ja foi atualizada" });
+                return BadRequest(new { message = "Esse curso já foi atualizado." });
             }
             catch (System.Exception)
             {
-                throw;
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
 
@@ -113,25 +121,30 @@ namespace CursoIdiomasAPI.Controllers
 
         public async Task<ActionResult<Curso>> Delete(int id, [FromServices] DataContext context)
         {
-            // Caso exista, retorna o primeiro curso encontrado que possui o ID passado via URL
+
+            // Verficia se o curso informado existe
             var cursos = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
             if (cursos == null)
-
                 // HTTP STATUS CODE => 404
-                return NotFound(new { message = "Não foi possivel encontrar o cursos" });
+                return NotFound(new { message = "Não foi possível encontrar o curso." });
+
+            // Verfica se o curso atual possui turmas ativas
+            var turmas = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            if (turmas != null)
+                return BadRequest(new { message = "Não é possivel deletar cursos, pois ele possui turmas ativas" });
+
             try
             {
                 context.Cursos.Remove(cursos);
                 await context.SaveChangesAsync();
 
                 // HTTP STATUS CODE => 200 
-                return Ok(new { message = "Curso removido com sucesso !" });
+                return Ok(new { message = "Curso removido com sucesso." });
             }
             catch (System.Exception)
             {
-
                 // HTTP STATUS CODE => 400 
-                return BadRequest(new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde" });
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
 
