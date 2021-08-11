@@ -9,7 +9,7 @@ namespace CursoIdiomasAPI.Models
     {
 
         [Key]
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
@@ -23,6 +23,5 @@ namespace CursoIdiomasAPI.Models
         [Required(ErrorMessage = "Esse campo é obrigatório")]
         [Range(1, int.MaxValue, ErrorMessage = "O preço deve ser maior que zero")]
         public decimal Preco { get; set; }
-
     }
 }
