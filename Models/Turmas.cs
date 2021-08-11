@@ -14,28 +14,14 @@ namespace CursoIdiomasAPI.Models
     {
 
         [Key]
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
-
-        // FK da tabela Curso
-        [Required(ErrorMessage = "Esse campo é requerido")]
-        public int IdCurso { get; set; }
-
-        [ForeignKey("IdCurso")]
-        public Curso Curso { get; set; }
-
-
-        // FK da tabela Professor
-        [Required(ErrorMessage = "Esse campo é requerido")]
-        public int IdProfessor { get; set; }
-        [ForeignKey("IdProfessor")]
-        public Professores Professor { get; set; }
-
-
-
-        // Datas de Inicio e fim da turma
         public DateTime DataInicio { get; set; }
-
         public DateTime DataFim { get; set; }
+
+        [Required(ErrorMessage = "Esse campo é obrigatório")]
+        public int ProfessoresId { get; set; }
+
+        public Professores Professores { get; private set; }
     }
 }
