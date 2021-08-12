@@ -37,13 +37,13 @@ namespace CursoIdiomasAPI.Controllers
         // Busca o curso pelo ID 
         [HttpGet]
         [AllowAnonymous]
-        [Route("{id:int}")] // HTTP GET => https://localhost:5001/v1/cursos/{id}
-        public async Task<ActionResult<Curso>> GetById(int id, [FromServices] DataContext context)
+        [Route("{cursoId}")] // HTTP GET => https://localhost:5001/v1/cursos/{id}
+        public async Task<ActionResult<Curso>> GetById(string cursoId, [FromServices] DataContext context)
         {
             try
             {
                 // Caso exista, retorna o primeiro aluno encontrado que possui o ID passado via URL
-                var curso = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+                var curso = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id.ToString() == cursoId);
 
                 if (curso == null)
                     return NotFound(new { message = "Não foi possível encontrar o curso" });
@@ -57,37 +57,37 @@ namespace CursoIdiomasAPI.Controllers
                 return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
+        /*
+                [HttpPost]
+                [AllowAnonymous]
+                [Route("")] // HTTP POST => https://localhost:5001/v1/cursos/
+                public async Task<ActionResult<Curso>> Post([FromServices] DataContext context, [FromBody] Curso model)
+                {
+                    try
+                    {
+                        if (!ModelState.IsValid)
+                            // HTTP STATUS CODE => 400 
+                            return BadRequest(ModelState);
 
-        [HttpPost]
-        [AllowAnonymous]
-        [Route("")] // HTTP POST => https://localhost:5001/v1/cursos/
-        public async Task<ActionResult<Curso>> Post([FromServices] DataContext context, [FromBody] Curso model)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                    // HTTP STATUS CODE => 400 
-                    return BadRequest(ModelState);
+                        context.Cursos.Add(model);
+                        await context.SaveChangesAsync();
 
-                context.Cursos.Add(model);
-                await context.SaveChangesAsync();
-
-                // HTTP STATUS CODE => 200 
-                return Ok(new { message = "Curso registrado com sucesso." });
-            }
-            catch (System.Exception)
-            {
-                // HTTP STATUS CODE => 500
-                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
-            }
-        }
-
+                        // HTTP STATUS CODE => 200 
+                        return Ok(new { message = "Curso registrado com sucesso." });
+                    }
+                    catch (System.Exception)
+                    {
+                        // HTTP STATUS CODE => 500
+                        return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+                    }
+                }
+        */
         [HttpPut]
         [AllowAnonymous]
-        [Route("{id:int}")] // HTTP PUT => https://localhost:5001/v1/cursos/{id}
-        public async Task<ActionResult<Curso>> Put(int id, [FromServices] DataContext context, [FromBody] Curso model)
+        [Route("{cursoId}")] // HTTP PUT => https://localhost:5001/v1/cursos/{id}
+        public async Task<ActionResult<Curso>> Put(string cursoId, [FromServices] DataContext context, [FromBody] Curso model)
         {
-            if (model.Id != id)
+            if (model.Id.ToString() != cursoId)
                 // HTTP STATUS CODE => 404 
                 return NotFound(new { message = "Não foi possível encontrar o curso informado" });
 
@@ -117,22 +117,22 @@ namespace CursoIdiomasAPI.Controllers
 
         [HttpDelete]
         [AllowAnonymous]
-        [Route("{id:int}")] // HTTP DELETE => https://localhost:5001/v1/cursos/{id}
+        [Route("{cursoId}")] // HTTP DELETE => https://localhost:5001/v1/cursos/{id}
 
-        public async Task<ActionResult<Curso>> Delete(int id, [FromServices] DataContext context)
+        public async Task<ActionResult<Curso>> Delete(string cursoId, [FromServices] DataContext context)
         {
 
             // Verficia se o curso informado existe
-            var cursos = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            var cursos = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id.ToString() == cursoId);
             if (cursos == null)
                 // HTTP STATUS CODE => 404
                 return NotFound(new { message = "Não foi possível encontrar o curso." });
 
             // Verfica se o curso atual possui turmas ativas
-            var turmas = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            /*var turmas = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
             if (turmas != null)
                 return BadRequest(new { message = "Não é possivel deletar cursos, pois ele possui turmas ativas" });
-
+*/
             try
             {
                 context.Cursos.Remove(cursos);

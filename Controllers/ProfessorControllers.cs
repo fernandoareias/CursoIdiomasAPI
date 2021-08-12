@@ -7,125 +7,81 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 // Completo
+
+
 namespace CursoIdiomasAPI.Controllers
 {
-    [Route("v1/cursos/")]
-    public class ProfessorController : ControllerBase
+    [Route("v1/")]
+    public class Professor : ControllerBase
     {
 
         [HttpGet]
-        [AllowAnonymous]
-        [Route("professores")] // HTTP GET => https://localhost:5001/v1/cursos/professores
+        [Route("cursos/professores")]
 
-        public async Task<ActionResult<List<Professores>>> GetAllByAll([FromServices] DataContext context)
+        public async Task<ActionResult<List<Professores>>> Get([FromServices] DataContext context)
         {
-            try
-            {
-                // Caso exista, retorna uma lista de professores registrados
-                var professores = await context.Professores.Include(x => x.Cursos).AsNoTracking().ToListAsync();
-                if (professores == null)
-                    // HTTP STATUS CODE => 404 
-                    return NotFound(new { message = "Não há professores registrados." });
-                // HTTP STATUS CODE => 200 
-                return Ok(professores);
-            }
-            catch (System.Exception)
-            {
-                // HTTP STATUS CODE => 400 
-                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
-            }
+            var professor = await context.Professores.AsNoTracking().ToListAsync();
+            if (professor == null)
+                return NotFound(new { message = "Não há professor registrado" });
+            return Ok(professor);
         }
+
 
         [HttpGet]
         [AllowAnonymous]
-        [Route("{idCurso:int}/professores")] // HTTP GET => https://localhost:5001/v1/cursos/{idCurso}/professores
-        public async Task<ActionResult<List<Professores>>> GetAllByIdCourse(int idCurso, [FromServices] DataContext context)
+        [Route("cursos/professores/{professorId}")] // HTTP GET => https://localhost:5001/v1/cursos/{id}
+        public async Task<ActionResult<Professores>> GetById(string professorId, [FromServices] DataContext context)
         {
             try
             {
-                // Caso exista, retorna o primeiro professor encontrado que possui o ID passado via URL
-                var professores = await context.Professores.AsNoTracking().Where(x => x.CursoId == idCurso).ToListAsync();
+                // Caso exista, retorna o primeiro aluno encontrado que possui o ID passado via URL
+                var professor = await context.Professores.AsNoTracking().FirstOrDefaultAsync(x => x.Id.ToString() == professorId);
 
-                if (professores == null)
-                    return NotFound(new { message = "Não há professor registrado neste curso." });
+                if (professor == null)
+                    return NotFound(new { message = "Não foi possível encontrar o professor" });
 
                 // HTTP STATUS CODE => 200 
-                return Ok(professores);
+                return Ok(professor);
             }
             catch (System.Exception)
             {
-                // HTTP STATUS CODE => 400 
+                // HTTP STATUS CODE => 500 
                 return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
+        /*
+                [HttpPost]
+                [AllowAnonymous]
+                [Route("professores")] // HTTP POST => https://localhost:5001/v1/cursos/
+                public async Task<ActionResult<Professores>> Post([FromServices] DataContext context, [FromBody] Professores model)
+                {
+                    try
+                    {
+                        if (!ModelState.IsValid)
+                            // HTTP STATUS CODE => 400 
+                            return BadRequest(ModelState);
 
-        // Busca o professores pelo ID 
-        [HttpGet]
-        [AllowAnonymous]
-        [Route("professores/{id:int}")] // HTTP GET => https://localhost:5001/v1/cursos/professores/{id}
-        public async Task<ActionResult<Professores>> GetByTeacherId(int id, [FromServices] DataContext context)
-        {
-            try
-            {
-                // Caso exista, retorna o primeiro professor encontrado que possui o ID passado via URL
-                var professores = await context.Professores
-                .AsNoTracking()
-                .Include(x => x.Cursos)
-                .FirstOrDefaultAsync(x => x.Id == id);
+                        context.Professores.Add(model);
+                        await context.SaveChangesAsync();
 
-                if (professores == null)
-                    return NotFound(new { message = "Não foi possível encontrar o professor." });
-
-                // HTTP STATUS CODE => 200 
-                return Ok(professores);
-            }
-            catch (System.Exception)
-            {
-                // HTTP STATUS CODE => 400 
-                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
-            }
-        }
-
-
-        [HttpPost]
-        [AllowAnonymous]
-        [Route("{idCurso:int}/professores")] // HTTP POST => https://localhost:5001/v1/cursos/{idCurso}/professores
-        public async Task<ActionResult<Professores>> Post(int idCurso, [FromServices] DataContext context, [FromBody] Professores model)
-        {
-
-            var curso = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == idCurso);
-            if (curso == null)
-                return NotFound(new { message = "Não foi possivel encontrar o curso." });
-
-            if (model.CursoId != idCurso)
-                return BadRequest(new { message = "Não foi possível registrar o professor, ID inválido." });
-
-            if (!ModelState.IsValid)
-                // HTTP STATUS CODE => 400 
-                return BadRequest(ModelState);
-
-            try
-            {
-                context.Professores.Add(model);
-                await context.SaveChangesAsync();
-
-                // HTTP STATUS CODE => 200 
-                return Ok(new { message = "Professor registrado com sucesso." });
-            }
-            catch (System.Exception)
-            {
-                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
-            }
-        }
-
+                        // HTTP STATUS CODE => 200 
+                        return Ok(new { message = "Curso registrado com sucesso." });
+                    }
+                    catch (System.Exception)
+                    {
+                        // HTTP STATUS CODE => 500
+                        return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+                    }
+                }
+        */
         [HttpPut]
         [AllowAnonymous]
-        [Route("professores/{id:int}")] // HTTP PUT => https://localhost:5001/v1/cursos/professores/{id}
-        public async Task<ActionResult<Professores>> Put(int id, [FromServices] DataContext context, [FromBody] Professores model)
+        [Route("cursos/professores/{professorId}")] // HTTP PUT => https://localhost:5001/v1/cursos/{id}
+        public async Task<ActionResult<Professores>> Put(string professorId, [FromServices] DataContext context, [FromBody] Professores model)
         {
-            if (model.Id != id)
+            if (model.Id.ToString() != professorId)
                 // HTTP STATUS CODE => 404 
-                return BadRequest(new { message = "Não foi possível registrar o professor ID inválido." });
+                return NotFound(new { message = "Não foi possível encontrar o curso informado" });
 
             if (!ModelState.IsValid)
                 // HTTP STATUS CODE => 400 
@@ -138,12 +94,12 @@ namespace CursoIdiomasAPI.Controllers
                 // Salva no banco 
                 await context.SaveChangesAsync();
                 // HTTP STATUS CODE => 200 
-                return Ok(new { message = "Professor atualizado com sucesso." });
+                return Ok(new { message = "Curso atualizado com sucesso." });
             }
             // Capturar o erro de concorrencia de escrita no banco, pode ser tratado posteriormente.
             catch (DbUpdateConcurrencyException)
             {
-                return BadRequest(new { message = "Esse professor já foi atualizado." });
+                return BadRequest(new { message = "Esse curso já foi atualizado." });
             }
             catch (System.Exception)
             {
@@ -153,31 +109,35 @@ namespace CursoIdiomasAPI.Controllers
 
         [HttpDelete]
         [AllowAnonymous]
-        [Route("professores/{id:int}")] // HTTP DELETE => https://localhost:5001​/v1​/cursos​/professores​/{id}
+        [Route("cursos/professores/{professorId}")] // HTTP DELETE => https://localhost:5001/v1/cursos/{id}
 
-        public async Task<ActionResult<Professores>> Delete(int id, [FromServices] DataContext context)
+        public async Task<ActionResult<Professores>> Delete(string professorId, [FromServices] DataContext context)
         {
-            // Caso exista, retorna o primeiro curso encontrado que possui o ID passado via URL
-            var professores = await context.Professores.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-            if (professores == null)
 
+            // Verficia se o curso informado existe
+            var professor = await context.Professores.AsNoTracking().FirstOrDefaultAsync(x => x.Id.ToString() == professorId);
+            if (professor == null)
                 // HTTP STATUS CODE => 404
-                return NotFound(new { message = "Não foi possível encontrar o professor." });
+                return NotFound(new { message = "Não foi possível encontrar o curso." });
+
+            // Verfica se o curso atual possui turmas ativas
+            /*var turmas = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            if (turmas != null)
+                return BadRequest(new { message = "Não é possivel deletar cursos, pois ele possui turmas ativas" });
+*/
             try
             {
-                context.Professores.Remove(professores);
+                context.Professores.Remove(professor);
                 await context.SaveChangesAsync();
 
                 // HTTP STATUS CODE => 200 
-                return Ok(new { message = "Professor removido com sucesso." });
+                return Ok(new { message = "Curso removido com sucesso." });
             }
             catch (System.Exception)
             {
-
                 // HTTP STATUS CODE => 400 
                 return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
-
     }
 }
