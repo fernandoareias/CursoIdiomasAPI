@@ -1,38 +1,53 @@
 # CursoIdiomasAPI
 
-## Regras de negócio
+## Como usar
 
-- [x] Aluno deve ser cadastrado com turma;
-
+### Instalação
 ```
-var turma = await context.Turmas.AsNoTracking().FirstOrDefaultAsync(y => y.Id == idTurmas);
-if(turma == null)
-    return BadRequest("Não foi possível encontrar a turma");
-...
-
-context.Alunos.Add(model);
-await context.SaveChangesAsync();
+git clone https://github.com/fernandoareias/CursoIdiomasAPI.git
+cd CursoIdiomasAPI
 ```
 
-- [x] Matrícula do aluno não pode ser repetida;
+Documentação Completa Swagger => https://localhost:5001/swagger/index.html
+
+## Exemplos
+
+### Registrar Nova Turma
+
+HTTP POST => https://localhost:5001/v1/cursos/professores/turmas
 
 ```
-[Key]
-public int Id { get; private set; }
+{
+  "dataInicio": "11/12/2022",
+  "dataFim": "15/06/2022",
+  "professores": {
+    "nome": "Bob",
+    "email": "bob.bob@gmail.com"
+  },
+  "cursos": {
+    "nome": "Inglês Básico",
+    "cargaHoraria": 90
+  }
+}
 ```
 
-- [x] Uma turma não pode ter mais de 5 alunos;
+### Novo Aluno
+
+HTTPS POST => https://localhost:5001/v1/cursos/turmas/{turmaID}/alunos
 
 ```
-var aluno = await context.Alunos.AsNoTracking().Where(x => x.TurmaId == idTurmas).ToListAsync();
-if (aluno.ToArray().Length >= 5)
-    return BadRequest(new { message = "Essa turma já está cheia, tente registrar o aluno em outra." });
+{
+  "nome": "Bob2",
+  "email": "bob2.bob@gmail.com"
+}
 ```
 
-- [x] Turma não pode ser excluída se possuir alunos;
+### Desativar uma matricula
+
+HTTP PUT => https://localhost:5001/v1/cursos/turmas/alunos/matriculas/{matriculaId}
 
 ```
-var aluno = await context.Alunos.AsNoTracking().FirstOrDefaultAsync(x => x.TurmaId == idTurma);
-if (aluno != null)
-    return BadRequest(new { message = "Não é possivel remover esta turma, pois existe alunos matriculados" });
+{
+  "ativa": false
+}
 ```
