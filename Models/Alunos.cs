@@ -1,7 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic;
 
 namespace CursoIdiomasAPI.Models
 {
@@ -9,11 +8,12 @@ namespace CursoIdiomasAPI.Models
     public class Aluno
     {
 
-        // public Aluno() => Id = Guid.NewGuid();
+
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; private set; }
+        //  public string URL { get; private set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
         [MaxLength(80, ErrorMessage = "Esse campo deve conter até 60 caracteres")]
@@ -25,7 +25,10 @@ namespace CursoIdiomasAPI.Models
 
 
         // Shadow FK
-        public Matricula Matricula { get; private set; }
+        // private Matricula Matricula { get; set; }
+
+
+        public void SetId(Guid id) => Id = id;
 
     }
 }
