@@ -47,7 +47,7 @@ namespace CursoIdiomasAPI.Controllers
             try
             {
                 // Retorna o primeiro aluno encontrado que possui o ID informado via url
-                var alunos = await context.Alunos.AsNoTracking().FirstOrDefaultAsync(y => y.Id.ToString("N") == System.Guid.Parse(alunoId).ToString("N"));
+                var alunos = await context.Alunos.AsNoTracking().FirstOrDefaultAsync(y => y.Id.ToString() == alunoId);
 
 
                 if (alunos == null)
@@ -98,9 +98,9 @@ namespace CursoIdiomasAPI.Controllers
                 await context.SaveChangesAsync();
                 return Ok(new { message = "Aluno registrado com sucesso" });
             }
-            catch (System.InvalidOperationException e)
+            catch (System.InvalidOperationException)
             {
-                return BadRequest(new { message = $"Formato do turmaId inválido. = {e}" });
+                return BadRequest(new { message = "Formato do turmaId inválido." });
             }
             catch (System.Exception)
             {
