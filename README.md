@@ -1,53 +1,42 @@
-# CursoIdiomasAPI
+## O que é 
 
-## Como usar
+È uma API para um curso de idiomas fictício.
+  
+## Instalação
 
-### Instalação
 ```
 git clone https://github.com/fernandoareias/CursoIdiomasAPI.git
-cd CursoIdiomasAPI
 ```
+
+### Gerando as tabelas
+
+Configure a connection string em __appsettings.json__
+
+```
+ "connectionString" : "server=<HOST>,PORT;database=<DATABASE>;User ID=<USER>;Password=<PASSWORD>"
+```
+
+Exemplo:
+
+
+```
+  "connectionString" : "server=localhost,1433;database=CursoIdiomasAPI;User ID=sa;Password=kp#@lkpkpç12"
+```
+
+Dentro da pasta do repositorio, execute os seguintes comandos para gerar as tabelas no SQL Server
+
+```
+dotnet ef migrations add InitialCreate
+dotnet ef database update
+```
+
+## Documentação
 
 Documentação Completa Swagger => https://localhost:5001/swagger/index.html
 
-## Exemplos
+## Regras de negócio
 
-### Registrar Nova Turma
-
-HTTP POST => https://localhost:5001/v1/cursos/professores/turmas
-
-```
-{
-  "dataInicio": "11/12/2022",
-  "dataFim": "15/06/2022",
-  "professores": {
-    "nome": "Bob",
-    "email": "bob.bob@gmail.com"
-  },
-  "cursos": {
-    "nome": "Inglês Básico",
-    "cargaHoraria": 90
-  }
-}
-```
-
-### Novo Aluno
-
-HTTPS POST => https://localhost:5001/v1/cursos/turmas/{turmaID}/alunos
-
-```
-{
-  "nome": "Bob2",
-  "email": "bob2.bob@gmail.com"
-}
-```
-
-### Desativar uma matricula
-
-HTTP PUT => https://localhost:5001/v1/cursos/turmas/alunos/matriculas/{matriculaId}
-
-```
-{
-  "ativa": false
-}
-```
+- [X] [Aluno deve ser cadastrado com turma](https://github.com/fernandoareias/CursoIdiomasAPI/blob/main/Controllers/AlunosControllers.cs#L70-L110)
+- [X] [Matrícula do aluno não pode ser repetida](https://github.com/fernandoareias/CursoIdiomasAPI/blob/main/Models/Matricula.cs#L12-L29)
+- [X] [Uma turma não pode ter mais de 5 alunos](https://github.com/fernandoareias/CursoIdiomasAPI/blob/main/Controllers/AlunosControllers.cs#L82-#L87)
+- [X] [Turma não pode ser excluída se possuir alunos](https://github.com/fernandoareias/CursoIdiomasAPI/blob/main/Controllers/TurmasController.cs#L137-L144)
