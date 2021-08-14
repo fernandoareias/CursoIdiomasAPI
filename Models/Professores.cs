@@ -8,15 +8,10 @@ namespace CursoIdiomasAPI.Models
     [Table("Professores")]
     public class Professores
     {
-        public Professores()
-        {
-            Id = Guid.NewGuid();
-            URL = Id.ToString("N");
-        }
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; private set; }
-        public string URL { get; private set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
         [MaxLength(60, ErrorMessage = "Esse campo deve conter até 60 caracteres")]
@@ -25,8 +20,6 @@ namespace CursoIdiomasAPI.Models
         [Required(ErrorMessage = "Esse campo é obrigatório")]
         [MaxLength(120, ErrorMessage = "Esse campo deve conter até 120 caracteres")]
         public string Email { get; set; }
-
-
-
+        public void SetId(Guid id) => Id = id;
     }
 }
