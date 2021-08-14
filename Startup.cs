@@ -35,7 +35,13 @@ namespace CursoIdiomasAPI
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CursoIdiomasAPI", Version = "v1" });
             });
 
-            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CursoIdiomasAPI"));
+            services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
+            // DB em memoria
+            //services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CursoIdiomasAPI"));
+            services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
