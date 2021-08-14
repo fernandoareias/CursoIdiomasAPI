@@ -10,23 +10,33 @@ namespace CursoIdiomasAPI.Models
     public class Boletim
     {
 
-        public Boletim()
+        public Boletim() { }
+        public Boletim(Boletim model, string matriculaId)
         {
-            DataPub = DateTime.Now.ToString();
+            Id = model.Id;
+            DataPub = DateTime.Now.ToString("dd/MM/yyyy");
+            UltimaAtualizacao = DateTime.Now.ToString("dd/MM/yyyy");
+            Nota = model.Nota;
+            MatriculaId = System.Guid.Parse(matriculaId);
         }
 
         [Key]
         public Guid Id { get; private set; }
 
 
-        [Required(ErrorMessage = "Esse campo é obrigatório")]
-        public Guid MatriculaId { get; set; }
-        public Matricula Matricula { get; private set; }
+        [Required(ErrorMessage = "Este campo é obrigatório")]
+        public Guid MatriculaId { get; private set; }
 
         public string DataPub { get; private set; }
+        public string UltimaAtualizacao { get; private set; }
 
-        [Required(ErrorMessage = "Esse campo é obrigatório")]
-        [Range(1, int.MaxValue, ErrorMessage = "O preço deve ser maior que zero")]
+        [Required(ErrorMessage = "Este campo é obrigatório")]
+        [Range(0, 10, ErrorMessage = "A nota do aluno deve estar entre 1 - 10")]
         public float Nota { get; set; }
+
+        public void setId(Guid id) => Id = id;
+        public void setMatriculaId(Guid id) => MatriculaId = id;
+        public void setDate(string date) => DataPub = date;
+        public void setAtualizacao() => UltimaAtualizacao = DateTime.Now.ToString();
     }
 }
