@@ -16,50 +16,53 @@ namespace CursoIdiomasAPI.Controllers
     public class AlunosController : ControllerBase
     {
 
+        // Caso exista, retorna uma lista contendo todos os alunos
         [HttpGet]
         [Route("cursos/turmas/alunos")]
 
         public async Task<ActionResult<List<Aluno>>> GetAllAlunos([FromServices] DataContext context)
         {
-            var alunos = await context.Alunos.Include(x => x.Matricula)
-            .ThenInclude(y => y.Turmas)
-            .ThenInclude(x => x.Professores).Include(x => x.Matricula)
-            .ThenInclude(y => y.Turmas).ThenInclude(z => z.Cursos).AsNoTracking().ToListAsync();
-            if (alunos == null)
-                return NotFound();
-            return Ok(alunos);
+            try
+            {
+                // Busca todos os alunos 
+                var alunos = await context.Alunos.AsNoTracking().ToListAsync();
+                if (alunos == null)
+                    return NotFound();
+
+                return Ok(alunos);
+            }
+            catch (System.Exception)
+            {
+
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+            }
         }
 
+
         [HttpGet]
-        [Route("curso/turmas/{turmaId}/alunos")]
-
-        public async Task<ActionResult<List<Aluno>>> GetAllByTurma(string turmaId, [FromServices] DataContext context)
-        {
-            var alunos = await context.Alunos.AsNoTracking().ToListAsync();
-            if (alunos == null)
-                return NotFound();
-
-
-            return Ok(alunos);
-
-        }
-        [HttpGet]
-        [Route("curso/turmas/alunos/{alunoId}")]
+        [Route("cursos/turmas/alunos/{alunoId}")]
 
         public async Task<ActionResult<Aluno>> GetById(string alunoId, [FromServices] DataContext context)
         {
             try
             {
-                var alunos = await context.Alunos.AsNoTracking().FirstOrDefaultAsync(y => y.Id.ToString() == alunoId);
+                // Retorna o primeiro aluno encontrado que possui o ID informado via url
+                var alunos = await context.Alunos.AsNoTracking().FirstOrDefaultAsync(y => y.Id.ToString("N") == System.Guid.Parse(alunoId).ToString("N"));
 
-                if (alunos != null)
-                    return Ok(alunos);
-                return NotFound();
+
+                if (alunos == null)
+                    return NotFound();
+
+                return Ok(alunos);
+            }
+            catch (System.InvalidOperationException)
+            {
+                return BadRequest(new { message = "Formato do {alunoId} inválido." });
             }
             catch (System.Exception)
             {
 
-                throw;
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
 
@@ -68,39 +71,43 @@ namespace CursoIdiomasAPI.Controllers
         [Route("cursos/turmas/{turmaId}/alunos")]
         public async Task<ActionResult<Aluno>> Post(string turmaId, [FromServices] DataContext context, [FromBody] Aluno model)
         {
-            var turma = await context.Turmas.AsNoTracking().FirstOrDefaultAsync(x => x.URL == turmaId);
-            //System.Console.WriteLine($"Turma ID: {turma.URL}  |  Turma URL: {turmaId}");
-            if (turma == null)
-                return NotFound(new { message = "Não foi possivel encontrar a turma" });
-
-
-            var matriculas = await context.Matriculas.AsNoTracking().Where(y => y.TurmaId.ToString("N") == turmaId.ToLower()).ToListAsync();
-            if (matriculas.ToArray().Length >= 5)
-                return BadRequest(new { message = "Esta turma já está cheia" });
-
-            var searchAluno = await context.Alunos.AsNoTracking().FirstOrDefaultAsync(x => x.Email == model.Email);
-            if (searchAluno != null)
-                return BadRequest(new { message = "Este email já está registrado." });
-            //if(matriculas.ToList()
             try
             {
+                // Verifica se a turma informada existe
+                var turma = await context.Turmas.AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id.ToString() == turmaId);
+                if (turma == null)
+                    return NotFound(new { message = "Não foi possivel encontrar a turma" });
+
+                // Verifica a quantidade de alunos matriculados nessa turma
+                var matriculas = await context.Matriculas.AsNoTracking()
+                .Where(y => y.TurmaId.ToString() == turmaId).ToListAsync();
+                if (matriculas.ToArray().Length >= 5)
+                    return BadRequest(new { message = "Esta turma já está cheia" });
+
+                // Verficia se o email ja foi registrado
+                var searchAluno = await context.Alunos.AsNoTracking().FirstOrDefaultAsync(x => x.Email == model.Email);
+                if (searchAluno != null)
+                    return BadRequest(new { message = "Este email já está registrado." });
+
+                // Registra o novo aluno
                 context.Alunos.Add(model);
-
                 await context.SaveChangesAsync();
+                // Gera a nova matricula
                 context.Matriculas.Add(new Matricula(System.Guid.Parse(turmaId), model.Id));
-
                 await context.SaveChangesAsync();
                 return Ok(new { message = "Aluno registrado com sucesso" });
             }
+            catch (System.InvalidOperationException e)
+            {
+                return BadRequest(new { message = $"Formato do turmaId inválido. = {e}" });
+            }
             catch (System.Exception)
             {
-
-                throw;
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
 
-
-        // Bug => DbUpdateConcurrencyException
         [HttpPut]
         [Route("curso/turmas/alunos/{alunoId}")]
 
@@ -108,15 +115,18 @@ namespace CursoIdiomasAPI.Controllers
         {
             try
             {
-                var alunos = await context.Alunos.AsNoTracking().FirstOrDefaultAsync(y => y.Id.ToString() == alunoId);
+                var alunos = await context.Alunos.AsNoTracking()
+                .FirstOrDefaultAsync(y => y.Id.ToString("N") == System.Guid.Parse(alunoId).ToString("N"));
                 if (alunos == null)
                     return NotFound();
 
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
+                System.Console.WriteLine($"ANTES UPDATE: {alunos.Id} | {alunos.Nome}| {alunos.Email}");
+                model.SetId(System.Guid.Parse(alunoId));
                 context.Entry<Aluno>(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-
+                System.Console.WriteLine($"PÒS UPDATE: {model.Id} | {model.Nome}| {model.Email}");
                 await context.SaveChangesAsync();
                 return Ok(model);
             }
@@ -127,7 +137,7 @@ namespace CursoIdiomasAPI.Controllers
             catch (System.Exception)
             {
 
-                throw;
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
 
@@ -140,16 +150,20 @@ namespace CursoIdiomasAPI.Controllers
             if (aluno == null)
                 return NotFound();
 
+            var matricula = await context.Matriculas.AsNoTracking()
+            .FirstOrDefaultAsync(x => x.AlunoId.ToString("N") == System.Guid.Parse(alunoId).ToString("N"));
+
             try
             {
                 context.Alunos.Remove(aluno);
+                context.Matriculas.Remove(matricula);
                 await context.SaveChangesAsync();
                 return Ok(new { message = "Aluno removido com sucesso" });
             }
             catch (System.Exception)
             {
 
-                throw;
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
     }
