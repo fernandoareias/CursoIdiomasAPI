@@ -21,11 +21,42 @@ namespace CursoIdiomasAPI.Controllers
 
         public async Task<ActionResult<Turma>> GetAll([FromServices] DataContext context)
         {
-            var turmas = await context.Turmas.AsNoTracking().Include(y => y.Cursos).Include(x => x.Professores).ToListAsync();
-            if (turmas == null)
-                return NotFound();
+            try
+            {
+                var turmas = await context.Turmas.AsNoTracking().Include(y => y.Cursos).Include(x => x.Professores).ToListAsync();
+                if (turmas == null)
+                    return NotFound();
 
-            return Ok(turmas);
+                return Ok(turmas);
+            }
+            catch (System.Exception)
+            {
+
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+            }
+        }
+
+
+        [HttpGet]
+        [Route("cursos/professores/{professorId}/turmas")]
+
+        public async Task<ActionResult<List<Turma>>> GetTurmaByTeacher(string professorId, [FromServices] DataContext context)
+        {
+            try
+            {
+                var turmas = await context.Turmas.AsNoTracking()
+                .Include(x => x.Cursos).Where(y => y.ProfessoresId.ToString() == professorId).ToListAsync();
+
+                if (turmas == null)
+                    return NotFound();
+
+                return Ok(turmas);
+            }
+            catch (System.Exception)
+            {
+
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+            }
         }
 
 
@@ -36,33 +67,92 @@ namespace CursoIdiomasAPI.Controllers
         [Route("cursos/professores/turmas")]
         public async Task<ActionResult<Turma>> Post([FromServices] DataContext context, [FromBody] Turma model)
         {
-            context.Turmas.Add(model);
-            await context.SaveChangesAsync();
-            return Ok(model);
+
+            try
+            {
+                context.Turmas.Add(model);
+                await context.SaveChangesAsync();
+                return Ok($"TurmaID = {model.Id.ToString()}");
+            }
+            catch (System.Exception)
+            {
+
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+            }
         }
 
 
         [HttpPost]
-        [Route("cursos/{CursoURL}/professores/{ProfessorURL}/turmas")]
+        [Route("cursos/{CursoId}/professores/{ProfessorId}/turmas")]
 
-        public async Task<ActionResult<Turma>> PostBy(string CursoURL, string ProfessorURL, [FromServices] DataContext context, [FromBody] Turma model)
+        public async Task<ActionResult<Turma>> PostBy(string CursoId, string ProfessorId, [FromServices] DataContext context, [FromBody] Turma model)
         {
-            var cursos = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(y => y.URL == CursoURL);
-            if (cursos == null)
-                return NotFound();
+            try
+            {
+                var cursos = await context.Cursos.AsNoTracking()
+            .FirstOrDefaultAsync(y => y.Id.ToString() == CursoId);
 
-            var professor = await context.Professores.AsNoTracking().FirstOrDefaultAsync(x => x.URL == ProfessorURL);
-            if (professor == null)
-                return NotFound();
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
 
-            model.setCursoId(CursoURL);
-            model.setProfessorId(ProfessorURL);
+                if (cursos == null)
+                    return NotFound();
 
-            context.Turmas.Add(model);
-            await context.SaveChangesAsync();
-            return Ok(new { message = "Turma criada com sucesso" });
+                var professor = await context.Professores.AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id.ToString() == ProfessorId);
+
+                if (professor == null)
+                    return NotFound();
+
+                model.setCursoId(CursoId);
+                model.setProfessorId(ProfessorId);
+
+                context.Turmas.Add(model);
+                await context.SaveChangesAsync();
+                return Ok(new { turmaId = model.Id });
+            }
+            catch (System.Exception)
+            {
+
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+            }
 
         }
+
+
+        [HttpDelete]
+        [Route("cursos/professores/turmas/{turmaId}")]
+
+        // Verifica se a turma existe e depois verifica se a mesma possui alguma matricula ativa
+        public async Task<ActionResult<Turma>> Delete(string turmaId, [FromServices] DataContext context)
+        {
+            try
+            {
+                var turma = await context.Turmas.AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id.ToString() == turmaId);
+
+                if (turma == null)
+                    return NotFound(new { message = "Não foi possível encontrar a turma informada." });
+
+                var matriculas = await context.Matriculas.AsNoTracking()
+                .Where(x => x.TurmaId.ToString() == turmaId).ToListAsync();
+
+                foreach (var item in matriculas)
+                    if (item.Ativa == true)
+                        return BadRequest(new { message = "Não é possível deletar a turma, pois há alunos ativos." });
+
+
+                context.Turmas.Remove(turma);
+                await context.SaveChangesAsync();
+                return Ok(new { message = "Turma removida com sucesso." });
+            }
+            catch (System.Exception)
+            {
+
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+            }
+        }
+
 
     }
 

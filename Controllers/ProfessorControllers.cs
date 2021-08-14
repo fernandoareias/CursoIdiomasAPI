@@ -20,10 +20,18 @@ namespace CursoIdiomasAPI.Controllers
 
         public async Task<ActionResult<List<Professores>>> Get([FromServices] DataContext context)
         {
-            var professor = await context.Professores.AsNoTracking().ToListAsync();
-            if (professor == null)
-                return NotFound(new { message = "Não há professor registrado" });
-            return Ok(professor);
+            try
+            {
+                var professor = await context.Professores.AsNoTracking().ToListAsync();
+                if (professor == null)
+                    return NotFound(new { message = "Não há professor registrado" });
+                return Ok(professor);
+            }
+            catch (System.Exception)
+            {
+
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+            }
         }
 
 
@@ -49,39 +57,13 @@ namespace CursoIdiomasAPI.Controllers
                 return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
-        /*
-                [HttpPost]
-                [AllowAnonymous]
-                [Route("professores")] // HTTP POST => https://localhost:5001/v1/cursos/
-                public async Task<ActionResult<Professores>> Post([FromServices] DataContext context, [FromBody] Professores model)
-                {
-                    try
-                    {
-                        if (!ModelState.IsValid)
-                            // HTTP STATUS CODE => 400 
-                            return BadRequest(ModelState);
 
-                        context.Professores.Add(model);
-                        await context.SaveChangesAsync();
-
-                        // HTTP STATUS CODE => 200 
-                        return Ok(new { message = "Curso registrado com sucesso." });
-                    }
-                    catch (System.Exception)
-                    {
-                        // HTTP STATUS CODE => 500
-                        return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
-                    }
-                }
-        */
         [HttpPut]
         [AllowAnonymous]
         [Route("cursos/professores/{professorId}")] // HTTP PUT => https://localhost:5001/v1/cursos/{id}
         public async Task<ActionResult<Professores>> Put(string professorId, [FromServices] DataContext context, [FromBody] Professores model)
         {
-            if (model.Id.ToString() != professorId)
-                // HTTP STATUS CODE => 404 
-                return NotFound(new { message = "Não foi possível encontrar o curso informado" });
+
 
             if (!ModelState.IsValid)
                 // HTTP STATUS CODE => 400 
@@ -89,6 +71,11 @@ namespace CursoIdiomasAPI.Controllers
 
             try
             {
+                var professor = await context.Professores.AsNoTracking().FirstOrDefaultAsync(x => x.Id.ToString() == professorId);
+                if (professor == null)
+                    return NotFound();
+
+                model.SetId(professor.Id);
                 // Verifica se houve mudança no stado e as aplicas caso seja necessario
                 context.Entry<Professores>(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 // Salva no banco 

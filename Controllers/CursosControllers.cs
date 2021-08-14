@@ -57,38 +57,39 @@ namespace CursoIdiomasAPI.Controllers
                 return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
-        /*
-                [HttpPost]
-                [AllowAnonymous]
-                [Route("")] // HTTP POST => https://localhost:5001/v1/cursos/
-                public async Task<ActionResult<Curso>> Post([FromServices] DataContext context, [FromBody] Curso model)
-                {
-                    try
-                    {
-                        if (!ModelState.IsValid)
-                            // HTTP STATUS CODE => 400 
-                            return BadRequest(ModelState);
 
-                        context.Cursos.Add(model);
-                        await context.SaveChangesAsync();
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("")] // HTTP POST => https://localhost:5001/v1/cursos/
+        public async Task<ActionResult<Curso>> Post([FromServices] DataContext context, [FromBody] Curso model)
+        {
+            try
+            {
+                var curso = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Nome == model.Nome);
+                if (curso != null)
+                    return BadRequest(new { message = "Este curso já está registrado" });
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
 
-                        // HTTP STATUS CODE => 200 
-                        return Ok(new { message = "Curso registrado com sucesso." });
-                    }
-                    catch (System.Exception)
-                    {
-                        // HTTP STATUS CODE => 500
-                        return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
-                    }
-                }
-        */
+                context.Cursos.Add(model);
+                await context.SaveChangesAsync();
+
+                // HTTP STATUS CODE => 200 
+                return Ok(new { message = "Curso registrado com sucesso." });
+            }
+            catch (System.Exception)
+            {
+                // HTTP STATUS CODE => 500
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+            }
+        }
+
         [HttpPut]
         [AllowAnonymous]
-        [Route("{cursoId}")] // HTTP PUT => https://localhost:5001/v1/cursos/{id}
+        [Route("{cursoId}")] // HTTP PUT => https://localhost:5001/v1/cursos/{cursoId}
         public async Task<ActionResult<Curso>> Put(string cursoId, [FromServices] DataContext context, [FromBody] Curso model)
         {
-            if (model.Id.ToString() != cursoId)
-                // HTTP STATUS CODE => 404 
+            if (model.Id.ToString() == cursoId)
                 return NotFound(new { message = "Não foi possível encontrar o curso informado" });
 
             if (!ModelState.IsValid)
@@ -97,6 +98,7 @@ namespace CursoIdiomasAPI.Controllers
 
             try
             {
+                model.SetId(System.Guid.Parse(cursoId));
                 // Verifica se houve mudança no stado e as aplicas caso seja necessario
                 context.Entry<Curso>(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 // Salva no banco 
@@ -123,16 +125,18 @@ namespace CursoIdiomasAPI.Controllers
         {
 
             // Verficia se o curso informado existe
-            var cursos = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id.ToString() == cursoId);
+            var cursos = await context.Cursos.AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Id.ToString() == cursoId);
+
             if (cursos == null)
-                // HTTP STATUS CODE => 404
                 return NotFound(new { message = "Não foi possível encontrar o curso." });
 
             // Verfica se o curso atual possui turmas ativas
-            /*var turmas = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            var turmas = await context.Turmas.AsNoTracking()
+            .FirstOrDefaultAsync(x => x.CursosId.ToString() == cursoId);
             if (turmas != null)
-                return BadRequest(new { message = "Não é possivel deletar cursos, pois ele possui turmas ativas" });
-*/
+                return BadRequest(new { message = "Não é possivel deletar o curso, pois possui turmas ativas." });
+
             try
             {
                 context.Cursos.Remove(cursos);
