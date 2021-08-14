@@ -24,7 +24,6 @@ namespace CursoIdiomasAPI.Models
         }
 
         [Key]
-        // Poderia ser um int => YAGNI 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; private set; }
 
@@ -35,16 +34,9 @@ namespace CursoIdiomasAPI.Models
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
         public Guid TurmaId { get; set; }
-        //public Turma Turmas { get; private set; }
-
 
         public void SetId(Guid id) => Id = id;
         public void SetTurmaId(Guid id) => TurmaId = id;
         public void SetAlunoId(Guid id) => AlunoId = id;
-
-
-
-
-
     }
 }
