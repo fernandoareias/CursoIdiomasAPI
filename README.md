@@ -1,6 +1,6 @@
 ## O que é 
 
-È uma API para um curso de idiomas fictício.
+É uma API para um curso de idiomas fictício.
   
 ## Instalação
 
@@ -23,7 +23,7 @@ Exemplo:
   "connectionString" : "server=localhost,1433;database=CursoIdiomasAPI;User ID=sa;Password=kp#@lkpkpç12"
 ```
 
-Dentro da pasta do repositorio, execute os seguintes comandos para gerar as tabelas no SQL Server
+Dentro da pasta do repositório, execute os seguintes comandos para gerar as tabelas no SQL Server
 
 ```
 dotnet ef migrations add InitialCreate
