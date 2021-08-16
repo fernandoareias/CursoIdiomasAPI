@@ -18,6 +18,7 @@ namespace CursoIdiomasAPI.Controllers
 
         [HttpGet]
         [Route("cursos/professores/turmas")]
+        [ResponseCache(VaryByHeader = "User-Agent", Location = ResponseCacheLocation.Any, Duration = 30)]
 
         public async Task<ActionResult<Turma>> GetAll([FromServices] DataContext context)
         {
@@ -114,7 +115,7 @@ namespace CursoIdiomasAPI.Controllers
             }
             catch (System.Exception)
             {
-                 return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
 
