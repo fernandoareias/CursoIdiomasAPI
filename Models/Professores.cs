@@ -6,7 +6,7 @@ namespace CursoIdiomasAPI.Models
 {
 
     [Table("Professores")]
-    public class Professores
+    public class Professor
     {
 
         [Key]

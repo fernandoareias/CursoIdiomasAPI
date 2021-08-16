@@ -19,8 +19,8 @@ namespace CursoIdiomasAPI.Models
         {
             Ativa = true;
             Id = Guid.NewGuid();
-            TurmaId = turma;
-            AlunoId = aluno;
+            TurmasId = turma;
+            AlunosId = aluno;
         }
 
         [Key]
@@ -30,13 +30,20 @@ namespace CursoIdiomasAPI.Models
         public bool Ativa { get; set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
-        public Guid AlunoId { get; private set; }
+        [ForeignKey("Aluno")]
+        public Guid AlunosId { get; private set; }
+        public Aluno Alunos { get; private set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
-        public Guid TurmaId { get; set; }
+
+
+        [ForeignKey("Turma")]
+
+        public Guid TurmasId { get; set; }
+        public Turma Turmas { get; private set; }
 
         public void SetId(Guid id) => Id = id;
-        public void SetTurmaId(Guid id) => TurmaId = id;
-        public void SetAlunoId(Guid id) => AlunoId = id;
+        public void SetTurmaId(Guid id) => TurmasId = id;
+        public void SetAlunoId(Guid id) => AlunosId = id;
     }
 }

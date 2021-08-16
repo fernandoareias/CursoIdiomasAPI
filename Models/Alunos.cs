@@ -22,12 +22,6 @@ namespace CursoIdiomasAPI.Models
         [Required(ErrorMessage = "Esse campo é obrigatório")]
         [MaxLength(120, ErrorMessage = "Esse campo deve conter até 120 caracteres")]
         public string Email { get; set; }
-
-
-        // Shadow FK
-        // private Matricula Matricula { get; set; }
-
-
         public void SetId(Guid id) => Id = id;
 
     }

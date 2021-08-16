@@ -14,6 +14,7 @@ namespace CursoIdiomasAPI.Models
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
         public Guid MatriculaId { get; private set; }
+        public Matricula Matricula { get; private set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
         public string Vencimento { get; set; }

@@ -17,8 +17,8 @@ namespace CursoIdiomasAPI.Models
 
         public Turma(Guid cursoId, Guid professorId)
         {
-            CursosId = cursoId;
-            ProfessoresId = professorId;
+            CursoId = cursoId;
+            ProfessorId = professorId;
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -28,16 +28,15 @@ namespace CursoIdiomasAPI.Models
 
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
-        public Guid ProfessoresId { get; private set; }
-        public Professores Professores { get; set; }
+        public Guid ProfessorId { get; private set; }
+        public Professor Professor { get; set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
-        public Guid CursosId { get; private set; }
-        public Curso Cursos { get; set; }
+        public Guid CursoId { get; private set; }
 
-
-        public void setCursoId(string cursoURL) => CursosId = Guid.Parse(cursoURL);
-
-        public void setProfessorId(string professorId) => ProfessoresId = Guid.Parse(professorId);
+        public virtual Curso Curso { get; set; }
+        public void setId(Guid id) => Id = id;
+        public void setCursoId(string cursoURL) => Curso.SetId(Guid.Parse(cursoURL));
+        public void setProfessorId(string professorId) => ProfessorId = Guid.Parse(professorId);
     }
 }
