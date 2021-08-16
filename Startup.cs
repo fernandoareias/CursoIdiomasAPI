@@ -40,7 +40,7 @@ namespace CursoIdiomasAPI
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
             // DB em memoria
-            //services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CursoIdiomasAPI"));
+            // services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CursoIdiomasAPI"));
             services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionString")));
         }
 
