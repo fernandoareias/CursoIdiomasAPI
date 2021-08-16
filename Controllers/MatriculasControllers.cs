@@ -16,12 +16,14 @@ namespace CursoIdiomasAPI.Controllers
     {
         [HttpGet]
         [Route("cursos/turmas/alunos/matriculas")]
+        [ResponseCache(VaryByHeader = "User-Agent", Location = ResponseCacheLocation.Any, Duration = 10)]
 
         public async Task<ActionResult<List<Matricula>>> GetAllAlunos([FromServices] DataContext context)
         {
             try
             {
-                var alunos = await context.Matriculas.AsNoTracking().ToListAsync();
+                var alunos = await context.Matriculas.AsNoTracking().Include(x => x.Alunos).Include(y => y.Turmas)
+                .ThenInclude(z => z.Curso).Include(x => x.Turmas).ThenInclude(w => w.Professor).ToListAsync();
                 if (alunos == null)
                     return NotFound();
                 return Ok(alunos);
@@ -40,7 +42,8 @@ namespace CursoIdiomasAPI.Controllers
         {
             try
             {
-                var matriculas = await context.Matriculas.AsNoTracking().FirstOrDefaultAsync(x => x.AlunosId.ToString() == alunoId);
+                var matriculas = await context.Matriculas.AsNoTracking().Include(x => x.Alunos).Include(y => y.Turmas)
+                .ThenInclude(z => z.Curso).Include(x => x.Turmas).ThenInclude(w => w.Professor).FirstOrDefaultAsync(x => x.AlunosId.ToString() == alunoId);
                 if (matriculas == null)
                     return NotFound();
 
@@ -66,10 +69,10 @@ namespace CursoIdiomasAPI.Controllers
                 var matricula = await context.Matriculas.AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id.ToString() == matriculaId);
 
-                if (model.AlunosId.ToString("N") == "00000000000000000000000000000000")
+                if (model.AlunosId.ToString() == "00000000-0000-0000-0000-000000000000")
                     model.SetAlunoId(matricula.AlunosId);
 
-                if (model.TurmasId.ToString("N") == "00000000000000000000000000000000")
+                if (model.TurmasId.ToString() == "00000000-0000-0000-0000-000000000000")
                     model.SetTurmaId(matricula.TurmasId);
 
                 if (matricula == null)
