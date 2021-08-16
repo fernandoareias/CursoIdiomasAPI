@@ -9,10 +9,12 @@ namespace CursoIdiomasAPI.Data
 
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Curso> Cursos { get; set; }
-        public DbSet<Professores> Professores { get; set; }
+        public DbSet<Professor> Professores { get; set; }
         public DbSet<Turma> Turmas { get; set; }
         public DbSet<Matricula> Matriculas { get; set; }
         public DbSet<Mensalidade> Mensalidades { get; set; }
         public DbSet<Boletim> Boletims { get; set; }
+
+
     }
 }
