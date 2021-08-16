@@ -1,5 +1,5 @@
 
 
-bin/
-obj/
-Migrations/
+/bin/*
+/obj/*
+/Migrations/*
