@@ -13,7 +13,7 @@ git clone https://github.com/fernandoareias/CursoIdiomasAPI.git
 Configure a connection string em __appsettings.json__
 
 ```
- "connectionString" : "server=<HOST>,PORT;database=<DATABASE>;User ID=<USER>;Password=<PASSWORD>"
+ "connectionString" : "server=<HOST>,<PORT>;database=<DATABASE>;User ID=<USER>;Password=<PASSWORD>"
 ```
 
 Exemplo:
