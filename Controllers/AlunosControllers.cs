@@ -19,6 +19,7 @@ namespace CursoIdiomasAPI.Controllers
         // Caso exista, retorna uma lista contendo todos os alunos
         [HttpGet]
         [Route("cursos/turmas/alunos")]
+        [ResponseCache(VaryByHeader = "User-Agent", Location = ResponseCacheLocation.Any, Duration = 10)]
 
         public async Task<ActionResult<List<Aluno>>> GetAllAlunos([FromServices] DataContext context)
         {
@@ -52,6 +53,41 @@ namespace CursoIdiomasAPI.Controllers
 
                 if (alunos == null)
                     return NotFound();
+
+                return Ok(alunos);
+            }
+            catch (System.InvalidOperationException)
+            {
+                return BadRequest(new { message = "Formato do {alunoId} inválido." });
+            }
+            catch (System.Exception)
+            {
+
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+            }
+        }
+
+
+        [HttpGet]
+        [Route("cursos/turmas/{turmaId}/alunos/")]
+        [ResponseCache(VaryByHeader = "User-Agent", Location = ResponseCacheLocation.Any, Duration = 5)]
+        public async Task<ActionResult<List<Aluno>>> GetByTurma(string turmaId, [FromServices] DataContext context)
+        {
+            try
+            {
+                // Retorna o primeiro aluno encontrado que possui o ID informado via url
+                var matriculas = await context.Matriculas.AsNoTracking().Where(x => x.TurmasId.ToString() == turmaId).ToListAsync();
+                if (matriculas == null)
+                    return NotFound(new { message = "Esta turma não possuí aluno matriculado." });
+
+                var alunos = new List<Aluno>();
+
+                foreach (var item in matriculas)
+                {
+                    var aluno = await context.Alunos.AsNoTracking().FirstOrDefaultAsync(x => x.Id.ToString() == item.AlunosId.ToString());
+                    if (aluno != null)
+                        alunos.Add(aluno);
+                }
 
                 return Ok(alunos);
             }
