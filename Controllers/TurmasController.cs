@@ -96,7 +96,7 @@ namespace CursoIdiomasAPI.Controllers
                     return NotFound(new { message = "Não foi possível encontrar a turma informada." });
 
                 var matriculas = await context.Matriculas.AsNoTracking().Where(x => x.TurmasId.ToString() == turmaId).ToListAsync();
-                System.Console.WriteLine(matriculas);
+
                 foreach (var item in matriculas)
                     if (item.Ativa == true)
                         return BadRequest(new { message = "Não é possível deletar a turma, pois há alunos ativos." });
@@ -112,9 +112,9 @@ namespace CursoIdiomasAPI.Controllers
                 await context.SaveChangesAsync();
                 return Ok(new { message = "Turma removida com sucesso." });
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
-                return StatusCode(500, e);
+                 return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }
 
