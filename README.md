@@ -36,7 +36,7 @@ Documentação Completa Swagger => https://localhost:5001/swagger/index.html
 
 ## Regras de negócio
 
-- [x] [Aluno deve ser cadastrado com turma](https://github.com/fernandoareias/CursoIdiomasAPI/blob/main/Controllers/AlunosControllers.cs#L70-L110)
+- [x] [Aluno deve ser cadastrado com turma](https://github.com/fernandoareias/CursoIdiomasAPI/blob/main/Controllers/AlunosControllers.cs#L106-L146)
 - [x] [Matrícula do aluno não pode ser repetida](https://github.com/fernandoareias/CursoIdiomasAPI/blob/main/Models/Matricula.cs#L12-L29)
-- [x] [Uma turma não pode ter mais de 5 alunos](https://github.com/fernandoareias/CursoIdiomasAPI/blob/main/Controllers/AlunosControllers.cs#L82-#L87)
-- [x] [Turma não pode ser excluída se possuir alunos](https://github.com/fernandoareias/CursoIdiomasAPI/blob/main/Controllers/TurmasController.cs#L97-L103)
+- [x] [Uma turma não pode ter mais de 5 alunos](https://github.com/fernandoareias/CursoIdiomasAPI/blob/main/Controllers/AlunosControllers.cs#L117-#L123)
+- [x] [Turma não pode ser excluída se possuir alunos](https://github.com/fernandoareias/CursoIdiomasAPI/blob/main/Controllers/TurmasController.cs#L98-L103)
