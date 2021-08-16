@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,13 @@ namespace CursoIdiomasAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Comprime a API
+            services.AddResponseCompression(options =>
+       {
+           options.Providers.Add<GzipCompressionProvider>();
+           options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/json" });
+       });
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -40,7 +48,7 @@ namespace CursoIdiomasAPI
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
             // DB em memoria
-            // services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CursoIdiomasAPI"));
+            //services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CursoIdiomasAPI"));
             services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionString")));
         }
 
@@ -59,6 +67,7 @@ namespace CursoIdiomasAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
