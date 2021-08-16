@@ -81,7 +81,7 @@ namespace CursoIdiomasAPI.Controllers
 
                 // Verifica a quantidade de alunos matriculados nessa turma
                 var matriculas = await context.Matriculas.AsNoTracking()
-                .Where(y => y.TurmaId.ToString() == turmaId).ToListAsync();
+                .Where(y => y.TurmasId.ToString() == turmaId).ToListAsync();
                 if (matriculas.ToArray().Length >= 5)
                     return BadRequest(new { message = "Esta turma já está cheia" });
 
@@ -116,17 +116,16 @@ namespace CursoIdiomasAPI.Controllers
             try
             {
                 var alunos = await context.Alunos.AsNoTracking()
-                .FirstOrDefaultAsync(y => y.Id.ToString("N") == System.Guid.Parse(alunoId).ToString("N"));
+                .FirstOrDefaultAsync(y => y.Id.ToString() == alunoId);
                 if (alunos == null)
                     return NotFound();
 
                 if (!ModelState.IsValid)
                     return BadRequest(ModelState);
 
-                System.Console.WriteLine($"ANTES UPDATE: {alunos.Id} | {alunos.Nome}| {alunos.Email}");
                 model.SetId(System.Guid.Parse(alunoId));
                 context.Entry<Aluno>(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                System.Console.WriteLine($"PÒS UPDATE: {model.Id} | {model.Nome}| {model.Email}");
+
                 await context.SaveChangesAsync();
                 return Ok(model);
             }
@@ -150,11 +149,29 @@ namespace CursoIdiomasAPI.Controllers
             if (aluno == null)
                 return NotFound();
 
-            var matricula = await context.Matriculas.AsNoTracking()
-            .FirstOrDefaultAsync(x => x.AlunoId.ToString("N") == System.Guid.Parse(alunoId).ToString("N"));
+            var matricula = await context.Matriculas.AsNoTracking().FirstOrDefaultAsync(x => x.AlunosId.ToString() == alunoId);
+            if (matricula.Ativa == true)
+                return BadRequest(new { message = "Não é possível deletar o aluno, pois o mesmo possuí matricula ativa." });
+
+            // Caso exista, remove todos as mensalidades registrados do aluno
+            var mensalidades = await context.Mensalidades.AsNoTracking()
+            .Where(x => x.MatriculaId.ToString() == matricula.Id.ToString()).ToListAsync();
+            // Remove todoas as mensalidades que o aluno possui
+            if (mensalidades != null)
+                foreach (var item in mensalidades)
+                    context.Mensalidades.Remove(item);
+
+            // Caso exista, remove todos os boletins registrados do aluno
+            var boletins = await context.Boletims.AsNoTracking()
+            .Where(x => x.MatriculaId.ToString() == matricula.Id.ToString()).ToListAsync();
+            if (boletins != null)
+                foreach (var item in boletins)
+                    context.Boletims.Remove(item);
+
 
             try
             {
+                aluno.SetId(System.Guid.Parse(alunoId));
                 context.Alunos.Remove(aluno);
                 context.Matriculas.Remove(matricula);
                 await context.SaveChangesAsync();
@@ -162,7 +179,6 @@ namespace CursoIdiomasAPI.Controllers
             }
             catch (System.Exception)
             {
-
                 return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
             }
         }

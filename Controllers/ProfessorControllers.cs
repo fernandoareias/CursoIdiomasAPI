@@ -12,13 +12,13 @@ using System.Linq;
 namespace CursoIdiomasAPI.Controllers
 {
     [Route("v1/")]
-    public class Professor : ControllerBase
+    public class ProfessorControlleer : ControllerBase
     {
 
         [HttpGet]
         [Route("cursos/professores")]
 
-        public async Task<ActionResult<List<Professores>>> Get([FromServices] DataContext context)
+        public async Task<ActionResult<List<Professor>>> Get([FromServices] DataContext context)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace CursoIdiomasAPI.Controllers
         [HttpGet]
         [AllowAnonymous]
         [Route("cursos/professores/{professorId}")] // HTTP GET => https://localhost:5001/v1/cursos/{id}
-        public async Task<ActionResult<Professores>> GetById(string professorId, [FromServices] DataContext context)
+        public async Task<ActionResult<Professor>> GetById(string professorId, [FromServices] DataContext context)
         {
             try
             {
@@ -58,10 +58,11 @@ namespace CursoIdiomasAPI.Controllers
             }
         }
 
+
         [HttpPut]
         [AllowAnonymous]
         [Route("cursos/professores/{professorId}")] // HTTP PUT => https://localhost:5001/v1/cursos/{id}
-        public async Task<ActionResult<Professores>> Put(string professorId, [FromServices] DataContext context, [FromBody] Professores model)
+        public async Task<ActionResult<Professor>> Put(string professorId, [FromServices] DataContext context, [FromBody] Professor model)
         {
 
 
@@ -77,7 +78,7 @@ namespace CursoIdiomasAPI.Controllers
 
                 model.SetId(professor.Id);
                 // Verifica se houve mudança no stado e as aplicas caso seja necessario
-                context.Entry<Professores>(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                context.Entry<Professor>(model).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                 // Salva no banco 
                 await context.SaveChangesAsync();
                 // HTTP STATUS CODE => 200 
@@ -94,37 +95,5 @@ namespace CursoIdiomasAPI.Controllers
             }
         }
 
-        [HttpDelete]
-        [AllowAnonymous]
-        [Route("cursos/professores/{professorId}")] // HTTP DELETE => https://localhost:5001/v1/cursos/{id}
-
-        public async Task<ActionResult<Professores>> Delete(string professorId, [FromServices] DataContext context)
-        {
-
-            // Verficia se o curso informado existe
-            var professor = await context.Professores.AsNoTracking().FirstOrDefaultAsync(x => x.Id.ToString() == professorId);
-            if (professor == null)
-                // HTTP STATUS CODE => 404
-                return NotFound(new { message = "Não foi possível encontrar o curso." });
-
-            // Verfica se o curso atual possui turmas ativas
-            /*var turmas = await context.Cursos.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
-            if (turmas != null)
-                return BadRequest(new { message = "Não é possivel deletar cursos, pois ele possui turmas ativas" });
-*/
-            try
-            {
-                context.Professores.Remove(professor);
-                await context.SaveChangesAsync();
-
-                // HTTP STATUS CODE => 200 
-                return Ok(new { message = "Curso removido com sucesso." });
-            }
-            catch (System.Exception)
-            {
-                // HTTP STATUS CODE => 400 
-                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
-            }
-        }
     }
 }

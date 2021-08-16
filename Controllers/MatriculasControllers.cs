@@ -17,7 +17,7 @@ namespace CursoIdiomasAPI.Controllers
         [HttpGet]
         [Route("cursos/turmas/alunos/matriculas")]
 
-        public async Task<ActionResult<List<Aluno>>> GetAllAlunos([FromServices] DataContext context)
+        public async Task<ActionResult<List<Matricula>>> GetAllAlunos([FromServices] DataContext context)
         {
             try
             {
@@ -33,6 +33,28 @@ namespace CursoIdiomasAPI.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("cursos/turmas/alunos/{alunoId}/matriculas")]
+
+        public async Task<ActionResult<Matricula>> GetMatriculaByAlunoId(string alunoId, [FromServices] DataContext context)
+        {
+            try
+            {
+                var matriculas = await context.Matriculas.AsNoTracking().FirstOrDefaultAsync(x => x.AlunosId.ToString() == alunoId);
+                if (matriculas == null)
+                    return NotFound();
+
+                return Ok(new { matriculas });
+            }
+            catch (System.Exception)
+            {
+                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
+            }
+        }
+
+
+
+
         [HttpPut]
         [AllowAnonymous]
         [Route("cursos/turmas/alunos/matriculas/{matriculaId}")]
@@ -44,11 +66,11 @@ namespace CursoIdiomasAPI.Controllers
                 var matricula = await context.Matriculas.AsNoTracking()
                 .FirstOrDefaultAsync(x => x.Id.ToString() == matriculaId);
 
-                if (model.AlunoId.ToString("N") == "00000000000000000000000000000000")
-                    model.SetAlunoId(matricula.AlunoId);
+                if (model.AlunosId.ToString("N") == "00000000000000000000000000000000")
+                    model.SetAlunoId(matricula.AlunosId);
 
-                if (model.TurmaId.ToString("N") == "00000000000000000000000000000000")
-                    model.SetTurmaId(matricula.TurmaId);
+                if (model.TurmasId.ToString("N") == "00000000000000000000000000000000")
+                    model.SetTurmaId(matricula.TurmasId);
 
                 if (matricula == null)
                     return NotFound();
@@ -69,40 +91,6 @@ namespace CursoIdiomasAPI.Controllers
 
         }
 
-        [HttpDelete]
-        [Route("cursos/matriculas/{matriculaId}")]
-
-        public async Task<ActionResult<Matricula>> Delete(string matriculaId, [FromServices] DataContext context)
-        {
-            try
-            {
-                var matricula = await context.Matriculas.AsNoTracking().FirstOrDefaultAsync(x => x.Id.ToString() == matriculaId);
-                if (matricula == null)
-                    return NotFound();
-
-                if (matricula.Ativa == true)
-                    return BadRequest(new { message = "Não foi possivel deletar, pois a matricula ainda está ativa" });
-
-                var aluno = await context.Alunos.AsNoTracking().FirstOrDefaultAsync(y => y.Id.ToString() == matricula.AlunoId.ToString());
-                if (aluno != null)
-                    context.Alunos.Remove(aluno);
-
-                var boletim = await context.Boletims.AsNoTracking().Where(x => x.MatriculaId.ToString() == matriculaId).ToListAsync();
-                if (boletim != null)
-                    foreach (var item in boletim)
-                        context.Boletims.Remove(item);
-
-                context.Matriculas.Remove(matricula);
-
-                await context.SaveChangesAsync();
-
-                return Ok(new { message = "Matricula removida com sucesso." });
-            }
-            catch (System.Exception)
-            {
-                return StatusCode(500, new { message = "Ocorreu um erro. Por favor, tente novamente mais tarde." });
-            }
-        }
 
     }
 }
