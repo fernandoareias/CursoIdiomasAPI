@@ -2,6 +2,9 @@
 
 É uma API para um curso de idiomas fictício.
 
+### Observação
+Atualmente está utilizando modelo anêmico, na V2 será implementado modelo rico e testes.
+
 ## Instalação
 
 ```
