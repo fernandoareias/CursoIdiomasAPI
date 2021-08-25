@@ -7,13 +7,9 @@ namespace CursoIdiomasAPI.Models
     [Table("Alunos")]
     public class Aluno
     {
-
-
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; private set; }
-        //  public string URL { get; private set; }
 
         [Required(ErrorMessage = "Esse campo é obrigatório")]
         [MaxLength(80, ErrorMessage = "Esse campo deve conter até 60 caracteres")]
