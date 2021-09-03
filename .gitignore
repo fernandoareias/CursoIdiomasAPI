@@ -4,6 +4,9 @@ CursoIdiomas.Domain/obj
 CursoIdiomas.Api/bin
 CursoIdiomas.Api/obj
 
+CursoIdiomas.Tests/bin
+CursoIdiomas.Tests/obj
+
 CursoIdiomas.infra/bin
 CursoIdiomas.Infra/obj
 
