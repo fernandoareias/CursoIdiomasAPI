@@ -1,0 +1,13 @@
+CursoIdiomas.Domain/bin
+CursoIdiomas.Domain/obj
+
+CursoIdiomas.Api/bin
+CursoIdiomas.Api/obj
+
+CursoIdiomas.infra/bin
+CursoIdiomas.Infra/obj
+
+CursoIdiomas.Shared/bin
+CursoIdiomas.Shared/obj
+sqltools_20210903121645_4044.log
+
