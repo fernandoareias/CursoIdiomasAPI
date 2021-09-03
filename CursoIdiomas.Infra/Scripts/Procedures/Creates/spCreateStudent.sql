@@ -1,17 +1,20 @@
 -- Procedure responsável por criar o Aluno no BD
 CREATE PROCEDURE spCreateStudent
     @Id UNIQUEIDENTIFIER,
-    @Name VARCHAR(80),
+    @FirstName VARCHAR(80),
+    @LastName VARCHAR(80),
     @Email VARCHAR(120)
 AS
 INSERT INTO [Students]
     (
     [Id],
-    [Name],
+    [FirstName],
+    [LastName],
     [Email]
     )
 VALUES(
         @Id,
-        @Name,
+        @FirstName,
+        @LastName,
         @Email
     )
