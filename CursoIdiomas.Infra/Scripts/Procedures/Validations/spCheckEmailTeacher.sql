@@ -1,4 +1,4 @@
-CREATE PROCEDURE spCheckStudentEmail
+CREATE PROCEDURE spCheckTeacherEmail
     @Email VARCHAR(60)
 AS
 SELECT CASE WHEN EXISTS (
