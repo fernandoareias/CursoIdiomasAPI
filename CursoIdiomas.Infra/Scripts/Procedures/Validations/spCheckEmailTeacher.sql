@@ -1,3 +1,4 @@
+-- Verifica se o Email do professor ja está registrado.
 CREATE PROCEDURE spCheckTeacherEmail
     @Email VARCHAR(60)
 AS
