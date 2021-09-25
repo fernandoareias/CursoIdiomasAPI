@@ -9,6 +9,7 @@ namespace CursoIdiomas.Application.Views
 {
     public class CursoView
     {
+        public Guid Id { get; set; }
         public string Nome { get;  set; }
         public int Dificuldade { get; set; }
         public int CargaHoraria { get;  set; }
@@ -16,14 +17,20 @@ namespace CursoIdiomas.Application.Views
 
         public CursoView(Curso model)
         {
-            Nome = model.Nome;
-            Dificuldade = (int)model.Dificuldade;
-            CargaHoraria = model.CargaHoraria;
-
+            if(model != null) {
+                Id = model.Id;
+                Nome = model.Nome;
+                Dificuldade = (int)model.Dificuldade;
+                CargaHoraria = model.CargaHoraria;
+            }
         }
 
         public static async Task<IEnumerable<CursoView>> Mapping(IEnumerable<Curso> cursos)
         {
+            if(cursos.Any() == false) {
+                return null;
+            }
+
             var listCursos = new List<CursoView>();
             foreach(var curso in cursos)
             {

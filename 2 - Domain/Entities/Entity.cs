@@ -18,7 +18,7 @@ namespace CursoIdiomas.Domain.Entities
         {
             Id = id;
         }
-
+            
         public Guid Id { get; private set; }
         public bool Equals(Entity other) => Id == other.Id;
     }

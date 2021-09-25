@@ -1,18 +1,16 @@
-﻿using CursoIdiomas.Application.Cursos.DTO;
-using CursoIdiomas.Application.Views;
+﻿using CursoIdiomas.Application.Commands;
+using CursoIdiomas.Application.Cursos.DTO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace CursoIdiomas.Application.Cursos.Interfaces
-{
+namespace CursoIdiomas.Application.Cursos.Interfaces {
     public interface ICursoAppServices
     {
 
-        Task<bool> RegistrarCurso(CursoDTO model);
-        Task<CursoView> ObterCurso(Guid id);
-        Task<IEnumerable<CursoView>> GetAll();
+        Task<GenericCommandsResults> RegistrarCurso(CursoDTO model);
+        Task<GenericCommandsResults> AtualizarCurso(System.Guid idCurso, CursoDTO model);
+        Task<GenericCommandsResults> ObterCurso(Guid id);
+        Task<GenericCommandsResults> Remover(Guid id);
+        Task<GenericCommandsResults> GetAll();
     }
 }

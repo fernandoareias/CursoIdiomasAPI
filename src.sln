@@ -37,7 +37,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Appl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1 - Application", "1 - Application\1 - Application.csproj", "{CEE3F91A-8366-4F54-B310-F41B3BAD6645}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursoIdiomas.API", "CursoIdiomas.API\CursoIdiomas.API.csproj", "{E069EBF9-A20A-4013-BD53-6E3B891691E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "0 - API", "0 - API\CursoIdiomas.API.csproj", "{E069EBF9-A20A-4013-BD53-6E3B891691E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

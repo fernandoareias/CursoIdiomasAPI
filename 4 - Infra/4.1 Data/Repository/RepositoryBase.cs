@@ -38,7 +38,6 @@ namespace CursoIdiomas.Infra.Data.Repository
             }
             catch (Exception e)
             {
-
                 throw e;
             }
         }
@@ -108,5 +107,24 @@ namespace CursoIdiomas.Infra.Data.Repository
 
             return item;
         }
+
+
+        //public async Task<T> UpdateAsync(System.Guid id, T item) {
+        //    try {
+        //        var result = await _dataset.SingleOrDefaultAsync(x => x.Id.Equals(item.Id));
+        //        if (result == null)
+        //            return null;
+
+
+        //        _context.Entry(result).CurrentValues.SetValues(item);
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (Exception e) {
+
+        //        throw e;
+        //    }
+
+        //    return item;
+        //}
     }
 }

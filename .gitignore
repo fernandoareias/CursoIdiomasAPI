@@ -12,6 +12,7 @@
 3 - Service/obj/*
 
 4 - Infra/4.1 Data/bin/*
+4 - Infra/4.1 Data/Context/ContextFactory.cs
 4 - Infra/4.1 Data/obj/*
 
 4 - Infra/4.2 CrossCutting/bin/*

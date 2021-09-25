@@ -1,6 +1,8 @@
 ﻿using CursoIdiomas.Domain.Entities;
+using CursoIdiomas.Domain.ValueObjects;
 using CursoIdiomas.Infra.Data.Mapping;
 using CursoIdiomas.Infra.Data.Seeds;
+using Flunt.Notifications;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,9 +23,11 @@ namespace CursoIdiomas.Infra.Data.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Notification>().HasNoKey();
 
-           modelBuilder.Entity<Curso>(new CursoMap().Configure);
-
+            modelBuilder.Entity<Curso>(new CursoMap().Configure);
+            modelBuilder.Entity<Turma>(new TurmaMap().Configure);
+            modelBuilder.Entity<Professor>(new ProfessorMap().Configure);
             CursoSeeds.Cursos(modelBuilder);
         }
     }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CursoIdiomas.Domain.Response
+namespace CursoIdiomas.Application.Commands
 {
     public class GenericCommandsResults 
     {

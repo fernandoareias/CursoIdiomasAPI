@@ -17,16 +17,16 @@ namespace CursoIdiomas.Domain.Entities
             Nome = nome;
             Email = email;
 
-        //    AddNotifications(new Contract<Notification>()
-            //    .Requires()
-            //);
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+            );
         }
 
         public Nome Nome { get; private set; }
         public Email Email { get; private set; }
 
         public Guid TurmaId { get; private set; }
-        public Turma Turma { get; private set; }
+        public List<Turma> Turmas { get; private set; }
 
     }
 }
