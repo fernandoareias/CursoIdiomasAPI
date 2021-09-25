@@ -1,0 +1,33 @@
+
+0 - API/bin/*
+0 - API/obj/*
+
+1 - Application/bin/*
+1 - Application/obj/*
+
+2 - Domain/bin/*
+2 - Domain/obj/*
+
+3 - Service/bin/*
+3 - Service/obj/*
+
+4 - Infra/4.1 Data/bin/*
+4 - Infra/4.1 Data/obj/*
+
+4 - Infra/4.2 CrossCutting/bin/*
+4 - Infra/4.2 CrossCutting/obj/*
+
+5 - Tests/5.1 - CursoIdiomas.Domain.Test/bin/*
+5 - Tests/5.1 - CursoIdiomas.Domain.Test/obj/*
+
+5 - Tests/5.2 - CursoIdiomas.Service.Test/bin/*
+5 - Tests/5.2 - CursoIdiomas.Service.Test/obj/*
+
+5 - Tests/5.3 - CursoIdiomas.Infra.Test/CursoIdiomas.Infra.CrossCutting.Test/bin/*
+5 - Tests/5.3 - CursoIdiomas.Infra.Test/CursoIdiomas.Infra.CrossCutting.Test/obj/*
+
+5 - Tests/5.3 - CursoIdiomas.Infra.Test/CursoIdiomas.Infra.Data.Test/bin/*
+5 - Tests/5.3 - CursoIdiomas.Infra.Test/CursoIdiomas.Infra.Data.Test/obj/*
+
+5 - Tests/5.4 - CursoIdiomas.Integracao.Test/bin/*
+5 - Tests/5.4 - CursoIdiomas.Integracao.Test/obj/*
