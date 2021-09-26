@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CursoIdiomas.Domain.Enum
+namespace CursoIdiomas.Domain.Cursos.Enum
 {
     public enum EDificuldade
     {

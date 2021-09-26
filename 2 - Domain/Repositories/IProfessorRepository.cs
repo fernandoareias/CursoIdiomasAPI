@@ -7,6 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Domain.Repositories {
-    public interface IProfessorRepository : IRepository<Professor> {
+    public interface IProfessorRepository : IRepository<CursoIdiomas.Domain.Professor.Professor> {
     }
 }

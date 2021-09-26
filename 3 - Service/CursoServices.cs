@@ -31,7 +31,7 @@ namespace CursoIdiomas.Service.CursoServices
 
         public async Task<Curso> Registrar(CursoDTO model)
         {
-            var _entity = new Curso(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
+            var _entity = new Curso(model.Nome, (CursoIdiomas.Domain.Cursos.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
             if (!_entity.IsValid)
                 return null;
 
@@ -43,7 +43,7 @@ namespace CursoIdiomas.Service.CursoServices
         }
 
         public async Task<Curso> Atualizar(Guid idCurso, CursoDTO model) {
-            var _entity = new Curso(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
+            var _entity = new Curso(idCurso, model.Nome, (CursoIdiomas.Domain.Cursos.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
 
             if (!_entity.IsValid)
                 return null;

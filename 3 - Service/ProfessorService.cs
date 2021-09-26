@@ -2,6 +2,7 @@
 using CursoIdiomas.Domain.Entities;
 using CursoIdiomas.Domain.Interfaces;
 using CursoIdiomas.Domain.Interfaces.Service;
+using CursoIdiomas.Domain.Professor;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

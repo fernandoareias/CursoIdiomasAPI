@@ -1,4 +1,5 @@
 ﻿using CursoIdiomas.Domain.Entities;
+using CursoIdiomas.Domain.Cursos.Enum;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,20 +14,20 @@ namespace CursoIdiomas.Infra.Data.Seeds
         public static void Cursos(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Turma>().HasData(
-                new Curso("Inglês", Domain.Enum.EDificuldade.Iniciante, 70),
-                new Curso("Espanhol", Domain.Enum.EDificuldade.Iniciante, 70),
-                new Curso("Italiano", Domain.Enum.EDificuldade.Iniciante, 80),
-                new Curso("Alemão", Domain.Enum.EDificuldade.Iniciante, 90),
+                new Curso("Inglês", EDificuldade.Iniciante, 70),
+                new Curso("Espanhol", EDificuldade.Iniciante, 70),
+                new Curso("Italiano", EDificuldade.Iniciante, 80),
+                new Curso("Alemão", EDificuldade.Iniciante, 90),
 
-                new Curso("Inglês", Domain.Enum.EDificuldade.Intermediario, 110),
-                new Curso("Espanhol", Domain.Enum.EDificuldade.Intermediario, 110),
-                new Curso("Italiano", Domain.Enum.EDificuldade.Intermediario, 150),
-                new Curso("Alemão", Domain.Enum.EDificuldade.Intermediario, 180),
+                new Curso("Inglês", EDificuldade.Intermediario, 110),
+                new Curso("Espanhol", EDificuldade.Intermediario, 110),
+                new Curso("Italiano", EDificuldade.Intermediario, 150),
+                new Curso("Alemão", EDificuldade.Intermediario, 180),
 
-                new Curso("Inglês", Domain.Enum.EDificuldade.Avancado, 150),
-                new Curso("Espanhol", Domain.Enum.EDificuldade.Avancado, 190),
-                new Curso("Italiano", Domain.Enum.EDificuldade.Avancado, 220),
-                new Curso("Alemão", Domain.Enum.EDificuldade.Avancado, 280)
+                new Curso("Inglês", EDificuldade.Avancado, 150),
+                new Curso("Espanhol", EDificuldade.Avancado, 190),
+                new Curso("Italiano", EDificuldade.Avancado, 220),
+                new Curso("Alemão", EDificuldade.Avancado, 280)
             );
 
         }

@@ -1,5 +1,6 @@
 ﻿using CursoIdiomas.Application.Boletim.Interfaces;
 using CursoIdiomas.Application.Commands;
+using CursoIdiomas.Application.CursoContext.Professor.DTO;
 using CursoIdiomas.Application.Cursos.DTO;
 using CursoIdiomas.Application.Cursos.Interfaces;
 using CursoIdiomas.Application.Views;
@@ -39,7 +40,7 @@ namespace CursoIdiomas.Application.Professor.Services {
             return new GenericCommandsResults(true, "Cursos encontrado!", true);
         }
 
-        public async Task<GenericCommandsResults> Registrar(CursoDTO model) {
+        public async Task<GenericCommandsResults> Registrar(ProfessorDTO model) {
             //var result = await _professorService.Registrar(model.ToDomain());
 
             //if (!result.IsValid) {
@@ -51,7 +52,7 @@ namespace CursoIdiomas.Application.Professor.Services {
 
         }
 
-        public async Task<GenericCommandsResults> Atualizar(System.Guid idCurso, CursoDTO model) {
+        public async Task<GenericCommandsResults> Atualizar(System.Guid idCurso, ProfessorDTO model) {
             //var result = await _professorService.Atualizar(idCurso, model.ToDomain());
 
             //if (!result.IsValid) {

@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <ProjectReference Include="..\2 - Domain\CursoIdiomas.Domain.csproj" />
-  </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>CursoIdiomas.Application</RootNamespace>
     <AssemblyName>CursoIdiomas.Application</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\2 - Domain\CursoIdiomas.Domain.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using CursoIdiomas.Domain.Entities;
+using CursoIdiomas.Domain.Professor;
 using CursoIdiomas.Domain.ValueObjects;
 using CursoIdiomas.Infra.Data.Mapping;
 using CursoIdiomas.Infra.Data.Seeds;

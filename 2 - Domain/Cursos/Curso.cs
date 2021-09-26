@@ -1,15 +1,10 @@
-﻿using CursoIdiomas.Domain.Enum;
-using CursoIdiomas.Domain.ValueObjects;
+﻿using CursoIdiomas.Domain.Cursos.Enum;
 using Flunt.Notifications;
 using Flunt.Validations;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CursoIdiomas.Domain.Entities
-{
+namespace CursoIdiomas.Domain.Entities {
     public class Curso : Entity
     {
         public Curso()

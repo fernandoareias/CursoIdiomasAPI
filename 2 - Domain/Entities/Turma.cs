@@ -22,7 +22,7 @@ namespace CursoIdiomas.Domain.Entities
         public Guid CursoId { get; private set; }
         public Curso Curso { get; private set; }
         public Guid ProfessorId { get; private set; }
-        public Professor Professor { get; private set; }
+        public CursoIdiomas.Domain.Professor.Professor Professor { get; private set; }
 
         public virtual List<Matricula> Matriculas { get; set; }
     }

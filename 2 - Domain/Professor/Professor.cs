@@ -1,4 +1,5 @@
-﻿using CursoIdiomas.Domain.ValueObjects;
+﻿using CursoIdiomas.Domain.Entities;
+using CursoIdiomas.Domain.ValueObjects;
 using Flunt.Notifications;
 using Flunt.Validations;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CursoIdiomas.Domain.Entities
+namespace CursoIdiomas.Domain.Professor
 {
     public class Professor : Entity
     {

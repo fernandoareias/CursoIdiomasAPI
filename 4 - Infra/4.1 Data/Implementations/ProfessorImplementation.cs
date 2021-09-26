@@ -1,4 +1,5 @@
 ﻿using CursoIdiomas.Domain.Entities;
+using CursoIdiomas.Domain.Professor;
 using CursoIdiomas.Domain.Repositories;
 using CursoIdiomas.Infra.Data.Context;
 using CursoIdiomas.Infra.Data.Repository;
