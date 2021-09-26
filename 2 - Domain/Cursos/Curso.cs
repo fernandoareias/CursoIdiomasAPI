@@ -46,26 +46,7 @@ namespace CursoIdiomas.Domain.Entities
                 );
 
         }
-        /*
-                public Curso(string nome, EDificuldade dificuldade, int cargaHoraria, Turma turma)
-                {
-                    Nome = nome;
-                    Dificuldade = dificuldade;
-                    CargaHoraria = cargaHoraria;
-                    TurmaId = turma.Id;
-                    Turma = turma;
-
-                    AddNotifications(new Contract<Notification>()
-                        .Requires()
-                        .IsGreaterThan(Nome, 2, "Nome", "O Nome deve ser maior que 2 caractéres.")
-                        .IsLowerThan(Nome, 80, "Nome", "O Nome deve ser menor que 80 caractéres.")
-                        .IsGreaterThan(CargaHoraria, 0, "CargaHoraria", "A Carga horaria deve ser maior que 0.")
-                        .IsLowerThan((int)dificuldade, 4, "Dificuldade", "O dificuldade deve ser menor que 4")
-                        .IsNotNull(turma, "Turma", "Turma não pode ser nula")
-                        );
-
-                }
-        */
+  
         public string Nome { get; private set; }
         public EDificuldade Dificuldade { get; private set; }
         public int CargaHoraria { get; private set; }

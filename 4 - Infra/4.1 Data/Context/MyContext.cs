@@ -14,7 +14,7 @@ namespace CursoIdiomas.Infra.Data.Context
 {
     public class MyContext : DbContext
     {
-        public DbSet<Curso> Curso { get; set; }
+        public DbSet<Turma> Curso { get; set; }
         public MyContext(DbContextOptions<MyContext> options) : base(options)
         {
 
@@ -25,9 +25,13 @@ namespace CursoIdiomas.Infra.Data.Context
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Notification>().HasNoKey();
 
-            modelBuilder.Entity<Curso>(new CursoMap().Configure);
+            modelBuilder.Entity<Turma>(new CursoMap().Configure);
             modelBuilder.Entity<Turma>(new TurmaMap().Configure);
-            modelBuilder.Entity<Professor>(new ProfessorMap().Configure);
+            modelBuilder.Entity<Turma>(new ProfessorMap().Configure);
+            modelBuilder.Entity<Turma>(new AlunoMap().Configure);
+            modelBuilder.Entity<Turma>(new MatriculaMap().Configure);
+            modelBuilder.Entity<Turma>(new BoletimMap().Configure);
+            modelBuilder.Entity<Turma>(new MensalidadesMap().Configure);
             CursoSeeds.Cursos(modelBuilder);
         }
     }

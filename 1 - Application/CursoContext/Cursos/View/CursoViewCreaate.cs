@@ -14,7 +14,7 @@ namespace CursoIdiomas.Domain.Views
         public int CargaHoraria { get; private set; }
         
 
-        public CursoViewCreate(Curso model)
+        public CursoViewCreate(Turma model)
         {
             Nome = model.Nome;
             Dificuldade = (int)model.Dificuldade;

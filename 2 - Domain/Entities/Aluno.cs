@@ -7,11 +7,18 @@ using System.Threading.Tasks;
 
 namespace CursoIdiomas.Domain.Entities
 {
-    public class Aluno : Entity
+    public class Alunos : Entity
     {
+        public Alunos() { }
+        public Alunos(Nome nome, Email email) {
+            Nome = nome;
+            Email = email;
+        }
 
         public Nome Nome { get; set; }
         public Email Email { get; set; }
 
+        public Guid IdMatricula { get; set; }
+        public Turma Matricula { get; set; }
     }
 }

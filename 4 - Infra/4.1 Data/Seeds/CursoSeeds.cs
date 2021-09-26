@@ -12,21 +12,21 @@ namespace CursoIdiomas.Infra.Data.Seeds
     {
         public static void Cursos(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Curso>().HasData(
-                new Curso("Inglês", Domain.Enum.EDificuldade.Iniciante, 70),
-                new Curso("Espanhol", Domain.Enum.EDificuldade.Iniciante, 70),
-                new Curso("Italiano", Domain.Enum.EDificuldade.Iniciante, 80),
-                new Curso("Alemão", Domain.Enum.EDificuldade.Iniciante, 90),
+            modelBuilder.Entity<Turma>().HasData(
+                new Turma("Inglês", Domain.Enum.EDificuldade.Iniciante, 70),
+                new Turma("Espanhol", Domain.Enum.EDificuldade.Iniciante, 70),
+                new Turma("Italiano", Domain.Enum.EDificuldade.Iniciante, 80),
+                new Turma("Alemão", Domain.Enum.EDificuldade.Iniciante, 90),
 
-                new Curso("Inglês", Domain.Enum.EDificuldade.Intermediario, 110),
-                new Curso("Espanhol", Domain.Enum.EDificuldade.Intermediario, 110),
-                new Curso("Italiano", Domain.Enum.EDificuldade.Intermediario, 150),
-                new Curso("Alemão", Domain.Enum.EDificuldade.Intermediario, 180),
+                new Turma("Inglês", Domain.Enum.EDificuldade.Intermediario, 110),
+                new Turma("Espanhol", Domain.Enum.EDificuldade.Intermediario, 110),
+                new Turma("Italiano", Domain.Enum.EDificuldade.Intermediario, 150),
+                new Turma("Alemão", Domain.Enum.EDificuldade.Intermediario, 180),
 
-                new Curso("Inglês", Domain.Enum.EDificuldade.Avancado, 150),
-                new Curso("Espanhol", Domain.Enum.EDificuldade.Avancado, 190),
-                new Curso("Italiano", Domain.Enum.EDificuldade.Avancado, 220),
-                new Curso("Alemão", Domain.Enum.EDificuldade.Avancado, 280)
+                new Turma("Inglês", Domain.Enum.EDificuldade.Avancado, 150),
+                new Turma("Espanhol", Domain.Enum.EDificuldade.Avancado, 190),
+                new Turma("Italiano", Domain.Enum.EDificuldade.Avancado, 220),
+                new Turma("Alemão", Domain.Enum.EDificuldade.Avancado, 280)
             );
 
         }

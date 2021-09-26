@@ -19,6 +19,45 @@ namespace CursoIdiomas.Infra.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CursoIdiomas.Domain.Entities.Aluno", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("IdMatricula")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Aluno");
+                });
+
+            modelBuilder.Entity("CursoIdiomas.Domain.Entities.Boletim", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DataPublicacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("MatriculaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<float>("Nota")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime?>("UltimaAtualizacao")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MatriculaId");
+
+                    b.ToTable("Boletim");
+                });
+
             modelBuilder.Entity("CursoIdiomas.Domain.Entities.Curso", b =>
                 {
                     b.Property<Guid>("Id")
@@ -45,7 +84,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9bdb0900-60a8-423e-81e2-aea666eed768"),
+                            Id = new Guid("46ed0afc-2fdf-4def-b216-9663cf640332"),
                             CargaHoraria = 70,
                             Dificuldade = 1,
                             Nome = "Inglês",
@@ -53,7 +92,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7ef79543-f964-4b37-9372-90665341af82"),
+                            Id = new Guid("9dbb1b0b-633f-4e53-8d44-46b5e6fc9fdd"),
                             CargaHoraria = 70,
                             Dificuldade = 1,
                             Nome = "Espanhol",
@@ -61,7 +100,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2ed58113-2479-4a0e-bf20-bcb3bb011a5f"),
+                            Id = new Guid("410f8a3c-5551-4a8f-b361-5f3d619b0ee0"),
                             CargaHoraria = 80,
                             Dificuldade = 1,
                             Nome = "Italiano",
@@ -69,7 +108,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("36459be2-80a1-46d1-8264-42b57a5ba4ed"),
+                            Id = new Guid("9e018cac-255c-4466-aa3b-2eb6fb05e7d7"),
                             CargaHoraria = 90,
                             Dificuldade = 1,
                             Nome = "Alemão",
@@ -77,7 +116,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cb2dea3a-6ffc-4ae4-9328-03337c02bf57"),
+                            Id = new Guid("47f77ff9-55ff-4b0b-9fb4-fe3a6dd02bd9"),
                             CargaHoraria = 110,
                             Dificuldade = 2,
                             Nome = "Inglês",
@@ -85,7 +124,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("26cd3036-7fff-4a71-9511-3c2f0d934ef9"),
+                            Id = new Guid("c781633c-6ca0-485b-872f-741395d54cc5"),
                             CargaHoraria = 110,
                             Dificuldade = 2,
                             Nome = "Espanhol",
@@ -93,7 +132,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9e57a4ef-b196-430c-85d6-6aa92c4e8f47"),
+                            Id = new Guid("c2075070-c498-4408-bbcb-a8832b885c40"),
                             CargaHoraria = 150,
                             Dificuldade = 2,
                             Nome = "Italiano",
@@ -101,7 +140,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e13f1f03-631e-4304-b181-9b0afdfba31d"),
+                            Id = new Guid("6df59ecd-f1ec-4de7-b95c-a414857827e4"),
                             CargaHoraria = 180,
                             Dificuldade = 2,
                             Nome = "Alemão",
@@ -109,7 +148,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fc259742-4ab0-4d7c-95d7-96b5a773873e"),
+                            Id = new Guid("4a3eef64-404d-4f6d-9263-12ea10a69e43"),
                             CargaHoraria = 150,
                             Dificuldade = 3,
                             Nome = "Inglês",
@@ -117,7 +156,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5166bd58-d962-4930-89e7-f90265c37913"),
+                            Id = new Guid("e4870a69-74d7-4f3b-8489-707909ff97ca"),
                             CargaHoraria = 190,
                             Dificuldade = 3,
                             Nome = "Espanhol",
@@ -125,7 +164,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d2edfcd5-5d6b-43a4-8589-43e2225cce3a"),
+                            Id = new Guid("63afb29a-4034-4533-8f84-108f7d065378"),
                             CargaHoraria = 220,
                             Dificuldade = 3,
                             Nome = "Italiano",
@@ -133,12 +172,59 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e8127002-3449-4b9d-9ae4-b5118c25ed3b"),
+                            Id = new Guid("aa47f99e-0932-4fe3-b396-cb2de3accad7"),
                             CargaHoraria = 280,
                             Dificuldade = 3,
                             Nome = "Alemão",
                             TurmaId = new Guid("00000000-0000-0000-0000-000000000000")
                         });
+                });
+
+            modelBuilder.Entity("CursoIdiomas.Domain.Entities.Matricula", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AlunoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativa")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("TurmaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlunoId")
+                        .IsUnique();
+
+                    b.HasIndex("TurmaId");
+
+                    b.ToTable("Matricula");
+                });
+
+            modelBuilder.Entity("CursoIdiomas.Domain.Entities.Mensalidades", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("MatriculaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("Vencimento")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MatriculaId");
+
+                    b.ToTable("Mensalidade");
                 });
 
             modelBuilder.Entity("CursoIdiomas.Domain.Entities.Professor", b =>
@@ -191,6 +277,89 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Notification");
+                });
+
+            modelBuilder.Entity("CursoIdiomas.Domain.Entities.Aluno", b =>
+                {
+                    b.OwnsOne("CursoIdiomas.Domain.ValueObjects.Email", "Email", b1 =>
+                        {
+                            b1.Property<Guid>("AlunoId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Address")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("AlunoId");
+
+                            b1.ToTable("Aluno");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AlunoId");
+                        });
+
+                    b.OwnsOne("CursoIdiomas.Domain.ValueObjects.Nome", "Nome", b1 =>
+                        {
+                            b1.Property<Guid>("AlunoId")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("FirstName")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("LastName")
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("AlunoId");
+
+                            b1.ToTable("Aluno");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AlunoId");
+                        });
+
+                    b.Navigation("Email");
+
+                    b.Navigation("Nome");
+                });
+
+            modelBuilder.Entity("CursoIdiomas.Domain.Entities.Boletim", b =>
+                {
+                    b.HasOne("CursoIdiomas.Domain.Entities.Matricula", "Matricula")
+                        .WithMany("Boletins")
+                        .HasForeignKey("MatriculaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Matricula");
+                });
+
+            modelBuilder.Entity("CursoIdiomas.Domain.Entities.Matricula", b =>
+                {
+                    b.HasOne("CursoIdiomas.Domain.Entities.Aluno", "Aluno")
+                        .WithOne("Matricula")
+                        .HasForeignKey("CursoIdiomas.Domain.Entities.Matricula", "AlunoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CursoIdiomas.Domain.Entities.Turma", "Turma")
+                        .WithMany("Matriculas")
+                        .HasForeignKey("TurmaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Aluno");
+
+                    b.Navigation("Turma");
+                });
+
+            modelBuilder.Entity("CursoIdiomas.Domain.Entities.Mensalidades", b =>
+                {
+                    b.HasOne("CursoIdiomas.Domain.Entities.Matricula", "Matricula")
+                        .WithMany("Mensalidades")
+                        .HasForeignKey("MatriculaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Matricula");
                 });
 
             modelBuilder.Entity("CursoIdiomas.Domain.Entities.Professor", b =>
@@ -254,14 +423,31 @@ namespace CursoIdiomas.Infra.Data.Migrations
                     b.Navigation("Professor");
                 });
 
+            modelBuilder.Entity("CursoIdiomas.Domain.Entities.Aluno", b =>
+                {
+                    b.Navigation("Matricula");
+                });
+
             modelBuilder.Entity("CursoIdiomas.Domain.Entities.Curso", b =>
                 {
                     b.Navigation("Turmas");
                 });
 
+            modelBuilder.Entity("CursoIdiomas.Domain.Entities.Matricula", b =>
+                {
+                    b.Navigation("Boletins");
+
+                    b.Navigation("Mensalidades");
+                });
+
             modelBuilder.Entity("CursoIdiomas.Domain.Entities.Professor", b =>
                 {
                     b.Navigation("Turmas");
+                });
+
+            modelBuilder.Entity("CursoIdiomas.Domain.Entities.Turma", b =>
+                {
+                    b.Navigation("Matriculas");
                 });
 #pragma warning restore 612, 618
         }

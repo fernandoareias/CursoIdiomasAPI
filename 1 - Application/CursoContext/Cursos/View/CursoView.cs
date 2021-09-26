@@ -15,7 +15,7 @@ namespace CursoIdiomas.Application.Views
         public int CargaHoraria { get;  set; }
 
 
-        public CursoView(Curso model)
+        public CursoView(Aluno model)
         {
             if(model != null) {
                 Id = model.Id;
@@ -25,7 +25,7 @@ namespace CursoIdiomas.Application.Views
             }
         }
 
-        public static async Task<IEnumerable<CursoView>> Mapping(IEnumerable<Curso> cursos)
+        public static async Task<IEnumerable<CursoView>> Mapping(IEnumerable<Aluno> cursos)
         {
             if(cursos.Any() == false) {
                 return null;
