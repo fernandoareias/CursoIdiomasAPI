@@ -21,6 +21,6 @@ namespace CursoIdiomas.Domain.Entities
         public float Nota { get; private set; }
 
         public Guid MatriculaId { get; private set; }
-        public Turma Matricula { get; private set; }
+        public Matricula Matricula { get; private set; }
     }
 }

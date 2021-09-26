@@ -10,11 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Implementations {
-    public class ProfessorImplementation : BaseRepository<Turma>, IProfessorRepository {
-        private DbSet<Turma> _dataset;
+    public class ProfessorImplementation : BaseRepository<Professor>, IProfessorRepository {
+        private DbSet<Professor> _dataset;
 
         public ProfessorImplementation(MyContext context) : base(context) {
-            _dataset = context.Set<Turma>();
+            _dataset = context.Set<Professor>();
         }
 
     }

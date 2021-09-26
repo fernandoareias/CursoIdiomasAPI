@@ -14,12 +14,12 @@ namespace CursoIdiomas.Domain.Entities
         public bool Ativa { get; private set; }
 
         public Guid AlunoId { get; private set; }
-        public virtual Turma Aluno { get; private set; }
+        public virtual Alunos Aluno { get; private set; }
         public Guid TurmaId { get; private set; }
         public virtual Turma Turma { get; private set; }
 
-        public virtual List<Turma> Boletins { get; private set; }
-        public virtual List<Turma> Mensalidades { get; private set; }
+        public virtual List<Boletim> Boletins { get; private set; }
+        public virtual List<Mensalidade> Mensalidades { get; private set; }
 
     }
 }

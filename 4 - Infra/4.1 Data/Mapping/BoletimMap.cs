@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Mapping {
-    public class BoletimMap : IEntityTypeConfiguration<Turma> {
-        public void Configure(EntityTypeBuilder<Turma> builder) {
+    public class BoletimMap : IEntityTypeConfiguration<Boletim> {
+        public void Configure(EntityTypeBuilder<Boletim> builder) {
 
 
             builder.ToTable("Boletim");

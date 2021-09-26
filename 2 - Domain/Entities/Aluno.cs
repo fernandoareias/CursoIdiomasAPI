@@ -19,6 +19,6 @@ namespace CursoIdiomas.Domain.Entities
         public Email Email { get; set; }
 
         public Guid IdMatricula { get; set; }
-        public Turma Matricula { get; set; }
+        public Matricula Matricula { get; set; }
     }
 }

@@ -8,45 +8,45 @@ using System.Threading.Tasks;
 
 namespace CursoIdiomas.Service.CursoServices {
     public class MensalidadeService : IMensalidadesService {
-        private readonly IRepository<Turma> _repository;
+        private readonly IRepository<Mensalidade> _repository;
 
-        public MensalidadeService(IRepository<Turma> repository) {
+        public MensalidadeService(IRepository<Mensalidade> repository) {
             _repository = repository;
 
         }
 
-        public async Task<IEnumerable<Turma>> GetAll() {
+        public async Task<IEnumerable<Mensalidade>> GetAll() {
             return await _repository.SelectAsync();
         }
 
 
-        public async Task<Turma> Obter(Guid id) {
+        public async Task<Mensalidade> Obter(Guid id) {
             return await _repository.SelectAsync(id);
         }
 
-        public async Task<Turma> Registrar(CursoDTO model) {
-            var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
-            if (!_entity.IsValid)
-                return null;
+        public async Task<Mensalidade> Registrar(CursoDTO model) {
+            //var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
+            //if (!_entity.IsValid)
+            //    return null;
 
-            var result = await _repository.InsertAsync(_entity);
-            if (result == null)
-                return null;
+            //var result = await _repository.InsertAsync(_entity);
+            //if (result == null)
+            //    return null;
 
-            return result;
+            return new Mensalidade();
         }
 
-        public async Task<Turma> Atualizar(Guid idCurso, CursoDTO model) {
-            var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
+        public async Task<Mensalidade> Atualizar(Guid idCurso, CursoDTO model) {
+            //var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
 
-            if (!_entity.IsValid)
-                return null;
+            //if (!_entity.IsValid)
+            //    return null;
 
-            var result = await _repository.UpdateAsync(_entity);
-            if (result == null)
-                return null;
+            //var result = await _repository.UpdateAsync(_entity);
+            //if (result == null)
+            //    return null;
 
-            return result;
+            return new Mensalidade();
 
         }
 

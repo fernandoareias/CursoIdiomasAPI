@@ -1,4 +1,6 @@
-﻿using CursoIdiomas.Application.Cursos.Interfaces;
+﻿using CursoIdiomas.Application.Aluno.Interfaces;
+using CursoIdiomas.Application.Cursos.DTO;
+using CursoIdiomas.Application.Cursos.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;

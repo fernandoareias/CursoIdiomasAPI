@@ -8,6 +8,9 @@ namespace CursoIdiomas.Domain.Entities
 {
     public class Mensalidade : Entity
     {
+        public Mensalidade() {
+
+        }
         public Mensalidade(DateTime vencimento, decimal valor) {
             Vencimento = vencimento;
             Valor = valor;
@@ -20,6 +23,6 @@ namespace CursoIdiomas.Domain.Entities
         public DateTime Vencimento { get; private set; }
         public decimal Valor { get; private set; }
         public Guid MatriculaId { get; private set; }
-        public Turma Matricula { get; private set; }
+        public Matricula Matricula { get; private set; }
     }
 }

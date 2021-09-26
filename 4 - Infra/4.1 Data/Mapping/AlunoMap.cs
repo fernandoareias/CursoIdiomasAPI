@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Mapping {
-    public class AlunoMap : IEntityTypeConfiguration<Turma> {
-        public void Configure(EntityTypeBuilder<Turma> builder) {
+    public class AlunoMap : IEntityTypeConfiguration<Alunos> {
+        public void Configure(EntityTypeBuilder<Alunos> builder) {
 
 
             builder.ToTable("Aluno");
@@ -17,7 +17,7 @@ namespace CursoIdiomas.Infra.Data.Mapping {
             builder.Ignore(x => x.Notifications);
             builder.OwnsOne(x => x.Nome);
             builder.OwnsOne(x => x.Email);
-            builder.HasOne((System.Linq.Expressions.Expression<Func<Turma, Turma>>)(x => (Turma)x.Matricula)).WithOne(y => y.Aluno);
+            builder.HasOne(x => x.Matricula).WithOne(m => m.Aluno);
         }
     }
 }

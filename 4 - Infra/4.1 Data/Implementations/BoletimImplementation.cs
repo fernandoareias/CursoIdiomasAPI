@@ -10,11 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Implementations {
-    public class BoletimImplementation : BaseRepository<Turma>, IBoletimRepository {
-        private DbSet<Turma> _dataset;
+    public class BoletimImplementation : BaseRepository<Boletim>, IBoletimRepository {
+        private DbSet<Boletim> _dataset;
 
         public BoletimImplementation(MyContext context) : base(context) {
-            _dataset = context.Set<Turma>();
+            _dataset = context.Set<Boletim>();
         }
 
     }

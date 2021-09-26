@@ -22,49 +22,49 @@ namespace CursoIdiomas.Application.Cursos.Services
 
         public async Task<GenericCommandsResults> GetAll()
         {
-            var result = await _cursoService.GetAll();
-            if(result == null) {
-                return new GenericCommandsResults(false, "Não há curso registrado.", null);
-            }
-            var views = await CursoView.Mapping(result);
+            //var result = await _cursoService.GetAll();
+            //if(result == null) {
+            //    return new GenericCommandsResults(false, "Não há curso registrado.", null);
+            //}
+            //var views = await CursoView.Mapping(result);
 
-            return new GenericCommandsResults(true, "Há cursos registrados!", views);
+            return new GenericCommandsResults(true, "Há cursos registrados!", true);
 
         }
 
         public async Task<GenericCommandsResults> ObterCurso(Guid id)
         {
-            var result = await _cursoService.ObterCurso(id);
-            if (!result.IsValid) {
-                return new GenericCommandsResults(false, "Não foi possível encontrar o curso", result.Notifications);
-            }
-           var view =  new CursoView(result);
+           // var result = await _cursoService.ObterCurso(id);
+           // if (!result.IsValid) {
+           //     return new GenericCommandsResults(false, "Não foi possível encontrar o curso", result.Notifications);
+           // }
+           //var view =  new CursoView(result);
 
-            return new GenericCommandsResults(true, "Cursos encontrado!", view);
+            return new GenericCommandsResults(true, "Cursos encontrado!", true);
         }
      
         public async Task<GenericCommandsResults> RegistrarCurso(CursoDTO model)
         {
-            var result = await _cursoService.RegistrarCurso(model.ToDomain());
+            //var result = await _cursoService.RegistrarCurso(model.ToDomain());
             
-            if (!result.IsValid) {
-                return new GenericCommandsResults(false, "Não foi possível registrar o curso", result.Notifications);
-            }
-            var view = new CursoView(result);
+            //if (!result.IsValid) {
+            //    return new GenericCommandsResults(false, "Não foi possível registrar o curso", result.Notifications);
+            //}
+            //var view = new CursoView(result);
 
-            return new GenericCommandsResults(true, "Curso registrado com sucesso", view);
+            return new GenericCommandsResults(true, "Curso registrado com sucesso", true);
 
         }
 
         public async Task<GenericCommandsResults> AtualizarCurso(System.Guid idCurso, CursoDTO model) {
-            var result = await _cursoService.AtualizarCurso(idCurso, model.ToDomain());
+            //var result = await _cursoService.AtualizarCurso(idCurso, model.ToDomain());
 
-            if (!result.IsValid) {
-                return new GenericCommandsResults(false, "Não foi possível atualizar o curso", result.Notifications);
-            }
-            var view = new CursoView(result);
+            //if (!result.IsValid) {
+            //    return new GenericCommandsResults(false, "Não foi possível atualizar o curso", result.Notifications);
+            //}
+            //var view = new CursoView(result);
 
-            return new GenericCommandsResults(true, "Curso atualizado com sucesso", view);
+            return new GenericCommandsResults(true, "Curso atualizado com sucesso", true);
 
 
         }

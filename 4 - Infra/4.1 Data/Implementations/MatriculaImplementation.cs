@@ -10,11 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Implementations {
-    public class MatriculaImplementation : BaseRepository<Turma>, IMatriculaRepository {
-        private DbSet<Turma> _dataset;
+    public class MatriculaImplementation : BaseRepository<Matricula>, IMatriculaRepository {
+        private DbSet<Matricula> _dataset;
 
         public MatriculaImplementation(MyContext context) : base(context) {
-            _dataset = context.Set<Turma>();
+            _dataset = context.Set<Matricula>();
         }
 
     }

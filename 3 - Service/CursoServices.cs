@@ -24,12 +24,12 @@ namespace CursoIdiomas.Service.CursoServices
         }
 
 
-        public async Task<Curso> ObterCurso(Guid id)
+        public async Task<Curso> Obter(Guid id)
         {
             return await _repository.SelectAsync(id);
         }
 
-        public async Task<Curso> RegistrarCurso(CursoDTO model)
+        public async Task<Curso> Registrar(CursoDTO model)
         {
             var _entity = new Curso(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
             if (!_entity.IsValid)
@@ -42,7 +42,7 @@ namespace CursoIdiomas.Service.CursoServices
             return result;
         }
 
-        public async Task<Curso> AtualizarCurso(Guid idCurso, CursoDTO model) {
+        public async Task<Curso> Atualizar(Guid idCurso, CursoDTO model) {
             var _entity = new Curso(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
 
             if (!_entity.IsValid)

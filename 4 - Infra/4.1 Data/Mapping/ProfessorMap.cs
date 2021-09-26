@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Mapping {
-    public class ProfessorMap : IEntityTypeConfiguration<Turma> {
-        public void Configure(EntityTypeBuilder<Turma> builder) {
+    public class ProfessorMap : IEntityTypeConfiguration<Professor> {
+        public void Configure(EntityTypeBuilder<Professor> builder) {
 
 
             builder.ToTable("Professor");

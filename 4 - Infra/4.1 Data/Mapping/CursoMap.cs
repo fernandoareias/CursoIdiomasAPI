@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Mapping
 {
-    public class CursoMap : IEntityTypeConfiguration<Turma>
+    public class CursoMap : IEntityTypeConfiguration<Curso>
     {
-        public void Configure(EntityTypeBuilder<Turma> builder)
+        public void Configure(EntityTypeBuilder<Curso> builder)
         {
             
         

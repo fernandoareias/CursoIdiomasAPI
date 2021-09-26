@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace CursoIdiomas.Domain.Interfaces.Service {
     public interface IMensalidadesService {
 
-        Task<Turma> Obter(Guid id);
-        Task<IEnumerable<Turma>> GetAll();
-        Task<Turma> Registrar(CursoDTO model);
-        Task<Turma> Atualizar(Guid id, CursoDTO model);
+        Task<Mensalidade> Obter(Guid id);
+        Task<IEnumerable<Mensalidade>> GetAll();
+        Task<Mensalidade> Registrar(CursoDTO model);
+        Task<Mensalidade> Atualizar(Guid id, CursoDTO model);
         Task<bool> Remover(Guid id);
     }
 }

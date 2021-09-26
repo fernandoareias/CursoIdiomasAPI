@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Implementations
 {
-    public class CursoImplementation  : BaseRepository<Turma>, ICursoRepository
+    public class CursoImplementation  : BaseRepository<Curso>, ICursoRepository
     {
         private DbSet<Curso> _dataset;
 

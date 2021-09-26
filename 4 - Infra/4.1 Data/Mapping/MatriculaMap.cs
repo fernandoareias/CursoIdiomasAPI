@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Mapping {
-    public class MatriculaMap : IEntityTypeConfiguration<Turma> {
-        public void Configure(EntityTypeBuilder<Turma> builder) {
+    public class MatriculaMap : IEntityTypeConfiguration<Matricula> {
+        public void Configure(EntityTypeBuilder<Matricula> builder) {
 
 
             builder.ToTable("Matricula");

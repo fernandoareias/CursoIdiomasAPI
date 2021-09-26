@@ -10,49 +10,49 @@ namespace CursoIdiomas.Service.CursoServices
 {
     public class BoletimService: IBoletimService
     {
-        private readonly IRepository<Turma> _repository;
+        private readonly IRepository<Boletim> _repository;
  
-        public BoletimService(IRepository<Turma> repository)
+        public BoletimService(IRepository<Boletim> repository)
         {
             _repository = repository;
         
         }
 
-        public async Task<IEnumerable<Turma>> GetAll()
+        public async Task<IEnumerable<Boletim>> GetAll()
         {
             return await _repository.SelectAsync();
         }
 
 
-        public async Task<Turma> Obter(Guid id)
+        public async Task<Boletim> Obter(Guid id)
         {
             return await _repository.SelectAsync(id);
         }
 
-        public async Task<Turma> Registrar(CursoDTO model)
+        public async Task<Boletim> Registrar(CursoDTO model)
         {
-            var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
-            if (!_entity.IsValid)
-                return null;
+            //var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
+            //if (!_entity.IsValid)
+            //    return null;
 
-            var result = await _repository.InsertAsync(_entity);
-            if(result == null)
-                return null;
+            //var result = await _repository.InsertAsync(_entity);
+            //if(result == null)
+            //    return null;
 
-            return result;
+            return new Boletim();
         }
 
-        public async Task<Turma> Atualizar(Guid idCurso, CursoDTO model) {
-            var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
+        public async Task<Boletim> Atualizar(Guid idCurso, CursoDTO model) {
+            //var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
 
-            if (!_entity.IsValid)
-                return null;
+            //if (!_entity.IsValid)
+            //    return null;
 
-            var result = await _repository.UpdateAsync(_entity);
-            if (result == null)
-                return null;
+            //var result = await _repository.UpdateAsync(_entity);
+            //if (result == null)
+            //    return null;
 
-            return result;
+            return new Boletim();
 
         }
 

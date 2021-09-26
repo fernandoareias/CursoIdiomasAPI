@@ -20,10 +20,10 @@ namespace CursoIdiomas.Domain.Entities
 
 
         public Guid CursoId { get; private set; }
-        public Turma Curso { get; private set; }
+        public Curso Curso { get; private set; }
         public Guid ProfessorId { get; private set; }
-        public Turma Professor { get; private set; }
+        public Professor Professor { get; private set; }
 
-        public virtual List<Turma> Matriculas { get; set; }
+        public virtual List<Matricula> Matriculas { get; set; }
     }
 }

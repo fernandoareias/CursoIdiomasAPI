@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Mapping {
-    public class MensalidadesMap : IEntityTypeConfiguration<Turma> {
-        public void Configure(EntityTypeBuilder<Turma> builder) {
+    public class MensalidadesMap : IEntityTypeConfiguration<Mensalidade> {
+        public void Configure(EntityTypeBuilder<Mensalidade> builder) {
 
 
             builder.ToTable("Mensalidade");

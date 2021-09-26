@@ -25,28 +25,28 @@ namespace CursoIdiomas.Service.CursoServices {
         }
 
         public async Task<Turma> Registrar(CursoDTO model) {
-            var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
-            if (!_entity.IsValid)
-                return null;
+         //   var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
+            //if (!_entity.IsValid)
+            //    return null;
 
-            var result = await _repository.InsertAsync(_entity);
-            if (result == null)
-                return null;
+           //// var result = await _repository.InsertAsync(_entity);
+           // if (result == null)
+           //     return null;
 
-            return result;
+            return new Turma();
         }
 
         public async Task<Turma> Atualizar(Guid idCurso, CursoDTO model) {
-            var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
+           // var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
 
-            if (!_entity.IsValid)
-                return null;
+          //  if (!_entity.IsValid)
+          //      return null;
 
-            var result = await _repository.UpdateAsync(_entity);
-            if (result == null)
-                return null;
+          ////  var result = await _repository.UpdateAsync(_entity);
+          //  if (result == null)
+          //      return null;
 
-            return result;
+            return new Turma();
 
         }
 
