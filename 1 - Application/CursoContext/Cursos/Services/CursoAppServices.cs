@@ -22,13 +22,13 @@ namespace CursoIdiomas.Application.Cursos.Services
 
         public async Task<GenericCommandsResults> GetAll()
         {
-            //var result = await _cursoService.GetAll();
-            //if(result == null) {
-            //    return new GenericCommandsResults(false, "Não há curso registrado.", null);
-            //}
-            //var views = await CursoView.Mapping(result);
+            var result = await _cursoService.GetAll();
+            if (result == null) {
+                return new GenericCommandsResults(false, "Não há curso registrado.", null);
+            }
+            var views = await CursoView.Mapping(result);
 
-            return new GenericCommandsResults(true, "Há cursos registrados!", true);
+            return new GenericCommandsResults(true, "Há cursos registrados!", views);
 
         }
 

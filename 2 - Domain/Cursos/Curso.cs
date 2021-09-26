@@ -1,13 +1,17 @@
 ﻿using CursoIdiomas.Domain.Cursos.Enum;
+using CursoIdiomas.Domain.Entities;
 using Flunt.Notifications;
 using Flunt.Validations;
 using System;
 using System.Collections.Generic;
 
-namespace CursoIdiomas.Domain.Entities {
+namespace CursoIdiomas.Domain.Cursos.Curso {
     public class Curso : Entity
     {
         public Curso()
+        {
+
+        }public Curso(Guid id) : base(id)
         {
 
         }
@@ -27,6 +31,7 @@ namespace CursoIdiomas.Domain.Entities {
                 );
 
         }
+    
         public Curso(Guid id, string nome, EDificuldade dificuldade, int cargaHoraria) : base(id){
             Nome = nome;
             Dificuldade = dificuldade;
@@ -41,11 +46,12 @@ namespace CursoIdiomas.Domain.Entities {
                 );
 
         }
-  
+
+       
+
         public string Nome { get; private set; }
         public EDificuldade Dificuldade { get; private set; }
         public int CargaHoraria { get; private set; }
-        public Guid TurmaId { get;  set; }
         public List<Turma> Turmas { get;  set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using CursoIdiomas.Domain.Cursos.DTO;
+﻿using CursoIdiomas.Domain.Cursos.Curso;
+using CursoIdiomas.Domain.Cursos.DTO;
 using CursoIdiomas.Domain.Entities;
 using System;
 using System.Collections.Generic;

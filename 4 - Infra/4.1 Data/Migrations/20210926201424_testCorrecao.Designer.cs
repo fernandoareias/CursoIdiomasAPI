@@ -4,14 +4,16 @@ using CursoIdiomas.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CursoIdiomas.Infra.Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20210926201424_testCorrecao")]
+    partial class testCorrecao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,6 +134,9 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("IdMatricula")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.ToTable("Aluno");
@@ -215,7 +220,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CursoId")
+                    b.Property<Guid?>("CursoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DataFim")
@@ -224,7 +229,13 @@ namespace CursoIdiomas.Infra.Data.Migrations
                     b.Property<DateTime?>("DataInicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ProfessorId")
+                    b.Property<Guid?>("ProfessorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("idCurso")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("idProfessor")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -238,10 +249,10 @@ namespace CursoIdiomas.Infra.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("125e50a4-db1f-4c5b-9778-0752cfa96896"),
-                            CursoId = new Guid("e0c62bad-3744-4e93-8b77-00588ecd4c5e"),
-                            DataInicio = new DateTime(2021, 9, 26, 17, 52, 35, 219, DateTimeKind.Local).AddTicks(7924),
-                            ProfessorId = new Guid("80d71825-3434-4503-902e-28fb2c5323f8")
+                            Id = new Guid("476162c7-026c-4027-bf14-5048e53e199b"),
+                            DataInicio = new DateTime(2021, 9, 26, 17, 14, 22, 834, DateTimeKind.Local).AddTicks(6142),
+                            idCurso = new Guid("e0c62bad-3744-4e93-8b77-00588ecd4c5e"),
+                            idProfessor = new Guid("80d71825-3434-4503-902e-28fb2c5323f8")
                         });
                 });
 
@@ -256,6 +267,17 @@ namespace CursoIdiomas.Infra.Data.Migrations
                     b.ToTable("Professor");
                 });
 
+            modelBuilder.Entity("Flunt.Notifications.Notification", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Notification");
+                });
+
             modelBuilder.Entity("CursoIdiomas.Domain.Entities.Alunos", b =>
                 {
                     b.OwnsOne("CursoIdiomas.Domain.ValueObjects.Email", "Email", b1 =>
@@ -264,7 +286,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("Address")
-                                .HasColumnType("nvarchar(120)")
+                                .HasColumnType("nvarchar")
                                 .HasColumnName("Emails");
 
                             b1.HasKey("AlunosId");
@@ -281,11 +303,11 @@ namespace CursoIdiomas.Infra.Data.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("FirstName")
-                                .HasColumnType("nvarchar(80)")
+                                .HasColumnType("nvarchar")
                                 .HasColumnName("Nome");
 
                             b1.Property<string>("LastName")
-                                .HasColumnType("nvarchar(80)")
+                                .HasColumnType("nvarchar")
                                 .HasColumnName("Sobrenome");
 
                             b1.HasKey("AlunosId");
@@ -346,15 +368,11 @@ namespace CursoIdiomas.Infra.Data.Migrations
                 {
                     b.HasOne("CursoIdiomas.Domain.Cursos.Curso.Curso", "Curso")
                         .WithMany("Turmas")
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CursoId");
 
                     b.HasOne("CursoIdiomas.Domain.Professor.Professor", "Professor")
                         .WithMany("Turmas")
-                        .HasForeignKey("ProfessorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProfessorId");
 
                     b.Navigation("Curso");
 
@@ -385,12 +403,12 @@ namespace CursoIdiomas.Infra.Data.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("FirstName")
-                                .HasColumnType("nvarchar(80)")
-                                .HasColumnName("Nome");
+                                .HasColumnType("nvarchar")
+                                .HasColumnName("ProfessorNome");
 
                             b1.Property<string>("LastName")
-                                .HasColumnType("nvarchar(80)")
-                                .HasColumnName("Sobrenome");
+                                .HasColumnType("nvarchar")
+                                .HasColumnName("ProfessorSobrenome");
 
                             b1.HasKey("ProfessorId");
 

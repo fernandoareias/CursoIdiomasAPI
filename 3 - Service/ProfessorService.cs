@@ -3,6 +3,7 @@ using CursoIdiomas.Domain.Entities;
 using CursoIdiomas.Domain.Interfaces;
 using CursoIdiomas.Domain.Interfaces.Service;
 using CursoIdiomas.Domain.Professor;
+using CursoIdiomas.Domain.Professor.DTO;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,11 +22,11 @@ namespace CursoIdiomas.Service.CursoServices {
         }
 
 
-        public async Task<Professor> Obter(Guid id) {
-            return await _repository.SelectAsync(id);
+        public async Task<Professor> Obter(Guid idProfessor) {
+            return await _repository.SelectAsync(idProfessor);
         }
 
-        public async Task<Professor> Registrar(CursoDTO model) {
+        public async Task<Professor> Registrar(ProfessorDTO model) {
             //var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
             //if (!_entity.IsValid)
             //    return null;
@@ -37,7 +38,7 @@ namespace CursoIdiomas.Service.CursoServices {
             return new Professor();
         }
 
-        public async Task<Professor> Atualizar(Guid idCurso, CursoDTO model) {
+        public async Task<Professor> Atualizar(Guid idProfessor, ProfessorDTO model) {
             //var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
 
             //if (!_entity.IsValid)
@@ -51,8 +52,8 @@ namespace CursoIdiomas.Service.CursoServices {
 
         }
 
-        public async Task<bool> Remover(Guid idCurso) {
-            return await _repository.DeleteAsync(idCurso);
+        public async Task<bool> Remover(Guid idProfessor) {
+            return await _repository.DeleteAsync(idProfessor);
 
         }
 

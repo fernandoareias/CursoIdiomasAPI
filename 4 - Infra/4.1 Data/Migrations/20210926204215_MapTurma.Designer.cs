@@ -4,14 +4,16 @@ using CursoIdiomas.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CursoIdiomas.Infra.Data.Migrations
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20210926204215_MapTurma")]
+    partial class MapTurma
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -132,6 +134,9 @@ namespace CursoIdiomas.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("IdMatricula")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.ToTable("Aluno");
@@ -238,9 +243,9 @@ namespace CursoIdiomas.Infra.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("125e50a4-db1f-4c5b-9778-0752cfa96896"),
+                            Id = new Guid("799e87fe-2ce5-40bf-bd4f-193e9e9e6a6d"),
                             CursoId = new Guid("e0c62bad-3744-4e93-8b77-00588ecd4c5e"),
-                            DataInicio = new DateTime(2021, 9, 26, 17, 52, 35, 219, DateTimeKind.Local).AddTicks(7924),
+                            DataInicio = new DateTime(2021, 9, 26, 17, 42, 14, 75, DateTimeKind.Local).AddTicks(9837),
                             ProfessorId = new Guid("80d71825-3434-4503-902e-28fb2c5323f8")
                         });
                 });
@@ -256,6 +261,17 @@ namespace CursoIdiomas.Infra.Data.Migrations
                     b.ToTable("Professor");
                 });
 
+            modelBuilder.Entity("Flunt.Notifications.Notification", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable("Notification");
+                });
+
             modelBuilder.Entity("CursoIdiomas.Domain.Entities.Alunos", b =>
                 {
                     b.OwnsOne("CursoIdiomas.Domain.ValueObjects.Email", "Email", b1 =>
@@ -264,7 +280,7 @@ namespace CursoIdiomas.Infra.Data.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("Address")
-                                .HasColumnType("nvarchar(120)")
+                                .HasColumnType("nvarchar")
                                 .HasColumnName("Emails");
 
                             b1.HasKey("AlunosId");
@@ -281,11 +297,11 @@ namespace CursoIdiomas.Infra.Data.Migrations
                                 .HasColumnType("uniqueidentifier");
 
                             b1.Property<string>("FirstName")
-                                .HasColumnType("nvarchar(80)")
+                                .HasColumnType("nvarchar")
                                 .HasColumnName("Nome");
 
                             b1.Property<string>("LastName")
-                                .HasColumnType("nvarchar(80)")
+                                .HasColumnType("nvarchar")
                                 .HasColumnName("Sobrenome");
 
                             b1.HasKey("AlunosId");
@@ -386,11 +402,11 @@ namespace CursoIdiomas.Infra.Data.Migrations
 
                             b1.Property<string>("FirstName")
                                 .HasColumnType("nvarchar(80)")
-                                .HasColumnName("Nome");
+                                .HasColumnName("ProfessorNome");
 
                             b1.Property<string>("LastName")
                                 .HasColumnType("nvarchar(80)")
-                                .HasColumnName("Sobrenome");
+                                .HasColumnName("ProfessorSobrenome");
 
                             b1.HasKey("ProfessorId");
 

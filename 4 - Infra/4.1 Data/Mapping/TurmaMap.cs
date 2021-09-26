@@ -13,12 +13,14 @@ namespace CursoIdiomas.Infra.Data.Mapping {
 
 
             builder.ToTable("Turma");
+            builder.Ignore(p => p.Notifications);
             builder.HasKey(p => p.Id);
-          
             builder.Property(x => x.DataInicio);
             builder.Property(x => x.DataFim);
-            builder.Ignore(p => p.Notifications);
-            builder.HasOne(x => x.Curso).WithMany(y => y.Turmas);
+       
+
+
+            builder.HasOne(x => x.Curso).WithMany(t => t.Turmas);
             builder.HasOne(x => x.Professor).WithMany(y => y.Turmas);
 
 

@@ -13,7 +13,7 @@ namespace CursoIdiomas.API.Controllers {
     public class ProfessorControllers : ControllerBase {
         private readonly IProfessorAppServices _professorAppService;
 
-        public ProfessorControllers(ProfessorAppServices professorAppService) {
+        public ProfessorControllers(IProfessorAppServices professorAppService) {
             _professorAppService = professorAppService;
         }
 

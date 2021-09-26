@@ -1,4 +1,5 @@
-﻿using CursoIdiomas.Domain.Entities;
+﻿using CursoIdiomas.Domain.Cursos.Curso;
+using CursoIdiomas.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

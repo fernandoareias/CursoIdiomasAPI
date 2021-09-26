@@ -1,4 +1,5 @@
-﻿using CursoIdiomas.Domain.Entities;
+﻿using CursoIdiomas.Domain.Cursos.Curso;
+using CursoIdiomas.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

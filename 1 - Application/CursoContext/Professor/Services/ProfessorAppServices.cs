@@ -1,6 +1,7 @@
 ﻿using CursoIdiomas.Application.Boletim.Interfaces;
 using CursoIdiomas.Application.Commands;
 using CursoIdiomas.Application.CursoContext.Professor.DTO;
+using CursoIdiomas.Application.CursoContext.Professor.View;
 using CursoIdiomas.Application.Cursos.DTO;
 using CursoIdiomas.Application.Cursos.Interfaces;
 using CursoIdiomas.Application.Views;
@@ -20,13 +21,13 @@ namespace CursoIdiomas.Application.Professor.Services {
 
 
         public async Task<GenericCommandsResults> GetAll() {
-            //var result = await _professorService.GetAll();
-            //if (result == null) {
-            //    return new GenericCommandsResults(false, "Não há curso registrado.", null);
-            //}
-            //var views = await CursoView.Mapping(result);
+            var result = await _professorService.GetAll();
+            if (result == null) {
+                return new GenericCommandsResults(false, "Não há curso registrado.", null);
+            }
+            var views = ProfessorView.Mapping(result);
 
-            return new GenericCommandsResults(true, "Há cursos registrados!", true);
+            return new GenericCommandsResults(true, "Há cursos registrados!", views);
 
         }
 
