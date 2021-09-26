@@ -23,45 +23,46 @@ namespace CursoIdiomas.Application.Professor.Services {
         public async Task<GenericCommandsResults> GetAll() {
             var result = await _professorService.GetAll();
             if (result == null) {
-                return new GenericCommandsResults(false, "Não há curso registrado.", null);
+                return new GenericCommandsResults(false, "Não há professor registrado.", null);
             }
             var views = ProfessorView.Mapping(result);
 
-            return new GenericCommandsResults(true, "Há cursos registrados!", views);
+            return new GenericCommandsResults(true, "Há professor registrados!", views);
 
         }
 
         public async Task<GenericCommandsResults> Obter(Guid id) {
-            //var result = await _professorService.Obter(id);
-            //if (!result.IsValid) {
-            //    return new GenericCommandsResults(false, "Não foi possível encontrar o curso", result.Notifications);
-            //}
-            //var view = new CursoView(result);
+            var result = await _professorService.Obter(id);
+            if (result == null) return new GenericCommandsResults(false, "Não foi possível encontrar o professor", null);
+            if (!result.IsValid) {
+                return new GenericCommandsResults(false, "Não foi possível encontrar o curso", result.Notifications);
+            }
+            var views = ProfessorView.Mapping(result);
 
-            return new GenericCommandsResults(true, "Cursos encontrado!", true);
+            return new GenericCommandsResults(true, "Professor encontrado!", views);
         }
 
         public async Task<GenericCommandsResults> Registrar(ProfessorDTO model) {
-            //var result = await _professorService.Registrar(model.ToDomain());
+            var result = await _professorService.Registrar(model.ToDomain());
 
-            //if (!result.IsValid) {
-            //    return new GenericCommandsResults(false, "Não foi possível registrar o curso", result.Notifications);
-            //}
-            //var view = new CursoView(result);
+            if (!result.IsValid) {
+                return new GenericCommandsResults(false, "Não foi possível registrar o curso", result.Notifications);
+            }
+            var views = ProfessorView.Mapping(result);
 
-            return new GenericCommandsResults(true, "Curso registrado com sucesso", true);
+            return new GenericCommandsResults(true, "Professor registrado com sucesso", views);
 
         }
 
         public async Task<GenericCommandsResults> Atualizar(System.Guid idCurso, ProfessorDTO model) {
-            //var result = await _professorService.Atualizar(idCurso, model.ToDomain());
+            var result = await _professorService.Atualizar(idCurso, model.ToDomain());
+            if (result == null) return new GenericCommandsResults(false, "Não foi possível atualizar o curso", null);
+            if (!result.IsValid) {
+                return new GenericCommandsResults(false, "Não foi possível atualizar o curso", result.Notifications);
+            }
+            var views = ProfessorView.Mapping(result);
 
-            //if (!result.IsValid) {
-            //    return new GenericCommandsResults(false, "Não foi possível atualizar o curso", result.Notifications);
-            //}
-            //var view = new CursoView(result);
-
-            return new GenericCommandsResults(true, "Curso atualizado com sucesso", true);
+            return new GenericCommandsResults(true, "Professor atualizado com sucesso", views);
 
 
         }
@@ -69,7 +70,7 @@ namespace CursoIdiomas.Application.Professor.Services {
         public async Task<GenericCommandsResults> Remover(Guid id) {
             var result = await _professorService.Remover(id);
 
-            return (result == true) ? new GenericCommandsResults(true, "Curso removido com sucesso", null) : new GenericCommandsResults(false, "Não foi possível remover o curso.", null); ;
+            return (result == true) ? new GenericCommandsResults(true, "Professor removido com sucesso", null) : new GenericCommandsResults(false, "Não foi possível remover o professor.", null); ;
         }
 
     }

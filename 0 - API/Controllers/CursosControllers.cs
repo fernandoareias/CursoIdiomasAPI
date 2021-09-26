@@ -28,8 +28,8 @@ namespace CursoIdiomas.API.Controllers
                 return BadRequest(ModelState);
 
             var result = await _cursoAppService.GetAll();
-            if (result == null)
-                return NotFound();
+            if (result.Data == null) return NotFound();
+            if (result.Success == false && result.Data != null) return BadRequest(result);
 
             return Ok(result);
         }
@@ -42,8 +42,9 @@ namespace CursoIdiomas.API.Controllers
                 return BadRequest(ModelState);
 
             var result = await _cursoAppService.ObterCurso(idCurso);
-            if (result == null)
-                return NotFound();
+
+            if (result.Data == null) return NotFound(result);
+            if (result.Success == false && result.Data != null) return BadRequest(result);
 
             return Ok(result);
         }
@@ -56,9 +57,8 @@ namespace CursoIdiomas.API.Controllers
                 return BadRequest(ModelState);
 
             var result = await _cursoAppService.RegistrarCurso(model);
-
-            if(result == null) 
-                return BadRequest();
+            if (result.Success == false && result.Data != null) return BadRequest(result);
+            if (result == null) return BadRequest(result);
 
             return Ok(result);
         }
@@ -72,8 +72,9 @@ namespace CursoIdiomas.API.Controllers
 
             var result = await _cursoAppService.AtualizarCurso(idCurso, model);
 
-            if (result == null)
-                return BadRequest();
+            if (result.Success == false && result.Data != null) return BadRequest(result);
+            if (result == null) return BadRequest(result);
+            if (result.Data == null) return NotFound(result);
 
             return Ok(result);
         }
@@ -83,8 +84,8 @@ namespace CursoIdiomas.API.Controllers
         public async Task<ActionResult> Delete(Guid idCurso) {
 
             var result = await _cursoAppService.Remover(idCurso);
-            if (result == null)
-                return BadRequest();
+
+            if (result == null || result.Success == false && result.Data == null) return BadRequest(result);
 
             return Ok(result);
         }

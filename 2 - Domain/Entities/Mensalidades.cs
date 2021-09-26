@@ -20,9 +20,9 @@ namespace CursoIdiomas.Domain.Entities
         public void ProrrogarVencimento(DateTime NovoVencimento) => this.Vencimento = NovoVencimento;
         public void AlterarValor(decimal valor) => this.Valor = valor;
 
-        public DateTime Vencimento { get;  set; }
-        public decimal Valor { get;  set; }
-        public Guid MatriculaId { get;  set; }
-        public Matricula Matricula { get;  set; }
+        public DateTime Vencimento { get; private set; }
+        public decimal Valor { get; private set; }
+        public Guid MatriculaId { get; private set; }
+        public Matricula Matricula { get; private set; }
     }
 }

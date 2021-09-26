@@ -25,8 +25,9 @@ namespace CursoIdiomas.API.Controllers {
                 return BadRequest(ModelState);
 
             var result = await _professorAppService.GetAll();
-            if (result == null)
-                return NotFound();
+
+            if (result.Data == null) return NotFound();
+            if (result.Success == false && result.Data != null) return BadRequest(result);
 
             return Ok(result);
         }
@@ -38,8 +39,9 @@ namespace CursoIdiomas.API.Controllers {
                 return BadRequest(ModelState);
 
             var result = await _professorAppService.Obter(idProfessor);
-            if (result == null)
-                return NotFound();
+            if (result.Data == null) return NotFound(result);
+            if (result.Success == false && result.Data != null) return BadRequest(result);
+
 
             return Ok(result);
         }
@@ -52,8 +54,10 @@ namespace CursoIdiomas.API.Controllers {
 
             var result = await _professorAppService.Registrar(model);
 
-            if (result == null)
-                return BadRequest();
+            if (result == null) return BadRequest();
+            if (result.Data == null) return NotFound(result);
+            if (result.Success == false && result.Data != null) return BadRequest(result);
+
 
             return Ok(result);
         }
@@ -66,8 +70,10 @@ namespace CursoIdiomas.API.Controllers {
 
             var result = await _professorAppService.Atualizar(idProfessor, model);
 
-            if (result == null)
-                return BadRequest();
+            if (result == null) return BadRequest();
+            if (result.Data == null) return NotFound(result);
+            if (result.Success == false && result.Data != null) return BadRequest(result);
+
 
             return Ok(result);
         }
@@ -76,8 +82,7 @@ namespace CursoIdiomas.API.Controllers {
         [Route("professores/{idProfessor}")]
         public async Task<ActionResult> Delete(Guid idProfessor) {
             var result = await _professorAppService.Remover(idProfessor);
-            if (result == null)
-                return BadRequest();
+            if (result.Success == false) return BadRequest();
 
             return Ok(result);
         }

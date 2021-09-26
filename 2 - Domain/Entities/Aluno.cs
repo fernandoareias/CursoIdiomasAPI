@@ -10,11 +10,15 @@ namespace CursoIdiomas.Domain.Entities
     public class Alunos : Entity
     {
         public Alunos() { }
-    
 
-        public Nome Nome { get;  set; }
-        public Email Email { get; set; }
+        public Alunos(Nome nome, Email email) {
+            Nome = nome;
+            Email = email;
+        }
 
-        public Matricula Matricula { get;  set; }
+        public Nome Nome { get; private set; }
+        public Email Email { get; private set; }
+
+        public Matricula Matricula { get; private set; }
     }
 }

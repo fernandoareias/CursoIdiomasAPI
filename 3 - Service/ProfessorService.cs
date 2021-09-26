@@ -4,6 +4,7 @@ using CursoIdiomas.Domain.Interfaces;
 using CursoIdiomas.Domain.Interfaces.Service;
 using CursoIdiomas.Domain.Professor;
 using CursoIdiomas.Domain.Professor.DTO;
+using CursoIdiomas.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -27,28 +28,29 @@ namespace CursoIdiomas.Service.CursoServices {
         }
 
         public async Task<Professor> Registrar(ProfessorDTO model) {
-            //var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
-            //if (!_entity.IsValid)
-            //    return null;
+            var _entity = new Professor(model.FirstName, model.LastName, model.Email);
+            if (!_entity.IsValid)
+                return null;
 
-            //var result = await _repository.InsertAsync(_entity);
-            //if (result == null)
-            //    return null;
-
-            return new Professor();
+            var result = await _repository.InsertAsync(_entity);
+           
+            return result;
         }
 
         public async Task<Professor> Atualizar(Guid idProfessor, ProfessorDTO model) {
-            //var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
+            //VO
+            var nome = new Nome(model.FirstName, model.LastName);
+            var email = new Email(model.Email);
+            var _entity = new Professor(idProfessor, nome, email);
 
-            //if (!_entity.IsValid)
-            //    return null;
+            if (!_entity.IsValid)
+                return null;
 
-            //var result = await _repository.UpdateAsync(_entity);
-            //if (result == null)
-            //    return null;
+            var result = await _repository.UpdateAsync(_entity);
+            if (result == null)
+                return null;
 
-            return new Professor();
+            return new Professor(result.Id, result.Professor_Nome, result.Professor_Email);
 
         }
 

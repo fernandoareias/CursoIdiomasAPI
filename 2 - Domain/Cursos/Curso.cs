@@ -52,6 +52,6 @@ namespace CursoIdiomas.Domain.Cursos.Curso {
         public string Nome { get; private set; }
         public EDificuldade Dificuldade { get; private set; }
         public int CargaHoraria { get; private set; }
-        public List<Turma> Turmas { get;  set; }
+        public List<Turma> Turmas { get; private set; }
     }
 }
