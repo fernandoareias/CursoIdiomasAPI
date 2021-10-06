@@ -15,7 +15,7 @@ namespace CursoIdiomas.Infra.Data.Mapping {
             builder.ToTable("Turma");
             builder.Ignore(p => p.Notifications);
             builder.HasKey(p => p.Id);
-            builder.Property(p => p.QntAlunos);
+            builder.Property(p => p.Turno);
        
 
 

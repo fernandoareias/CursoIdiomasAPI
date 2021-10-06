@@ -7,6 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Domain.Repositories {
-    public interface ITurmaRepository : IRepository<Turma> {
+    public interface ITurmaRepository : IRepository<Domain.Entities.Turma> {
     }
 }

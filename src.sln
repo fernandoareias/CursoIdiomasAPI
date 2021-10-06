@@ -29,15 +29,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5.3.1 - CursoIdiomas.Infra.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - API", "0 - API", "{30BA0769-D1C2-4F63-9C1E-EBBEC644FA07}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Domain", "2 - Domain", "{4805B0FA-76C2-4E24-85D3-CE0194EA91F5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{4805B0FA-76C2-4E24-85D3-CE0194EA91F5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Service", "3 - Service", "{538BEFE9-961F-414A-8F7D-CAD1D9ECE4AE}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Service", "2 - Service", "{538BEFE9-961F-414A-8F7D-CAD1D9ECE4AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Application", "{F2FA8CAC-562E-4FEC-AA5D-F345BF246489}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "1 - Application", "1 - Application\1 - Application.csproj", "{CEE3F91A-8366-4F54-B310-F41B3BAD6645}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "0 - API", "0 - API\CursoIdiomas.API.csproj", "{E069EBF9-A20A-4013-BD53-6E3B891691E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoIdiomas.API", "0 - API\CursoIdiomas.API.csproj", "{E069EBF9-A20A-4013-BD53-6E3B891691E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

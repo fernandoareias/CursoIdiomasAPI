@@ -1,4 +1,5 @@
-﻿using CursoIdiomas.Domain.Cursos.DTO;
+﻿using CursoIdiomas.Domain.Cursos.Curso;
+using CursoIdiomas.Domain.Cursos.DTO;
 using CursoIdiomas.Domain.Entities;
 using CursoIdiomas.Domain.Interfaces;
 using CursoIdiomas.Domain.Interfaces.Service;
@@ -13,15 +14,18 @@ using System.Threading.Tasks;
 namespace CursoIdiomas.Service.CursoServices {
     public class ProfessorService : IProfessorService {
         private readonly IRepository<CursoIdiomas.Domain.Entities.Professor> _repository;
-
-        public ProfessorService(IRepository<CursoIdiomas.Domain.Entities.Professor> repository) {
+        private readonly IRepository<Curso> _cursoRepository; 
+        public ProfessorService(
+            IRepository<CursoIdiomas.Domain.Entities.Professor> repository,
+            IRepository<Curso> cursoRepository
+        ) {
             _repository = repository;
-
+            _cursoRepository = cursoRepository;
         }
 
         public async Task<List<CursoIdiomas.Domain.Entities.Professor>> GetAll(long idCurso) {
             var teachers = await _repository.SelectAsync();
-            return teachers.Where(x => x.IdCurso.Equals(idCurso)).ToList();
+            return teachers.Where(x => x.CursoId == idCurso).ToList();
         }
 
 
@@ -29,8 +33,11 @@ namespace CursoIdiomas.Service.CursoServices {
             return await _repository.SelectAsync(idProfessor);
         }
 
-        public async Task<CursoIdiomas.Domain.Entities.Professor> Registrar(ProfessorDTO model) {
-            var _entity = new CursoIdiomas.Domain.Entities.Professor(model.FirstName, model.LastName, model.Email, model.Salario, 1);
+        public async Task<CursoIdiomas.Domain.Entities.Professor> Registrar(long idCurso, ProfessorDTO model) {
+            var curso = await _cursoRepository.SelectAsync(idCurso);
+
+            if (curso == null) return null;
+            var _entity = new CursoIdiomas.Domain.Entities.Professor(model.FirstName, model.LastName, model.Email, model.Salario, curso.Id);
             if (!_entity.IsValid)
                 return null;
 
@@ -39,16 +46,24 @@ namespace CursoIdiomas.Service.CursoServices {
             return result;
         }
 
+        
+
         public async Task<CursoIdiomas.Domain.Entities.Professor> Atualizar(long idProfessor, ProfessorDTO model) {
+            var atualEntity = await Obter(idProfessor);
+
+            if (atualEntity == null) return null;
             //VO
             var nome = new Nome(model.FirstName, model.LastName);
-            var email = new Email(model.Email);
-            var _entity = new CursoIdiomas.Domain.Entities.Professor(idProfessor, nome, email);
 
-            if (!_entity.IsValid)
+            var email = new Email(model.Email);
+
+            var _entity = new CursoIdiomas.Domain.Entities.Professor(idProfessor, nome, email, atualEntity.CursoId);
+
+            atualEntity.Update(_entity);
+            if (!atualEntity.IsValid)
                 return null;
 
-            var result = await _repository.UpdateAsync(_entity);
+            var result = await _repository.UpdateAsync(atualEntity);
             if (result == null)
                 return null;
 

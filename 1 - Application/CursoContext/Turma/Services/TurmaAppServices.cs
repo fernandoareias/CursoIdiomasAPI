@@ -1,5 +1,7 @@
 ﻿using CursoIdiomas.Application.Boletim.Interfaces;
 using CursoIdiomas.Application.Commands;
+using CursoIdiomas.Application.CursoContext.Turma.DTOs;
+using CursoIdiomas.Application.CursoContext.Turma.View;
 using CursoIdiomas.Application.Cursos.DTO;
 using CursoIdiomas.Application.Cursos.Interfaces;
 using CursoIdiomas.Application.Turma.Interfaces;
@@ -14,6 +16,7 @@ using System.Threading.Tasks;
 namespace CursoIdiomas.Application.Professor.Services {
     public class TurmaAppServices : ITurmaAppServices {
         private readonly ITurmaService _turmaService;
+
         public TurmaAppServices(ITurmaService turmaService) {
             _turmaService = turmaService;
         }
@@ -40,19 +43,19 @@ namespace CursoIdiomas.Application.Professor.Services {
             return new GenericCommandsResults(true, "Cursos encontrado!", true);
         }
 
-        public async Task<GenericCommandsResults> Registrar(CursoDTO model) {
-            //var result = await _turmaService.Registrar(model.ToDomain());
+        public async Task<GenericCommandsResults> Registrar(long idProfessor, TurmaDTO model) {
+            var result = await _turmaService.Registrar(idProfessor, model.ToDomain());
 
-            //if (!result.IsValid) {
-            //    return new GenericCommandsResults(false, "Não foi possível registrar o curso", result.Notifications);
-            //}
-            //var view = new CursoView(result);
+            if (!result.IsValid) {
+                return new GenericCommandsResults(false, "Não foi possível registrar o curso", result.Notifications);
+            }
+            var view = new TurmaView(result);
 
             return new GenericCommandsResults(true, "Curso registrado com sucesso", true);
 
         }
 
-        public async Task<GenericCommandsResults> Atualizar(long idCurso, CursoDTO model) {
+        public async Task<GenericCommandsResults> Atualizar(long idCurso, TurmaDTO model) {
             //var result = await _turmaService.Atualizar(idCurso, model.ToDomain());
 
             //if (!result.IsValid) {

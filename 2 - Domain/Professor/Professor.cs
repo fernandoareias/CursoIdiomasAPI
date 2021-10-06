@@ -18,28 +18,28 @@ namespace CursoIdiomas.Domain.Entities
             Professor_Nome = new Nome(FirstName, LasName);
             Professor_Email = new Email(Address);
             Salario = salario;
-            IdCurso = idCurso;
+            CursoId = idCurso;
         }
 
         public Professor(string FirstName, string LasName, string Address, decimal salario, long idCurso) {
             Professor_Nome = new Nome(FirstName, LasName);
             Professor_Email = new Email(Address);
             Salario = salario;
-            IdCurso = idCurso;
+            CursoId = idCurso;
         }
 
         public Professor(long id, Nome professor_Nome, Email professor_Email, decimal salario, long idCurso) : base(id) {
             Professor_Nome = professor_Nome;
             Professor_Email = professor_Email;
             Salario = salario;
-            IdCurso = idCurso;
+            CursoId = idCurso;
         }
 
         public Professor(Nome professor_Nome, Email professor_Email, decimal salario, long idCurso) {
             Professor_Nome = professor_Nome;
             Professor_Email = professor_Email;
             Salario = salario;
-            IdCurso = idCurso;
+            CursoId = idCurso;
         }
 
        
@@ -49,14 +49,28 @@ namespace CursoIdiomas.Domain.Entities
             Professor_Email = professor_Email;
         }
 
+        public Professor(long id, Nome professor_Nome, Email professor_Email, long idCurso) : base(id) {
+            Professor_Nome = professor_Nome;
+            Professor_Email = professor_Email;
+            CursoId = idCurso;
+        }
         public  Nome Professor_Nome { get; private set; }
         public  Email Professor_Email { get; private set; }
         public decimal Salario { get; private set; }
 
-        public long IdCurso { get; private set; }
-        public Curso Curso { get; private set; }
 
+        public long CursoId { get; private set; }
+        public Curso Curso { get; private set; }
+        
         public IEnumerable<Turma> Turmas { get; private set; }
+
+        public void Update(Professor entity) {
+            
+            Professor_Nome = entity.Professor_Nome;
+            Professor_Email = entity.Professor_Email;
+            Salario = entity.Salario;
+            CursoId = entity.CursoId;
+        }
 
     }
 }

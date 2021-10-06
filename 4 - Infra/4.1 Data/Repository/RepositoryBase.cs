@@ -62,7 +62,7 @@ namespace CursoIdiomas.Infra.Data.Repository
         {
             try
             {
-                return await _dataset.SingleOrDefaultAsync(p => p.Id.Equals(id));
+                return await _dataset.SingleOrDefaultAsync(p => p.Id == id);
             }
             catch (Exception e)
             {

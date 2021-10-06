@@ -42,8 +42,9 @@ namespace CursoIdiomas.Application.Professor.Services {
             return new GenericCommandsResults(true, "Professor encontrado!", views);
         }
 
-        public async Task<GenericCommandsResults> Registrar(ProfessorDTO model) {
-            var result = await _professorService.Registrar(model.ToDomain());
+        public async Task<GenericCommandsResults> Registrar(long idCurso , ProfessorDTO model) {
+
+            var result = await _professorService.Registrar(idCurso, model.ToDomain());
 
             if (!result.IsValid) {
                 return new GenericCommandsResults(false, "Não foi possível registrar o curso", result.Notifications);

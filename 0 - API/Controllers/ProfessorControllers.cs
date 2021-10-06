@@ -47,12 +47,12 @@ namespace CursoIdiomas.API.Controllers {
         }
 
         [HttpPost]
-        [Route("professores")]
-        public async Task<ActionResult> Post([FromBody] ProfessorDTO model) {
+        [Route("cursos/{idCurso}/professores")]
+        public async Task<ActionResult> Post(long idCurso, [FromBody] ProfessorDTO model) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _professorAppService.Registrar(model);
+            var result = await _professorAppService.Registrar(idCurso, model);
 
             if (result == null) return BadRequest();
             if (result.Data == null) return NotFound(result);

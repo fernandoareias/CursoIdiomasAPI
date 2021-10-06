@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CursoIdiomas.Application.Boletim.Interfaces {
     public interface IProfessorAppServices {
 
-        Task<GenericCommandsResults> Registrar(ProfessorDTO model);
+        Task<GenericCommandsResults> Registrar(long idCurso, ProfessorDTO model);
         Task<GenericCommandsResults> Atualizar(long idCurso, ProfessorDTO model);
         Task<GenericCommandsResults> Obter(long id);
         Task<GenericCommandsResults> Remover(long id);

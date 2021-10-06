@@ -14,21 +14,20 @@ namespace CursoIdiomas.Domain.Entities
             _matriculas = new List<Matricula>();
         }
 
-        public Turma(long professorId) {
-           
+        public Turma(long professorId, int turno) {
+
             ProfessorId = professorId;
-            QntAlunos = GetQntAlunos();
-        }  
-        public Turma(long id, long idProfessor) : base(id) { 
-           
+            Turno = turno;
+        }
+        public Turma(long id, long idProfessor, int turno) : base(id) {
             ProfessorId = idProfessor;
-            QntAlunos = GetQntAlunos();
+            Turno = turno;
         }
 
-        
+
         public long ProfessorId { get; private set; }
         public CursoIdiomas.Domain.Entities.Professor Professor { get; private set; }
-        public int QntAlunos { get; private set; }
+        public int Turno { get; private set; }
 
 
         public IEnumerable<Matricula> Matriculas => _matriculas;
@@ -37,6 +36,6 @@ namespace CursoIdiomas.Domain.Entities
             _matriculas.Add(matricula);
         }
 
-        public int GetQntAlunos() => QntAlunos;
+        public int GetQntAlunos() => _matriculas.Count();
     }
 }
