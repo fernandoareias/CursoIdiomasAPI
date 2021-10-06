@@ -13,7 +13,7 @@ namespace CursoIdiomas.Infra.Data.Context
         public MyContext CreateDbContext(string[] args)
         {
             // Usado para criar as migrações
-            var connectionString = "server=localhost,1433;database=CursoIdiomas;User ID=sa;Password=aaa123";
+            var connectionString = "server=localhost,1433;database=CursoIdiomas;User ID=sa;Password=a";
             var optionsBuilder = new DbContextOptionsBuilder<MyContext>();
             optionsBuilder.UseSqlServer(connectionString);
             return new MyContext(optionsBuilder.Options);
