@@ -8,9 +8,9 @@ namespace CursoIdiomas.Application.Cursos.Interfaces {
     {
 
         Task<GenericCommandsResults> RegistrarCurso(CursoDTO model);
-        Task<GenericCommandsResults> AtualizarCurso(System.Guid idCurso, CursoDTO model);
-        Task<GenericCommandsResults> ObterCurso(Guid id);
-        Task<GenericCommandsResults> Remover(Guid id);
+        Task<GenericCommandsResults> AtualizarCurso(long idCurso, CursoDTO model);
+        Task<GenericCommandsResults> ObterCurso(long id);
+        Task<GenericCommandsResults> Remover(long id);
         Task<GenericCommandsResults> GetAll();
     }
 }

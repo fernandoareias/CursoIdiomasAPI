@@ -10,14 +10,17 @@ namespace CursoIdiomas.Domain.Professor.DTO {
                 
         }
 
-        public ProfessorDTO(string firstName, string lastName, string email) {
+        public ProfessorDTO(string firstName, string lastName, string email, decimal salario) {
             FirstName = firstName;
             LastName = lastName;
             Email = email;
+            Salario = salario;
         }
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public decimal Salario { get; set; }
+        
     }
 }

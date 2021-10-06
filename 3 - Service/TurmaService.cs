@@ -20,7 +20,7 @@ namespace CursoIdiomas.Service.CursoServices {
         }
 
 
-        public async Task<Turma> Obter(Guid id) {
+        public async Task<Turma> Obter(long id) {
             return await _repository.SelectAsync(id);
         }
 
@@ -36,7 +36,7 @@ namespace CursoIdiomas.Service.CursoServices {
             return new Turma();
         }
 
-        public async Task<Turma> Atualizar(Guid idTurma, CursoDTO model) {
+        public async Task<Turma> Atualizar(long idTurma, CursoDTO model) {
            // var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
 
           //  if (!_entity.IsValid)
@@ -50,7 +50,7 @@ namespace CursoIdiomas.Service.CursoServices {
 
         }
 
-        public async Task<bool> Remover(Guid idTurma) {
+        public async Task<bool> Remover(long idTurma) {
             return await _repository.DeleteAsync(idTurma);
 
         }

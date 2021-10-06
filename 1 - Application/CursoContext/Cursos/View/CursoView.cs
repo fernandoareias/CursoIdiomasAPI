@@ -10,11 +10,12 @@ namespace CursoIdiomas.Application.Views
 {
     public class CursoView
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         public string Nome { get;  set; }
         public int Dificuldade { get; set; }
         public int CargaHoraria { get;  set; }
-
+        public DateTime DataInicio { get; set; }
+        public DateTime? DataTermino { get; set; }
 
         public CursoView(Curso model)
         {
@@ -23,6 +24,8 @@ namespace CursoIdiomas.Application.Views
                 Nome = model.Nome;
                 Dificuldade = (int)model.Dificuldade;
                 CargaHoraria = model.CargaHoraria;
+                DataInicio = model.DataInicio;
+                DataTermino = model.DataTermino;
             }
         }
 

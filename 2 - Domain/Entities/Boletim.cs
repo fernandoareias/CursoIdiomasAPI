@@ -9,10 +9,10 @@ namespace CursoIdiomas.Domain.Entities
     public class Boletim : Entity
     {
         public Boletim() { }
-        public Boletim(float nota, Guid matriculaId) {
+        public Boletim(float nota, long idAluno) {
             Nota = nota;
             DataPublicacao = System.DateTime.Now;
-            MatriculaId = matriculaId;
+            IdAluno = idAluno;
 
         }
 
@@ -22,7 +22,7 @@ namespace CursoIdiomas.Domain.Entities
         public DateTime? UltimaAtualizacao { get; private set; }
         public float Nota { get; private set; }
 
-        public Guid MatriculaId { get; private set; }
-        public Matricula Matricula { get; private set; }
+        public long IdAluno { get; private set; }
+        public Alunos Aluno { get; private set; }
     }
 }

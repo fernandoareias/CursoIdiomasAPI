@@ -30,7 +30,7 @@ namespace CursoIdiomas.Application.Cursos.Services {
 
         }
 
-        public async Task<GenericCommandsResults> Obter(Guid id) {
+        public async Task<GenericCommandsResults> Obter(long id) {
             //var result = await _matriculaService.Obter(id);
             //if (!result.IsValid) {
             //    return new GenericCommandsResults(false, "Não foi possível encontrar o curso", result.Notifications);
@@ -52,7 +52,7 @@ namespace CursoIdiomas.Application.Cursos.Services {
 
         }
 
-        public async Task<GenericCommandsResults> Atualizar(System.Guid idCurso, CursoDTO model) {
+        public async Task<GenericCommandsResults> Atualizar(long idCurso, CursoDTO model) {
             //var result = await _matriculaService.Atualizar(idCurso, model.ToDomain());
 
             //if (!result.IsValid) {
@@ -65,7 +65,7 @@ namespace CursoIdiomas.Application.Cursos.Services {
 
         }
 
-        public async Task<GenericCommandsResults> Remover(Guid id) {
+        public async Task<GenericCommandsResults> Remover(long id) {
             var result = await _matriculaService.Remover(id);
 
             return (result == true) ? new GenericCommandsResults(true, "Curso removido com sucesso", null) : new GenericCommandsResults(false, "Não foi possível remover o curso.", null); ;

@@ -16,8 +16,8 @@ namespace CursoIdiomas.Infra.Data.Seeds {
 
         public static void Professor(ModelBuilder modelBuilder) {
           
-            modelBuilder.Entity<Professor>().HasData(
-                new Professor(new Guid("80d71825-3434-4503-902e-28fb2c5323f8"), nome1, email1)
+            modelBuilder.Entity<CursoIdiomas.Domain.Entities.Professor>().HasData(
+                new CursoIdiomas.Domain.Entities.Professor(1, nome1, email1, 1800, 1)
                 
                
             );

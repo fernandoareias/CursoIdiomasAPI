@@ -12,20 +12,16 @@ namespace CursoIdiomas.Domain.Entities
 
         }
 
-        public Matricula(bool ativa, Guid alunoId, Guid turmaId) {
-            Ativa = ativa;
+        public Matricula(long alunoId, long turmaId) {
             AlunoId = alunoId;
             TurmaId = turmaId;
         }
 
-        public bool Ativa { get; private set; }
-
-        public Guid AlunoId { get; private set; }
+        public long AlunoId { get; private set; }
         public  Alunos Aluno { get; private set; }
-        public Guid TurmaId { get; private set; }
+        public long TurmaId { get; private set; }
         public  Turma Turma { get; private set; }
-        public virtual List<Boletim> Boletins { get; private set; }
-        public virtual List<Mensalidade> Mensalidades { get; private set; }
+        
 
     }
 }

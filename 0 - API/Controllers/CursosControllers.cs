@@ -29,7 +29,7 @@ namespace CursoIdiomas.API.Controllers
 
             var result = await _cursoAppService.GetAll();
             if (result.Data == null) return NotFound();
-            if (result.Success == false && result.Data != null) return BadRequest(result);
+  
 
             return Ok(result);
         }
@@ -37,7 +37,7 @@ namespace CursoIdiomas.API.Controllers
 
         [HttpGet]
         [Route("cursos/{idCurso}")]
-        public async Task<ActionResult> GetById(Guid idCurso) {
+        public async Task<ActionResult> GetById(long idCurso) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -57,6 +57,7 @@ namespace CursoIdiomas.API.Controllers
                 return BadRequest(ModelState);
 
             var result = await _cursoAppService.RegistrarCurso(model);
+            
             if (result.Success == false && result.Data != null) return BadRequest(result);
             if (result == null) return BadRequest(result);
 
@@ -66,7 +67,7 @@ namespace CursoIdiomas.API.Controllers
 
         [HttpPut]
         [Route("cursos/{idCurso}")]
-        public async Task<ActionResult> Put(Guid idCurso, [FromBody] CursoDTO model) {
+        public async Task<ActionResult> Put(long idCurso, [FromBody] CursoDTO model) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -81,7 +82,7 @@ namespace CursoIdiomas.API.Controllers
 
         [HttpDelete]
         [Route("curso/{idCurso}")]
-        public async Task<ActionResult> Delete(Guid idCurso) {
+        public async Task<ActionResult> Delete(long idCurso) {
 
             var result = await _cursoAppService.Remover(idCurso);
 

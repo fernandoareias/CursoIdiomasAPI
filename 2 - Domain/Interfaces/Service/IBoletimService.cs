@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace CursoIdiomas.Domain.Interfaces.Service {
     public interface IBoletimService {
 
-        Task<Boletim> Obter(Guid id);
+        Task<Boletim> Obter(long id);
         Task<IEnumerable<Boletim>> GetAll();
         Task<Boletim> Registrar(CursoDTO model);
-        Task<Boletim> Atualizar(Guid id, CursoDTO model);
-        Task<bool> Remover(Guid id);
+        Task<Boletim> Atualizar(long id, CursoDTO model);
+        Task<bool> Remover(long id);
     }
 }

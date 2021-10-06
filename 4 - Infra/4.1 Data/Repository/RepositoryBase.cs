@@ -20,11 +20,11 @@ namespace CursoIdiomas.Infra.Data.Repository
             _dataset = _context.Set<T>();
         }
 
-        public async Task<bool> ExistAsync(Guid id)
+        public async Task<bool> ExistAsync(long id)
         {
             return await _dataset.AnyAsync(p => p.Id.Equals(id));
         }
-        public async Task<bool> DeleteAsync(Guid id)
+        public async Task<bool> DeleteAsync(long id)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace CursoIdiomas.Infra.Data.Repository
             return item;
         }
 
-        public async Task<T> SelectAsync(Guid id)
+        public async Task<T> SelectAsync(long id)
         {
             try
             {

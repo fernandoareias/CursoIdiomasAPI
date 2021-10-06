@@ -10,11 +10,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Implementations {
-    public class MensalidadesImplementation : BaseRepository<Mensalidade>, IMensalidadesRepository {
-        private DbSet<Mensalidade> _dataset;
+    public class MensalidadesImplementation : BaseRepository<Cobranca>, IMensalidadesRepository {
+        private DbSet<Cobranca> _dataset;
 
         public MensalidadesImplementation(MyContext context) : base(context) {
-            _dataset = context.Set<Mensalidade>();
+            _dataset = context.Set<Cobranca>();
         }
 
     }

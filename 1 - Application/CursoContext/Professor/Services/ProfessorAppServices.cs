@@ -20,8 +20,8 @@ namespace CursoIdiomas.Application.Professor.Services {
         }
 
 
-        public async Task<GenericCommandsResults> GetAll() {
-            var result = await _professorService.GetAll();
+        public async Task<GenericCommandsResults> GetAll(long idCurso) {
+            var result = await _professorService.GetAll(idCurso);
             if (result == null) {
                 return new GenericCommandsResults(false, "Não há professor registrado.", null);
             }
@@ -31,7 +31,7 @@ namespace CursoIdiomas.Application.Professor.Services {
 
         }
 
-        public async Task<GenericCommandsResults> Obter(Guid id) {
+        public async Task<GenericCommandsResults> Obter(long id) {
             var result = await _professorService.Obter(id);
             if (result == null) return new GenericCommandsResults(false, "Não foi possível encontrar o professor", null);
             if (!result.IsValid) {
@@ -54,7 +54,7 @@ namespace CursoIdiomas.Application.Professor.Services {
 
         }
 
-        public async Task<GenericCommandsResults> Atualizar(System.Guid idCurso, ProfessorDTO model) {
+        public async Task<GenericCommandsResults> Atualizar(long idCurso, ProfessorDTO model) {
             var result = await _professorService.Atualizar(idCurso, model.ToDomain());
             if (result == null) return new GenericCommandsResults(false, "Não foi possível atualizar o curso", null);
             if (!result.IsValid) {
@@ -67,7 +67,7 @@ namespace CursoIdiomas.Application.Professor.Services {
 
         }
 
-        public async Task<GenericCommandsResults> Remover(Guid id) {
+        public async Task<GenericCommandsResults> Remover(long id) {
             var result = await _professorService.Remover(id);
 
             return (result == true) ? new GenericCommandsResults(true, "Professor removido com sucesso", null) : new GenericCommandsResults(false, "Não foi possível remover o professor.", null); ;

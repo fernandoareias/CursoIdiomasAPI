@@ -18,7 +18,7 @@ namespace CursoIdiomas.Infra.Data.Mapping {
             builder.OwnsOne(x => x.Nome).Property(x => x.FirstName).HasColumnName("Nome").HasColumnType("nvarchar(80)");
             builder.OwnsOne(x => x.Nome).Property(x => x.LastName).HasColumnName("Sobrenome").HasColumnType("nvarchar(80)");
             builder.OwnsOne(x => x.Email).Property(x => x.Address).HasColumnName("Emails").HasColumnType("nvarchar(120)");
-            builder.HasOne(x => x.Matricula).WithOne(m => m.Aluno);
+            builder.HasMany(x => x.Matriculas).WithOne(m => m.Aluno);
         }
     }
 }

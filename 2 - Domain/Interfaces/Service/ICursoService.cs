@@ -10,10 +10,10 @@ namespace CursoIdiomas.Domain.Interfaces.Service
     public interface ICursoService
     {
         
-        Task<Curso> Obter(Guid id);
+        Task<Curso> Obter(long id);
         Task<IEnumerable<Curso>> GetAll();
         Task<Curso> Registrar(CursoDTO model);
-        Task<Curso> Atualizar(Guid idCurso, CursoDTO model);
-        Task<bool> Remover(Guid idCurso);
+        Task<Curso> Atualizar(long idCurso, CursoDTO model);
+        Task<bool> Remover(long idCurso);
     }
 }

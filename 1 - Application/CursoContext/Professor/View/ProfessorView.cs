@@ -9,24 +9,24 @@ namespace CursoIdiomas.Application.CursoContext.Professor.View {
         public ProfessorView() {    
 
         }
-        public ProfessorView(Guid id, string nome, string email) {
+        public ProfessorView(long id, string nome, string email) {
             Id = id;
             Nome = nome;
             Email = email;
         }
 
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
 
-        public static ProfessorView Mapping(CursoIdiomas.Domain.Professor.Professor model) {
+        public static ProfessorView Mapping(CursoIdiomas.Domain.Entities.Professor model) {
         
             return new ProfessorView {
                 Id = model.Id,
                 Nome = model.Professor_Nome.ToString(),
                 Email = model.Professor_Email.ToString()
             };
-        } public static IEnumerable<ProfessorView> Mapping(IEnumerable<CursoIdiomas.Domain.Professor.Professor> model) {
+        } public static IEnumerable<ProfessorView> Mapping(IEnumerable<CursoIdiomas.Domain.Entities.Professor> model) {
           
             var listaProfessores = new List<ProfessorView>();
             foreach(var professor in model) {

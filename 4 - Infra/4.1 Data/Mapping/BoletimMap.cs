@@ -19,7 +19,7 @@ namespace CursoIdiomas.Infra.Data.Mapping {
             builder.Property(x => x.UltimaAtualizacao);
             builder.Property(x => x.DataPublicacao);
 
-            builder.HasOne(x => x.Matricula).WithMany(y => y.Boletins);
+            builder.HasOne(x => x.Aluno).WithMany(y => y.Boletims);
         }
     }
 }

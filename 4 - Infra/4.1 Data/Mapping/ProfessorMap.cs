@@ -1,13 +1,6 @@
 ﻿using CursoIdiomas.Domain.Entities;
-using CursoIdiomas.Domain.Professor;
-using CursoIdiomas.Domain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Mapping {
     public class ProfessorMap : IEntityTypeConfiguration<Professor> {
@@ -21,7 +14,9 @@ namespace CursoIdiomas.Infra.Data.Mapping {
             builder.Ignore(x => x.Notifications);
             builder.OwnsOne(x => x.Professor_Nome).Property(x => x.FirstName).HasColumnName("Nome").HasColumnType("nvarchar(80)");
             builder.OwnsOne(x => x.Professor_Nome).Property(x => x.LastName).HasColumnName("Sobrenome").HasColumnType("nvarchar(80)");
-   
+            builder.Property(p => p.Salario);
+
+            builder.HasOne(x => x.Curso).WithMany(x => x.Professores);
 
         }
     }

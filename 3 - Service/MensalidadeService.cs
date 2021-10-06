@@ -8,23 +8,23 @@ using System.Threading.Tasks;
 
 namespace CursoIdiomas.Service.CursoServices {
     public class MensalidadeService : IMensalidadesService {
-        private readonly IRepository<Mensalidade> _repository;
+        private readonly IRepository<Cobranca> _repository;
 
-        public MensalidadeService(IRepository<Mensalidade> repository) {
+        public MensalidadeService(IRepository<Cobranca> repository) {
             _repository = repository;
 
         }
 
-        public async Task<IEnumerable<Mensalidade>> GetAll() {
+        public async Task<IEnumerable<Cobranca>> GetAll() {
             return await _repository.SelectAsync();
         }
 
 
-        public async Task<Mensalidade> Obter(Guid id) {
+        public async Task<Cobranca> Obter(long id) {
             return await _repository.SelectAsync(id);
         }
 
-        public async Task<Mensalidade> Registrar(CursoDTO model) {
+        public async Task<Cobranca> Registrar(CursoDTO model) {
             //var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
             //if (!_entity.IsValid)
             //    return null;
@@ -33,10 +33,10 @@ namespace CursoIdiomas.Service.CursoServices {
             //if (result == null)
             //    return null;
 
-            return new Mensalidade();
+            return new Cobranca();
         }
 
-        public async Task<Mensalidade> Atualizar(Guid idCurso, CursoDTO model) {
+        public async Task<Cobranca> Atualizar(long idCurso, CursoDTO model) {
             //var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
 
             //if (!_entity.IsValid)
@@ -46,11 +46,11 @@ namespace CursoIdiomas.Service.CursoServices {
             //if (result == null)
             //    return null;
 
-            return new Mensalidade();
+            return new Cobranca();
 
         }
 
-        public async Task<bool> Remover(Guid idCurso) {
+        public async Task<bool> Remover(long idCurso) {
             return await _repository.DeleteAsync(idCurso);
 
         }

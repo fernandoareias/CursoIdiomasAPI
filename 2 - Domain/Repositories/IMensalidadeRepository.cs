@@ -7,6 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Domain.Repositories {
-    public interface IMensalidadesRepository : IRepository<Mensalidade> {
+    public interface IMensalidadesRepository : IRepository<Cobranca> {
     }
 }

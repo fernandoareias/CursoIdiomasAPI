@@ -15,10 +15,9 @@ namespace CursoIdiomas.Infra.Data.Mapping {
             builder.ToTable("Matricula");
             builder.HasKey(p => p.Id);
             builder.Ignore(x => x.Notifications);
-            builder.HasOne(x => x.Aluno).WithOne(y => y.Matricula);
+            builder.HasOne(x => x.Aluno).WithMany(y => y.Matriculas);
             builder.HasOne(x => x.Turma).WithMany(y => y.Matriculas);
-            builder.HasMany(x => x.Boletins).WithOne(x => x.Matricula);
-            builder.HasMany(x => x.Mensalidades).WithOne(x => x.Matricula);
+            
 
         }
     }

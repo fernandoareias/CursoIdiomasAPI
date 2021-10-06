@@ -13,7 +13,7 @@ namespace CursoIdiomas.Infra.Data.Seeds {
     public static class TurmaSeeds {
         public static void Turma(ModelBuilder modelBuilder) {
             modelBuilder.Entity<Turma>().HasData(
-                new Turma(DateTime.Now, null, new Guid("e0c62bad-3744-4e93-8b77-00588ecd4c5e"), new Guid("80d71825-3434-4503-902e-28fb2c5323f8"))
+                new Turma(1, 1)
             );
 
         }

@@ -25,10 +25,6 @@ namespace CursoIdiomas.Application.Cursos.Services
             var result = await _cursoService.GetAll();
             if (result == null) 
                 return new GenericCommandsResults(false, "Não há curso registrado.", null);
-            
-            if (result.Select(x => x.IsValid == false).Count() > 0)
-                return new GenericCommandsResults(false, "Ops, Ocorreu um erro.", result);
-
 
             var views = await CursoView.Mapping(result);
 
@@ -36,7 +32,7 @@ namespace CursoIdiomas.Application.Cursos.Services
 
         }
 
-        public async Task<GenericCommandsResults> ObterCurso(Guid id)
+        public async Task<GenericCommandsResults> ObterCurso(long id)
         {
             var result = await _cursoService.Obter(id);
             if (result == null) return new GenericCommandsResults(false, "Não foi possível encontrar o curso", result);
@@ -61,7 +57,7 @@ namespace CursoIdiomas.Application.Cursos.Services
 
         }
 
-        public async Task<GenericCommandsResults> AtualizarCurso(System.Guid idCurso, CursoDTO model) {
+        public async Task<GenericCommandsResults> AtualizarCurso(long idCurso, CursoDTO model) {
             var result = await _cursoService.Atualizar(idCurso, model.ToDomain());
 
             if (!result.IsValid) {
@@ -74,7 +70,7 @@ namespace CursoIdiomas.Application.Cursos.Services
 
         }
 
-        public async Task<GenericCommandsResults> Remover(Guid id) {
+        public async Task<GenericCommandsResults> Remover(long id) {
             var result = await _cursoService.Remover(id);
             
             return (result == true) ? new GenericCommandsResults(true, "Curso removido com sucesso", null) : new GenericCommandsResults(false, "Não foi possível remover o curso.", null); ;

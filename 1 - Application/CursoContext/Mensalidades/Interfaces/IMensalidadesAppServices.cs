@@ -7,9 +7,9 @@ namespace CursoIdiomas.Application.Boletim.Interfaces {
     public interface IMensalidadesAppServices {
 
         Task<GenericCommandsResults> Registrar(CursoDTO model);
-        Task<GenericCommandsResults> Atualizar(System.Guid idCurso, CursoDTO model);
-        Task<GenericCommandsResults> Obter(Guid id);
-        Task<GenericCommandsResults> Remover(Guid id);
+        Task<GenericCommandsResults> Atualizar(long idCurso, CursoDTO model);
+        Task<GenericCommandsResults> Obter(long id);
+        Task<GenericCommandsResults> Remover(long id);
         Task<GenericCommandsResults> GetAll();
     }
 }

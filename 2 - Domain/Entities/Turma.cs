@@ -9,24 +9,34 @@ namespace CursoIdiomas.Domain.Entities
 {
     public class Turma : Entity
     {
+        private readonly List<Matricula> _matriculas;
         public Turma() {
-
+            _matriculas = new List<Matricula>();
         }
 
-        public Turma(DateTime? dataInicio, DateTime? dataFim, Guid cursoId, Guid professorId) {
-            DataInicio = dataInicio;
-            DataFim = dataFim;
-            CursoId = cursoId;
+        public Turma(long professorId) {
+           
             ProfessorId = professorId;
+            QntAlunos = GetQntAlunos();
+        }  
+        public Turma(long id, long idProfessor) : base(id) { 
+           
+            ProfessorId = idProfessor;
+            QntAlunos = GetQntAlunos();
         }
 
-        public DateTime? DataInicio { get; private set; }
-        public DateTime? DataFim { get; private set; }
-        public Guid CursoId { get; private  set; }
-        public Curso Curso { get; private set; }
-        public Guid ProfessorId { get; private set; }
-        public CursoIdiomas.Domain.Professor.Professor Professor { get; private set; }
+        
+        public long ProfessorId { get; private set; }
+        public CursoIdiomas.Domain.Entities.Professor Professor { get; private set; }
+        public int QntAlunos { get; private set; }
 
-        public virtual List<Matricula> Matriculas { get; private set; }
+
+        public IEnumerable<Matricula> Matriculas => _matriculas;
+        public void AddMatricula(Matricula matricula) {
+
+            _matriculas.Add(matricula);
+        }
+
+        public int GetQntAlunos() => QntAlunos;
     }
 }

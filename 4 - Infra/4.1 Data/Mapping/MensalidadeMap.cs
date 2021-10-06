@@ -8,17 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Mapping {
-    public class MensalidadesMap : IEntityTypeConfiguration<Mensalidade> {
-        public void Configure(EntityTypeBuilder<Mensalidade> builder) {
+    public class MensalidadesMap : IEntityTypeConfiguration<Cobranca> {
+        public void Configure(EntityTypeBuilder<Cobranca> builder) {
 
 
-            builder.ToTable("Mensalidade");
+            builder.ToTable("Cobranca");
             builder.HasKey(p => p.Id);
             builder.Ignore(x => x.Notifications);
             builder.Property(x => x.Vencimento);
             builder.Property(x => x.Valor);
 
-            builder.HasOne(x => x.Matricula).WithMany(y => y.Mensalidades);
+            builder.HasOne(x => x.Aluno).WithMany(y => y.Cobrancas);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("alunos/{idAluno}")]
-        public async Task<ActionResult> GetById(Guid idAluno) {
+        public async Task<ActionResult> GetById(long idAluno) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -64,7 +64,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpPut]
         [Route("alunos/{idAluno}")]
-        public async Task<ActionResult> Put(Guid idAluno, [FromBody] CursoDTO model) {
+        public async Task<ActionResult> Put(long idAluno, [FromBody] CursoDTO model) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -78,7 +78,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpDelete]
         [Route("alunos/{idAluno}")]
-        public async Task<ActionResult> Delete(Guid idAluno) {
+        public async Task<ActionResult> Delete(long idAluno) {
 
             var result = await _alunoAppService.Remover(idAluno);
             if (result == null)

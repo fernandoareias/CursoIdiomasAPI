@@ -19,12 +19,12 @@ namespace CursoIdiomas.API.Controllers {
 
 
         [HttpGet]
-        [Route("professores")]
-        public async Task<ActionResult> GetAll() {
+        [Route("cursos/{idCurso}/professores")]
+        public async Task<ActionResult> GetAll(long idCurso) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _professorAppService.GetAll();
+            var result = await _professorAppService.GetAll(idCurso);
 
             if (result.Data == null) return NotFound();
             if (result.Success == false && result.Data != null) return BadRequest(result);
@@ -34,7 +34,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("professores/{idProfessor}")]
-        public async Task<ActionResult> GetById(Guid idProfessor) {
+        public async Task<ActionResult> GetById(long idProfessor) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -56,7 +56,7 @@ namespace CursoIdiomas.API.Controllers {
 
             if (result == null) return BadRequest();
             if (result.Data == null) return NotFound(result);
-            if (result.Success == false && result.Data != null) return BadRequest(result);
+
 
 
             return Ok(result);
@@ -64,7 +64,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpPut]
         [Route("professores/{idProfessor}")]
-        public async Task<ActionResult> Put(Guid idProfessor, [FromBody] ProfessorDTO model) {
+        public async Task<ActionResult> Put(long idProfessor, [FromBody] ProfessorDTO model) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -80,7 +80,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpDelete]
         [Route("professores/{idProfessor}")]
-        public async Task<ActionResult> Delete(Guid idProfessor) {
+        public async Task<ActionResult> Delete(long idProfessor) {
             var result = await _professorAppService.Remover(idProfessor);
             if (result.Success == false) return BadRequest();
 
