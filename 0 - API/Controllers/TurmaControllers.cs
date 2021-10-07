@@ -16,8 +16,9 @@ namespace CursoIdiomas.API.Controllers {
             _turmaAppServices = turmaAppServices;
         }
 
+
         [HttpGet]
-        [Route("cursos/professores/{idProfessor}/turmas")]
+        [Route("cursos/professores/turmas")]
         public async Task<ActionResult> GetAll() {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -29,6 +30,22 @@ namespace CursoIdiomas.API.Controllers {
 
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("cursos/professores/{idProfessor}/turmas")]
+        public async Task<ActionResult> GetAllByProfessor(long idProfessor) {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _turmaAppServices.GetAllByProfessor(idProfessor);
+
+            if (result.Data == null) return NotFound();
+            if (result.Success == false && result.Data != null) return BadRequest(result);
+
+            return Ok(result);
+        }
+
+
 
         [HttpPost]
         [Route("cursos/professores/{idProfessor}/turmas")]
@@ -43,5 +60,29 @@ namespace CursoIdiomas.API.Controllers {
 
             return Ok(result);
         }
+
+        [HttpPut]
+        [Route("cursos/professores/turmas/{idTurma}")]
+        public async Task<ActionResult> Put(long idTurma, [FromBody]TurmaDTO turmaDTO) {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _turmaAppServices.Atualizar(idTurma, turmaDTO);
+
+            if (result.Data == null) return NotFound();
+            if (result.Success == false && result.Data != null) return BadRequest(result);
+
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        [Route("cursos/professores/turmas/{idTurma}")]
+        public async Task<ActionResult> DeleteTurma(long idTurma) {
+           
+            var result = await _turmaAppServices.Remover(idTurma);
+
+            return Ok(result);
+        }
+
     }
 }

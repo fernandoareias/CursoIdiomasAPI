@@ -16,5 +16,7 @@ namespace CursoIdiomas.Application.CursoContext.Turma.View {
             Turno = entity.Turno;
             ProfessorId = entity.ProfessorId;
         }
+
+
     }
 }

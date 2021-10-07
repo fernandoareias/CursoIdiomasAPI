@@ -8,5 +8,6 @@ using System.Threading.Tasks;
 
 namespace CursoIdiomas.Domain.Repositories {
     public interface ITurmaRepository : IRepository<Domain.Entities.Turma> {
+        Task<List<Domain.Entities.Turma>> SelectByProfessor(long idProfessor);
     }
 }

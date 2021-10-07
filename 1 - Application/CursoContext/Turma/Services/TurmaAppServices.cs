@@ -23,22 +23,31 @@ namespace CursoIdiomas.Application.Professor.Services {
 
 
         public async Task<GenericCommandsResults> GetAll() {
-            //var result = await _turmaService.GetAll();
-            //if (result == null) {
-            //    return new GenericCommandsResults(false, "Não há curso registrado.", null);
-            //}
-            //var views = await CursoView.Mapping(result);
+            var result = await _turmaService.GetAll();
+            if (result == null) {
+                return new GenericCommandsResults(false, "Não há turma registrado.", null);
+            }
+            var views = result.Select(s => new TurmaView(s)).ToList();
 
-            return new GenericCommandsResults(true, "Há cursos registrados!", true);
+            return new GenericCommandsResults(true, "Foi possível encontrar turmas!", views);
+        }
 
+        public async Task<GenericCommandsResults> GetAllByProfessor(long idProfessor) {
+            var result = await _turmaService.GetAllByProfessor(idProfessor);
+
+            if (result == null) return new GenericCommandsResults(false, "Não há curso registrado.", null);
+
+            var views = result.Select(s => new TurmaView(s)).ToList();
+
+            return new GenericCommandsResults(true, "Este professor possui turmas!", views);
         }
 
         public async Task<GenericCommandsResults> Obter(long id) {
-            //var result = await _turmaService.Obter(id);
-            //if (!result.IsValid) {
-            //    return new GenericCommandsResults(false, "Não foi possível encontrar o curso", result.Notifications);
-            //}
-            //var view = new CursoView(result);
+            var result = await _turmaService.Obter(id);
+            if (!result.IsValid) {
+                return new GenericCommandsResults(false, "Não foi possível encontrar o curso", result.Notifications);
+            }
+            var view = new TurmaView(result);
 
             return new GenericCommandsResults(true, "Cursos encontrado!", true);
         }
@@ -47,21 +56,21 @@ namespace CursoIdiomas.Application.Professor.Services {
             var result = await _turmaService.Registrar(idProfessor, model.ToDomain());
 
             if (!result.IsValid) {
-                return new GenericCommandsResults(false, "Não foi possível registrar o curso", result.Notifications);
+                return new GenericCommandsResults(false, "Não foi possível registrar a turma", result.Notifications);
             }
             var view = new TurmaView(result);
 
-            return new GenericCommandsResults(true, "Curso registrado com sucesso", true);
+            return new GenericCommandsResults(true, "Turma registrado com sucesso", true);
 
         }
 
-        public async Task<GenericCommandsResults> Atualizar(long idCurso, TurmaDTO model) {
-            //var result = await _turmaService.Atualizar(idCurso, model.ToDomain());
+        public async Task<GenericCommandsResults> Atualizar(long idTurma, TurmaDTO model) {
+            var result = await _turmaService.Atualizar(idTurma, model.ToDomain());
 
-            //if (!result.IsValid) {
-            //    return new GenericCommandsResults(false, "Não foi possível atualizar o curso", result.Notifications);
-            //}
-            //var view = new CursoView(result);
+            if (!result.IsValid) {
+                return new GenericCommandsResults(false, "Não foi possível atualizar o curso", result.Notifications);
+            }
+            var view = new TurmaView(result);
 
             return new GenericCommandsResults(true, "Curso atualizado com sucesso", true);
 
@@ -71,8 +80,9 @@ namespace CursoIdiomas.Application.Professor.Services {
         public async Task<GenericCommandsResults> Remover(long id) {
             var result = await _turmaService.Remover(id);
 
-            return (result == true) ? new GenericCommandsResults(true, "Curso removido com sucesso", null) : new GenericCommandsResults(false, "Não foi possível remover o curso.", null); ;
+            return (result == true) ? new GenericCommandsResults(true, "Turma removida com sucesso", null) : new GenericCommandsResults(false, "Não foi possível remover a turma.", null); ;
         }
 
+       
     }
 }

@@ -19,14 +19,14 @@ namespace CursoIdiomas.Infra.CrossCutting.DependencyInjection
     {
         public static void ConfigureDependenciesRepository(IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
-            serviceCollection.AddScoped<ICursoRepository, CursoImplementation>();
-            serviceCollection.AddScoped<IAlunoRepository, AlunoImplementation>();
-            serviceCollection.AddScoped<IBoletimRepository, BoletimImplementation>();
-            serviceCollection.AddScoped<IMatriculaRepository, MatriculaImplementation>();
-            serviceCollection.AddScoped<IMensalidadesRepository, MensalidadesImplementation>();
-            serviceCollection.AddScoped<IProfessorRepository, ProfessorImplementation>();
-            serviceCollection.AddScoped<ITurmaRepository, TurmaImplementation>();
+            serviceCollection.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
+            serviceCollection.AddTransient<ICursoRepository, CursoImplementation>();
+            serviceCollection.AddTransient<IAlunoRepository, AlunoImplementation>();
+            serviceCollection.AddTransient<IBoletimRepository, BoletimImplementation>();
+            serviceCollection.AddTransient<IMatriculaRepository, MatriculaImplementation>();
+            serviceCollection.AddTransient<IMensalidadesRepository, MensalidadesImplementation>();
+            serviceCollection.AddTransient<IProfessorRepository, ProfessorImplementation>();
+            serviceCollection.AddTransient<ITurmaRepository, TurmaImplementation>();
 
             serviceCollection.AddDbContext<MyContext>(
                   options => options.UseSqlServer("server=localhost,1433;database=CursoIdiomas;User ID=sa;Password=Nando@37074957"));

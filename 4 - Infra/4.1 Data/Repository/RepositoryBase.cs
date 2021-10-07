@@ -69,8 +69,6 @@ namespace CursoIdiomas.Infra.Data.Repository
 
                 throw e;
             }
-
-
         }
 
         public async Task<IEnumerable<T>> SelectAsync()

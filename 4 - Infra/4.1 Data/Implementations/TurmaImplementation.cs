@@ -15,8 +15,12 @@ namespace CursoIdiomas.Infra.Data.Implementations {
 
         public TurmaImplementation(MyContext context) : base(context) {
             _dataset = context.Set<Turma>();
+            
         }
 
+        public async Task<List<Turma>> SelectByProfessor(long idProfessor) {
+            return await _dataset.Where(t => t.ProfessorId == idProfessor).ToListAsync();
+        }
     }
 
 }

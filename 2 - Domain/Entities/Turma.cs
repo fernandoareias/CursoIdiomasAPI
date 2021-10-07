@@ -14,6 +14,10 @@ namespace CursoIdiomas.Domain.Entities
             _matriculas = new List<Matricula>();
         }
 
+        public Turma(int turno) {
+            Turno = turno;
+        }
+
         public Turma(long professorId, int turno) {
 
             ProfessorId = professorId;
@@ -37,5 +41,10 @@ namespace CursoIdiomas.Domain.Entities
         }
 
         public int GetQntAlunos() => _matriculas.Count();
+
+
+        public void Update(Turma novaEntity){
+            Turno = novaEntity.Turno;
+        }
     }
 }
