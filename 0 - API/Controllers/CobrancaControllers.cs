@@ -4,6 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.API.Controllers {
-    public class MensalidadesControllers {
+    public class CobrancaControllers {
     }
 }
