@@ -1,7 +1,9 @@
-﻿using CursoIdiomas.Domain.Cursos.DTO;
+﻿using CursoIdiomas.Domain.Aluno.DTOs;
+using CursoIdiomas.Domain.Cursos.DTO;
 using CursoIdiomas.Domain.Entities;
 using CursoIdiomas.Domain.Interfaces;
 using CursoIdiomas.Domain.Interfaces.Service;
+using CursoIdiomas.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -29,28 +31,32 @@ namespace CursoIdiomas.Service.CursoServices
             return await _repository.SelectAsync(id);
         }
 
-        public async Task<Alunos> Registrar(CursoDTO model)
+        public async Task<Alunos> Registrar(long idTurma, AlunoCreateDTO model)
         {
-            //var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
-            //if (!_entity.IsValid)
-            //    return null;
+            var _entity = new Alunos(model.FirstName, model.LastName, model.Email, idTurma);
+            if (!_entity.IsValid) return null;
 
-            //var result = await _repository.InsertAsync(_entity);
-            //if(result == null)
-            //    return null;
+            var result = await _repository.InsertAsync(_entity);
+            if (result == null) return null;
 
-            return new Alunos();
+            return _entity;
         }
 
-        public async Task<Alunos> Atualizar(long idCurso, CursoDTO model) {
-            //var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
+        public async Task<Alunos> Atualizar(long idAluno, AlunoCreateDTO model) {
+            var _entity = await _repository.SelectAsync(idAluno);
+            if (_entity == null) return null;
+            
+            var nome = new Nome(model.FirstName, model.LastName);
+            var email = new Email(model.Email);
+            
+            var _entityNew = new Alunos(nome, email);
+            _entity.Update(_entityNew);
+            
 
-            //if (!_entity.IsValid)
-            //    return null;
 
-            //var result = await _repository.UpdateAsync(_entity);
-            //if (result == null)
-            //    return null;
+            var result = await _repository.UpdateAsync(_entity);
+            if (result == null)
+                return null;
 
             return new Alunos();
 

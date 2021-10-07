@@ -1,4 +1,5 @@
 ﻿using CursoIdiomas.Application.Aluno.Interfaces;
+using CursoIdiomas.Application.CursoContext.Aluno.DTOs;
 using CursoIdiomas.Application.Cursos.DTO;
 using CursoIdiomas.Application.Cursos.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +21,7 @@ namespace CursoIdiomas.API.Controllers {
 
 
         [HttpGet]
-        [Route("alunos")]
+        [Route("cursos/professor/turmas/alunos")]
         public async Task<ActionResult> GetAll() {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -34,7 +35,7 @@ namespace CursoIdiomas.API.Controllers {
 
 
         [HttpGet]
-        [Route("alunos/{idAluno}")]
+        [Route("cursos/professor/turmas/alunos/{idAluno}")]
         public async Task<ActionResult> GetById(long idAluno) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -47,13 +48,13 @@ namespace CursoIdiomas.API.Controllers {
         }
 
         [HttpPost]
-        [Route("alunos")]
-        public async Task<ActionResult> Post([FromBody] CursoDTO model) {
+        [Route("cursos/professor/turmas/{idTurmas}/alunos")]
+        public async Task<ActionResult> Post(long idTurmas, [FromBody] AlunoCreateDTO model) {
 
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var result = await _alunoAppService.Registrar(model);
+            var result = await _alunoAppService.Registrar(idTurmas, model);
 
             if (result == null)
                 return BadRequest();
@@ -63,8 +64,8 @@ namespace CursoIdiomas.API.Controllers {
 
 
         [HttpPut]
-        [Route("alunos/{idAluno}")]
-        public async Task<ActionResult> Put(long idAluno, [FromBody] CursoDTO model) {
+        [Route("cursos/professor/turmas/alunos/{idAluno}")]
+        public async Task<ActionResult> Put(long idAluno, [FromBody] AlunoCreateDTO model) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -77,7 +78,7 @@ namespace CursoIdiomas.API.Controllers {
         }
 
         [HttpDelete]
-        [Route("alunos/{idAluno}")]
+        [Route("cursos/professor/turmas/alunos/{idAluno}")]
         public async Task<ActionResult> Delete(long idAluno) {
 
             var result = await _alunoAppService.Remover(idAluno);
