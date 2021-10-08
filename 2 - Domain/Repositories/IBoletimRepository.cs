@@ -7,6 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Domain.Repositories {
-    public interface IBoletimRepository : IRepository<Boletim> {
+    public interface IBoletimRepository : IRepository<Domain.Entities.Boletim> {
     }
 }

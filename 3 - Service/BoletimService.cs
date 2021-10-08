@@ -1,4 +1,5 @@
-﻿using CursoIdiomas.Domain.Cursos.DTO;
+﻿using CursoIdiomas.Domain.Boletim.DTO;
+using CursoIdiomas.Domain.Cursos.DTO;
 using CursoIdiomas.Domain.Entities;
 using CursoIdiomas.Domain.Interfaces;
 using CursoIdiomas.Domain.Interfaces.Service;
@@ -29,17 +30,15 @@ namespace CursoIdiomas.Service.CursoServices
             return await _repository.SelectAsync(id);
         }
 
-        public async Task<Boletim> Registrar(CursoDTO model)
+        public async Task<Boletim> Registrar(long idAluno, BoletimDTO model)
         {
-            //var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
-            //if (!_entity.IsValid)
-            //    return null;
+            var _entity = new Boletim(model.Nota, idAluno);
+            if (!_entity.IsValid) return null;
 
-            //var result = await _repository.InsertAsync(_entity);
-            //if(result == null)
-            //    return null;
+            var result = await _repository.InsertAsync(_entity);
+            if (result == null) return null;
 
-            return new Boletim();
+            return _entity;
         }
 
         public async Task<Boletim> Atualizar(long idCurso, CursoDTO model) {
