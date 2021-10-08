@@ -15,7 +15,7 @@ namespace CursoIdiomas.Domain.Entities
             Vencimento = vencimento;
             Valor = valor;
             Uri = uri;
-            IdAluno = idAluno;
+            AlunoId = idAluno;
         }
 
 
@@ -23,7 +23,7 @@ namespace CursoIdiomas.Domain.Entities
         public DateTime Vencimento { get; private set; }
         public decimal Valor { get; private set; }
         public string Uri { get; private set; }
-        public long IdAluno { get; private set; }
+        public long AlunoId { get; private set; }
         public Alunos Aluno { get; private set; }
     }
 }

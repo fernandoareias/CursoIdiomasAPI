@@ -1,5 +1,6 @@
 ﻿using CursoIdiomas.Domain.Cursos.DTO;
 using CursoIdiomas.Domain.Entities;
+using CursoIdiomas.Domain.Mensalidades.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace CursoIdiomas.Domain.Interfaces.Service {
 
         Task<Cobranca> Obter(long id);
         Task<IEnumerable<Cobranca>> GetAll();
-        Task<Cobranca> Registrar(CursoDTO model);
+        Task<Cobranca> Registrar(long idAluno, MensalidadeDTO model);
         Task<Cobranca> Atualizar(long id, CursoDTO model);
         Task<bool> Remover(long id);
     }

@@ -2,6 +2,7 @@
 using CursoIdiomas.Domain.Entities;
 using CursoIdiomas.Domain.Interfaces;
 using CursoIdiomas.Domain.Interfaces.Service;
+using CursoIdiomas.Domain.Mensalidades.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -24,16 +25,14 @@ namespace CursoIdiomas.Service.CursoServices {
             return await _repository.SelectAsync(id);
         }
 
-        public async Task<Cobranca> Registrar(CursoDTO model) {
-            //var _entity = new Turma(model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
-            //if (!_entity.IsValid)
-            //    return null;
+        public async Task<Cobranca> Registrar(long idAluno, MensalidadeDTO model) {
+            var _entity = new Cobranca(model.Vencimento, model.Valor, model.Uri, idAluno);
+            if (!_entity.IsValid || _entity == null) return null;
 
-            //var result = await _repository.InsertAsync(_entity);
-            //if (result == null)
-            //    return null;
+            var result = await _repository.InsertAsync(_entity);
+            if (result == null) return null;
 
-            return new Cobranca();
+            return _entity;
         }
 
         public async Task<Cobranca> Atualizar(long idCurso, CursoDTO model) {

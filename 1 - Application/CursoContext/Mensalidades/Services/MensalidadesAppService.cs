@@ -1,5 +1,7 @@
 ﻿using CursoIdiomas.Application.Boletim.Interfaces;
 using CursoIdiomas.Application.Commands;
+using CursoIdiomas.Application.CursoContext.Mensalidades;
+using CursoIdiomas.Application.CursoContext.Mensalidades.DTOs;
 using CursoIdiomas.Application.Cursos.DTO;
 using CursoIdiomas.Application.Cursos.Interfaces;
 using CursoIdiomas.Application.Views;
@@ -19,35 +21,34 @@ namespace CursoIdiomas.Application.Cursos.Services {
 
 
         public async Task<GenericCommandsResults> GetAll() {
-            //var result = await _mensalidadesService.GetAll();
-            //if (result == null) {
-            //    return new GenericCommandsResults(false, "Não há curso registrado.", null);
-            //}
-            //var views = await CursoView.Mapping(result);
+            var result = await _mensalidadesService.GetAll();
 
-            return new GenericCommandsResults(true, "Há cursos registrados!", true);
+            if (!result.Any() || result == null) return new GenericCommandsResults(false, "Não há mensalidades registradas.", null);
 
+            var views = result.Select(m => new MensalidadeView(m));
+
+            return new GenericCommandsResults(true, "Há mensalidades registradas!", views);
         }
 
         public async Task<GenericCommandsResults> Obter(long id) {
-            //var result = await _mensalidadesService.Obter(id);
-            //if (!result.IsValid) {
-            //    return new GenericCommandsResults(false, "Não foi possível encontrar o curso", result.Notifications);
-            //}
-            //var view = new CursoView(result);
+            var result = await _mensalidadesService.Obter(id);
 
-            return new GenericCommandsResults(true, "Cursos encontrado!", true);
+            if (result == null) return new GenericCommandsResults(false, "Não foi possível encontrar a mensalidade informada.", null);
+
+            var view = new MensalidadeView(result);
+
+            return new GenericCommandsResults(true, "Mensalidade encontrado!", view);
         }
 
-        public async Task<GenericCommandsResults> Registrar(CursoDTO model) {
-            //var result = await _mensalidadesService.Registrar(model.ToDomain());
+        public async Task<GenericCommandsResults> Registrar(long idAluno, MensalidadeDTO model) {
+            var result = await _mensalidadesService.Registrar(idAluno, model.ToDomain());
 
-            //if (!result.IsValid) {
-            //    return new GenericCommandsResults(false, "Não foi possível registrar o curso", result.Notifications);
-            //}
-            //var view = new CursoView(result);
+            if (!result.IsValid) {
+                return new GenericCommandsResults(false, "Não foi possível registrar o mensalidade", result.Notifications);
+            }
+            var view = new MensalidadeView(result);
 
-            return new GenericCommandsResults(true, "Curso registrado com sucesso", true);
+            return new GenericCommandsResults(true, "Mensalidade registrado com sucesso", view);
 
         }
 
