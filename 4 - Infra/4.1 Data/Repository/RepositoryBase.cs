@@ -42,7 +42,7 @@ namespace CursoIdiomas.Infra.Data.Repository
             }
         }
 
-        public async Task<T> InsertAsync(T item)
+        public virtual async Task<T> InsertAsync(T item)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace CursoIdiomas.Infra.Data.Repository
             return item;
         }
 
-        public async Task<T> SelectAsync(long id)
+        public virtual async Task<T> SelectAsync(long id)
         {
             try
             {
@@ -71,7 +71,7 @@ namespace CursoIdiomas.Infra.Data.Repository
             }
         }
 
-        public async Task<IEnumerable<T>> SelectAsync()
+        public virtual async Task<IEnumerable<T>> SelectAsync()
         {
             try
             {

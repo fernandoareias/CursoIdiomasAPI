@@ -5,21 +5,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CursoIdiomas.Application.CursoContext.Professor.View {
-    public class ProfessorView {
+namespace CursoIdiomas.Application.CursoContext.Professor.View.Simple {
+    public class ProfessorWithCursoSimpleViewModel {
 
-        public long Id { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
-        public CursoSimpleViewModel Curso { get; set; }
-        // Revisar
 
-        public ProfessorView(Domain.Entities.Professor entity) {
-            Id = entity.Id;
+        public CursoSimpleViewModel Curso { get; set; }
+
+        public ProfessorWithCursoSimpleViewModel(Domain.Entities.Professor entity) {
             Nome = entity.Professor_Nome.ToString();
             Email = entity.Professor_Email.ToString();
             Curso = new CursoSimpleViewModel(entity.Curso);
         }
-       
+
     }
 }

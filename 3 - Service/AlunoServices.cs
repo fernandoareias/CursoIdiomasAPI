@@ -13,11 +13,10 @@ namespace CursoIdiomas.Service.CursoServices
     public class AlunosServices: IAlunoService
     {
         private readonly IRepository<Alunos> _repository;
- 
-        public AlunosServices(IRepository<Alunos> repository)
-        {
+        private readonly ITurmaService _turmaService;
+        public AlunosServices(IRepository<Alunos> repository, ITurmaService turmaService) {
             _repository = repository;
-        
+            _turmaService = turmaService;
         }
 
         public async Task<IEnumerable<Alunos>> GetAll()
@@ -33,6 +32,11 @@ namespace CursoIdiomas.Service.CursoServices
 
         public async Task<Alunos> Registrar(long idTurma, AlunoCreateDTO model)
         {
+            var turma = await _turmaService.Obter(idTurma);
+            if (turma == null) return null;
+
+            if (turma.GetQntAlunos() >= 5) return null;
+
             var _entity = new Alunos(model.FirstName, model.LastName, model.Email, idTurma);
             if (!_entity.IsValid) return null;
 

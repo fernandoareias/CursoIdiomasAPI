@@ -6,6 +6,7 @@ using CursoIdiomas.Application.Cursos.DTO;
 using CursoIdiomas.Application.Cursos.Interfaces;
 using CursoIdiomas.Application.Views;
 using CursoIdiomas.Domain.Interfaces.Service;
+using CursoIdiomas.Domain.Professor.View.Simple;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace CursoIdiomas.Application.Professor.Services {
             if (result == null) {
                 return new GenericCommandsResults(false, "Não há professor registrado.", null);
             }
-            var views = ProfessorView.Mapping(result);
+            var views = result.Select(p => new ProfessorSimpleListViewModel(p)).ToList();
 
             return new GenericCommandsResults(true, "Há professor registrados!", views);
 
@@ -37,7 +38,7 @@ namespace CursoIdiomas.Application.Professor.Services {
             if (!result.IsValid) {
                 return new GenericCommandsResults(false, "Não foi possível encontrar o curso", result.Notifications);
             }
-            var views = ProfessorView.Mapping(result);
+            var views = new ProfessorView(result);
 
             return new GenericCommandsResults(true, "Professor encontrado!", views);
         }
@@ -49,7 +50,7 @@ namespace CursoIdiomas.Application.Professor.Services {
             if (!result.IsValid) {
                 return new GenericCommandsResults(false, "Não foi possível registrar o curso", result.Notifications);
             }
-            var views = ProfessorView.Mapping(result);
+            var views = new ProfessorView(result);
 
             return new GenericCommandsResults(true, "Professor registrado com sucesso", views);
 
@@ -61,7 +62,7 @@ namespace CursoIdiomas.Application.Professor.Services {
             if (!result.IsValid) {
                 return new GenericCommandsResults(false, "Não foi possível atualizar o curso", result.Notifications);
             }
-            var views = ProfessorView.Mapping(result);
+            var views = new ProfessorView(result);
 
             return new GenericCommandsResults(true, "Professor atualizado com sucesso", views);
 

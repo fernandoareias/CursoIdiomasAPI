@@ -18,6 +18,17 @@ namespace CursoIdiomas.Infra.Data.Implementations {
             _dataset = context.Set<CursoIdiomas.Domain.Entities.Professor>();
         }
 
+
+        public async override Task<Professor> SelectAsync(long id) {
+            var query = await _dataset
+                .Include(p => p.Curso)
+                .Include(p => p.Turmas)
+                .FirstOrDefaultAsync(p => p.Id == id);
+               
+
+            return query;
+        }
+
     }
 
 }

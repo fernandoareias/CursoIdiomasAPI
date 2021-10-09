@@ -35,6 +35,13 @@ namespace CursoIdiomas.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CursoIdiomas.API", Version = "v1" });
             });
+
+            services.AddElmahIo(o =>
+            {
+                o.ApiKey = "6da68bfa110e46e8870dcf9123711b1f";
+                o.LogId = new Guid("70b6dbf7-3dda-40b1-8252-a8f056b43a2d");
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +64,8 @@ namespace CursoIdiomas.API
             {
                 endpoints.MapControllers();
             });
+
+            app.UseElmahIo();
         }
     }
 }

@@ -5,6 +5,7 @@ using CursoIdiomas.Domain.Interfaces;
 using CursoIdiomas.Domain.Interfaces.Service;
 using CursoIdiomas.Domain.Professor;
 using CursoIdiomas.Domain.Professor.DTO;
+using CursoIdiomas.Domain.Repositories;
 using CursoIdiomas.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,10 @@ using System.Threading.Tasks;
 
 namespace CursoIdiomas.Service.CursoServices {
     public class ProfessorService : IProfessorService {
-        private readonly IRepository<CursoIdiomas.Domain.Entities.Professor> _repository;
+        private readonly IProfessorRepository _repository;
         private readonly IRepository<Curso> _cursoRepository; 
         public ProfessorService(
-            IRepository<CursoIdiomas.Domain.Entities.Professor> repository,
+            IProfessorRepository repository,
             IRepository<Curso> cursoRepository
         ) {
             _repository = repository;
@@ -24,8 +25,8 @@ namespace CursoIdiomas.Service.CursoServices {
         }
 
         public async Task<List<CursoIdiomas.Domain.Entities.Professor>> GetAll(long idCurso) {
-            var teachers = await _repository.SelectAsync();
-            return teachers.Where(x => x.CursoId == idCurso).ToList();
+            
+            return _repository.SelectAsync().Result.ToList();
         }
 
 

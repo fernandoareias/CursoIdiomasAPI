@@ -38,8 +38,7 @@ namespace CursoIdiomas.Application.Views
             var listCursos = new List<CursoView>();
             foreach(var curso in cursos)
             {
-                var cursoModel = new CursoView(curso);
-                listCursos.Add(cursoModel);
+                listCursos.Add(new CursoView(curso));
             }
 
             return await Task.FromResult(listCursos);

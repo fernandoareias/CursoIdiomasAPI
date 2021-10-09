@@ -19,7 +19,31 @@ namespace CursoIdiomas.Infra.Data.Implementations {
         }
 
         public async Task<List<Turma>> SelectByProfessor(long idProfessor) {
-            return await _dataset.Where(t => t.ProfessorId == idProfessor).ToListAsync();
+            return await _dataset
+                .Include(x => x.Matriculas)
+                .ThenInclude(x => x.Aluno)
+                .Include(x => x.Professor)
+                .Where(t => t.ProfessorId == idProfessor)
+                .ToListAsync();
+        }
+
+        public override async Task<IEnumerable<Turma>> SelectAsync() {
+            return await _dataset
+                .Include(x => x.Matriculas)
+                .ThenInclude(x => x.Aluno)
+                .Include(x => x.Professor)
+                .ToListAsync();
+                
+        }
+
+
+        public override async Task<Turma> SelectAsync(long id) {
+            return await _dataset
+                .Include(x => x.Matriculas)
+                .ThenInclude(x => x.Aluno)
+                .Include(x => x.Professor)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
         }
     }
 

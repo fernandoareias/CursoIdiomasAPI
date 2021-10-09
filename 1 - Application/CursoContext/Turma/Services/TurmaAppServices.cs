@@ -5,6 +5,7 @@ using CursoIdiomas.Application.CursoContext.Turma.View;
 using CursoIdiomas.Application.Cursos.DTO;
 using CursoIdiomas.Application.Cursos.Interfaces;
 using CursoIdiomas.Application.Turma.Interfaces;
+using CursoIdiomas.Application.Turma.View.Simple;
 using CursoIdiomas.Application.Views;
 using CursoIdiomas.Domain.Interfaces.Service;
 using System;
@@ -27,7 +28,7 @@ namespace CursoIdiomas.Application.Professor.Services {
             if (result == null) {
                 return new GenericCommandsResults(false, "Não há turma registrado.", null);
             }
-            var views = result.Select(s => new TurmaView(s)).ToList();
+            var views = result.Select(s => new TurmaSimpleListViewModel(s)).ToList();
 
             return new GenericCommandsResults(true, "Foi possível encontrar turmas!", views);
         }
