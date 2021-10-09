@@ -1,6 +1,8 @@
 ﻿using CursoIdiomas.Application.Boletim.Interfaces;
 using CursoIdiomas.Application.CursoContext.Professor.DTO;
+using CursoIdiomas.Application.CursoContext.Professor.View;
 using CursoIdiomas.Application.Professor.Services;
+using CursoIdiomas.Domain.Professor.View.Simple;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("cursos/{idCurso}/professores")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<List<ProfessorSimpleListViewModel>>))]
         public async Task<ActionResult> GetAll(long idCurso) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -34,6 +37,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("professores/{idProfessor}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<List<ProfessorView>>))]
         public async Task<ActionResult> GetById(long idProfessor) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -48,6 +52,8 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpPost]
         [Route("cursos/{idCurso}/professores")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<List<ProfessorView>>))]
+        []
         public async Task<ActionResult> Post(long idCurso, [FromBody] ProfessorDTO model) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -64,6 +70,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpPut]
         [Route("professores/{idProfessor}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<List<ProfessorView>>))]
         public async Task<ActionResult> Put(long idProfessor, [FromBody] ProfessorDTO model) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -80,6 +87,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpDelete]
         [Route("professores/{idProfessor}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<bool>))]
         public async Task<ActionResult> Delete(long idProfessor) {
             var result = await _professorAppService.Remover(idProfessor);
             if (result.Success == false) return BadRequest();

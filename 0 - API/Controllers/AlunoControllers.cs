@@ -1,5 +1,6 @@
 ﻿using CursoIdiomas.Application.Aluno.Interfaces;
 using CursoIdiomas.Application.CursoContext.Aluno.DTOs;
+using CursoIdiomas.Application.CursoContext.Aluno.View;
 using CursoIdiomas.Application.Cursos.DTO;
 using CursoIdiomas.Application.Cursos.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("cursos/professor/turmas/alunos")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<List<AlunoView>>))]
         public async Task<ActionResult> GetAll() {
             var result = await _alunoAppService.GetAll();
             if (result == null)
@@ -33,6 +35,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("cursos/professor/turmas/alunos/{idAluno}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<AlunoView>))]
         public async Task<ActionResult> GetById(long idAluno) {
             var result = await _alunoAppService.Obter(idAluno);
             if (result == null)
@@ -43,6 +46,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpPost]
         [Route("cursos/professor/turmas/{idTurmas}/alunos")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<AlunoView>))]
         public async Task<ActionResult> Post(long idTurmas, [FromBody] AlunoCreateDTO model) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -58,6 +62,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpPut]
         [Route("cursos/professor/turmas/alunos/{idAluno}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<AlunoView>))]
         public async Task<ActionResult> Put(long idAluno, [FromBody] AlunoCreateDTO model) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -72,6 +77,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpDelete]
         [Route("cursos/professor/turmas/alunos/{idAluno}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<bool>))]
         public async Task<ActionResult> Delete(long idAluno) {
             var result = await _alunoAppService.Remover(idAluno);
             if (result == null)

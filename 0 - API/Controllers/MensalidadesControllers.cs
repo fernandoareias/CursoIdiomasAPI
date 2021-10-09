@@ -1,4 +1,5 @@
 ﻿using CursoIdiomas.Application.Boletim.Interfaces;
+using CursoIdiomas.Application.CursoContext.Mensalidades;
 using CursoIdiomas.Application.CursoContext.Mensalidades.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,6 +23,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("cursos/professor/turmas/alunos/mensalidades")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<List<MensalidadeView>>))]
         public async Task<IActionResult> ListarMensalides() {
 
             var result = await _mensalidadeAppService.GetAll();
@@ -33,6 +35,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("cursos/professor/turmas/alunos/mensalidades/{idMensalidade}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<MensalidadeView>))]
         public async Task<IActionResult> VisualizarMensalidade(long idMensalidade) {
             
             var result = await _mensalidadeAppService.Obter(idMensalidade);
@@ -44,6 +47,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpPost]
         [Route("cursos/professor/turmas/alunos/{idAluno}/mensalidades")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<MensalidadeView>))]
         public async Task<IActionResult> RegistrarMensalidade(long idAluno, [FromBody]MensalidadeDTO model) {
 
             var result = await _mensalidadeAppService.Registrar(idAluno, model);
@@ -55,6 +59,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpDelete]
         [Route("cursos/professor/turmas/alunos/mensalidades/{idMensalidade}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<bool>))]
         public async Task<IActionResult> DeleteMensalidade(long idMensalidade) {
             
             var result = await _mensalidadeAppService.Remover(idMensalidade);

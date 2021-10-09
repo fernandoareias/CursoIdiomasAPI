@@ -1,5 +1,7 @@
-﻿using CursoIdiomas.Application.Cursos.DTO;
+﻿using CursoIdiomas.Application.CursoContext.Cursos.View.Simple;
+using CursoIdiomas.Application.Cursos.DTO;
 using CursoIdiomas.Application.Cursos.Interfaces;
+using CursoIdiomas.Application.Views;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,7 @@ namespace CursoIdiomas.API.Controllers
 
         [HttpGet]
         [Route("cursos")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<List<CursoSimpleListViewModel>>))]
         public async Task<ActionResult> GetAll()
         {
             if (!ModelState.IsValid)
@@ -36,7 +39,8 @@ namespace CursoIdiomas.API.Controllers
 
 
         [HttpGet]
-        [Route("cursos/{idCurso}")]
+        [Route("cursos/{idCurso}")] 
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<CursoView>))]
         public async Task<ActionResult> GetById(long idCurso) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -51,6 +55,7 @@ namespace CursoIdiomas.API.Controllers
 
         [HttpPost]
         [Route("cursos")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<CursoView>))]
         public async Task<ActionResult> Post([FromBody]CursoDTO model) {
 
             if (!ModelState.IsValid)
@@ -67,6 +72,7 @@ namespace CursoIdiomas.API.Controllers
 
         [HttpPut]
         [Route("cursos/{idCurso}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<CursoView>))]
         public async Task<ActionResult> Put(long idCurso, [FromBody] CursoDTO model) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -82,6 +88,7 @@ namespace CursoIdiomas.API.Controllers
 
         [HttpDelete]
         [Route("curso/{idCurso}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<bool>))]
         public async Task<ActionResult> Delete(long idCurso) {
 
             var result = await _cursoAppService.Remover(idCurso);

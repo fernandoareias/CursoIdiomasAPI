@@ -1,5 +1,7 @@
 ﻿using CursoIdiomas.Application.CursoContext.Turma.DTOs;
+using CursoIdiomas.Application.CursoContext.Turma.View;
 using CursoIdiomas.Application.Turma.Interfaces;
+using CursoIdiomas.Application.Turma.View.Simple;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("cursos/professores/turmas")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<List<TurmaSimpleListViewModel>>))]
         public async Task<ActionResult> GetAll() {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -33,6 +36,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("cursos/professores/{idProfessor}/turmas")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<TurmaView>))]
         public async Task<ActionResult> GetAllByProfessor(long idProfessor) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -49,6 +53,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpPost]
         [Route("cursos/professores/{idProfessor}/turmas")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<TurmaView>))]
         public async Task<ActionResult> Post(long idProfessor, [FromBody] TurmaDTO turmaDTO) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -63,6 +68,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpPut]
         [Route("cursos/professores/turmas/{idTurma}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<TurmaView>))]
         public async Task<ActionResult> Put(long idTurma, [FromBody]TurmaDTO turmaDTO) {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -77,6 +83,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpDelete]
         [Route("cursos/professores/turmas/{idTurma}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<bool>))]
         public async Task<ActionResult> DeleteTurma(long idTurma) {
            
             var result = await _turmaAppServices.Remover(idTurma);

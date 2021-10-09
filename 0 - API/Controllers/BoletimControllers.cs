@@ -1,4 +1,5 @@
 ﻿using CursoIdiomas.Application.Boletim.Interfaces;
+using CursoIdiomas.Application.CursoContext.Boletim;
 using CursoIdiomas.Application.CursoContext.Boletim.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,6 +19,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("cursos/professor/turmas/alunos/boletins")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<List<BoletimView>>))]
         public async Task<IActionResult> Listar() {
             var result = await _boletimAppServices.GetAll();
 
@@ -28,6 +30,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpGet]
         [Route("cursos/professor/turmas/alunos/boletins/{idBoletim}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<BoletimView>))]
         public async Task<IActionResult> Visualizar(long idBoletim) {
             var result = await _boletimAppServices.Obter(idBoletim);
 
@@ -39,6 +42,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpPost]
         [Route("cursos/professor/turmas/alunos/{idAlunos}/boletins")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<BoletimView>))]
         public async Task<IActionResult> CadastrarBoletim(long idAlunos, [FromBody]BoletimDTO model) {
 
             var result = await _boletimAppServices.Registrar(idAlunos, model);
@@ -49,6 +53,7 @@ namespace CursoIdiomas.API.Controllers {
 
         [HttpDelete]
         [Route("cursos/professor/turmas/alunos/boletins/{idBoletim}")]
+        [ProducesDefaultResponseType(typeof(GenericCommandsResults<BoletimView>))]
         public async Task<IActionResult> DeletarBoletim(long idBoletim) {
             var result = await _boletimAppServices.Remover(idBoletim);
 
