@@ -1,4 +1,5 @@
 ﻿using CursoIdiomas.Application.Commands;
+using CursoIdiomas.Application.CursoContext.Cursos.View.Simple;
 using CursoIdiomas.Application.Cursos.DTO;
 using CursoIdiomas.Application.Cursos.Interfaces;
 using CursoIdiomas.Application.Views;
@@ -26,7 +27,7 @@ namespace CursoIdiomas.Application.Cursos.Services
             if (result == null) 
                 return new GenericCommandsResults(false, "Não há curso registrado.", null);
 
-            var views = await CursoView.Mapping(result);
+            var views = result.Select(c => new CursoSimpleListViewModel(c));
 
             return new GenericCommandsResults(true, "Há cursos registrados!", views);
 

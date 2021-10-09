@@ -6,6 +6,7 @@ using CursoIdiomas.Infra.Data.Implementations;
 using CursoIdiomas.Infra.Data.Repository;
 using CursoIdiomas.Service.CursoServices;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace CursoIdiomas.Infra.CrossCutting.DependencyInjection
 {
     public class ConfigureRepository
     {
-        public static void ConfigureDependenciesRepository(IServiceCollection serviceCollection)
+        public static void ConfigureDependenciesRepository(IConfiguration Configuration, IServiceCollection serviceCollection)
         {
             serviceCollection.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
             serviceCollection.AddTransient<ICursoRepository, CursoImplementation>();
@@ -29,7 +30,7 @@ namespace CursoIdiomas.Infra.CrossCutting.DependencyInjection
             serviceCollection.AddTransient<ITurmaRepository, TurmaImplementation>();
 
             serviceCollection.AddDbContext<MyContext>(
-                  options => options.UseSqlServer("server=localhost,1433;database=CursoIdiomas;User ID=sa;Password=Nando@37074957"));
+                  options => options.UseSqlServer($"{Configuration["ConnectionStrings:connectionString"]}"));
 
         }
     }

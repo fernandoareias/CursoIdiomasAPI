@@ -32,24 +32,15 @@ namespace CursoIdiomas.Infra.Data.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            //modelBuilder.Entity<Notification>().HasNoKey();
-     
             modelBuilder.Entity<Curso>(new CursoMap().Configure);
            
             modelBuilder.Entity<CursoIdiomas.Domain.Entities.Professor>(new ProfessorMap().Configure);
             
-          
-          modelBuilder.Entity<Turma>(new TurmaMap().Configure);
+            modelBuilder.Entity<Turma>(new TurmaMap().Configure);
             modelBuilder.Entity<Alunos>(new AlunoMap().Configure);
             modelBuilder.Entity<Matricula>(new MatriculaMap().Configure);
             modelBuilder.Entity<Boletim>(new BoletimMap().Configure);
-           modelBuilder.Entity<Cobranca>(new MensalidadesMap().Configure);
-           // CursoSeeds.Cursos(modelBuilder);
-
-         //  ProfessorSeeds.Professor(modelBuilder);
-           //TurmaSeeds.Turma(modelBuilder);
-
-        
+            modelBuilder.Entity<Cobranca>(new MensalidadesMap().Configure);
         }
     }
 }
