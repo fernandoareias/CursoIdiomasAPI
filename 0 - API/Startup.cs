@@ -22,24 +22,31 @@ namespace CursoIdiomas.API
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            ConfigureService.ConfigureDependenciesService(services);
-            ConfigureRepository.ConfigureDependenciesRepository(services);
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(System.IO.Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json");
 
+            Configuration = builder.Build();
+
+            ConfigureService.ConfigureDependenciesService(services);
+            ConfigureRepository.ConfigureDependenciesRepository(Configuration, services);
+
+            services.AddResponseCompression();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CursoIdiomas.API", Version = "v1" });
             });
 
-            services.AddElmahIo(o =>
+           services.AddElmahIo(o =>
             {
-                o.ApiKey = "6da68bfa110e46e8870dcf9123711b1f";
-                o.LogId = new Guid("70b6dbf7-3dda-40b1-8252-a8f056b43a2d");
+                o.ApiKey = $"{Configuration["Elmah:Key"]}";
+                o.LogId = new Guid($"{Configuration["Elmah:Id"]}");
             });
 
         }
@@ -59,7 +66,7 @@ namespace CursoIdiomas.API
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseResponseCompression();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
