@@ -8,7 +8,6 @@ namespace Domain.Test.Entities
     public class CursoTestes
     {
 
-
         [Fact]
         public void DeveCriarUmCursoValido()
         {
