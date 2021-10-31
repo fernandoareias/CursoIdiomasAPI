@@ -1,0 +1,160 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/fernando/dev/CursoIdiomasAPI/5 - Testes/Domain.Test/Domain.Test.csproj": {}
+  },
+  "projects": {
+    "/home/fernando/dev/CursoIdiomasAPI/2 - Domain/CursoIdiomas.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/fernando/dev/CursoIdiomasAPI/2 - Domain/CursoIdiomas.Domain.csproj",
+        "projectName": "CursoIdiomas.Domain",
+        "projectPath": "/home/fernando/dev/CursoIdiomasAPI/2 - Domain/CursoIdiomas.Domain.csproj",
+        "packagesPath": "/home/fernando/.nuget/packages/",
+        "outputPath": "/home/fernando/dev/CursoIdiomasAPI/2 - Domain/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/fernando/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Flunt": {
+              "target": "Package",
+              "version": "[2.0.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.205/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/fernando/dev/CursoIdiomasAPI/5 - Testes/Domain.Test/Domain.Test.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/fernando/dev/CursoIdiomasAPI/5 - Testes/Domain.Test/Domain.Test.csproj",
+        "projectName": "Domain.Test",
+        "projectPath": "/home/fernando/dev/CursoIdiomasAPI/5 - Testes/Domain.Test/Domain.Test.csproj",
+        "packagesPath": "/home/fernando/.nuget/packages/",
+        "outputPath": "/home/fernando/dev/CursoIdiomasAPI/5 - Testes/Domain.Test/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/fernando/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/home/fernando/dev/CursoIdiomasAPI/2 - Domain/CursoIdiomas.Domain.csproj": {
+                "projectPath": "/home/fernando/dev/CursoIdiomasAPI/2 - Domain/CursoIdiomas.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Flunt": {
+              "target": "Package",
+              "version": "[2.0.5, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.7.1, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.3.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[5.0.0, 5.0.0]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.205/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
