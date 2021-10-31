@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\1 - Application\1 - Application.csproj" />
+    <ProjectReference Include="..\..\2 - Domain\CursoIdiomas.Domain.csproj" />
+    <ProjectReference Include="..\..\3 - Service\CursoIdiomas.Service.csproj" />
+    <ProjectReference Include="..\4.1 Data\CursoIdiomas.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
