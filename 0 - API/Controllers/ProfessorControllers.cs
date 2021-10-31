@@ -1,4 +1,4 @@
-﻿using CursoIdiomas.Application.Boletim.Interfaces;
+﻿/*using CursoIdiomas.Application.Boletim.Interfaces;
 using CursoIdiomas.Application.CursoContext.Professor.DTO;
 using CursoIdiomas.Application.CursoContext.Professor.View;
 using CursoIdiomas.Application.Professor.Services;
@@ -96,3 +96,4 @@ namespace CursoIdiomas.API.Controllers {
         }
     }
 }
+*/
