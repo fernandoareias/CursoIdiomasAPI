@@ -15,13 +15,13 @@ namespace CursoIdiomas.Service.Tests.Mock {
             return await Task.FromResult(new Professor(idProfessor, Faker.Name.First(), Faker.Name.Last(), Faker.Internet.Email(), Faker.RandomNumber.Next(2, 1000), idCurso));
         }
 
-        public async Task<List<Professor>> GetAll(long idCurso)
+        public async Task<List<Professor>> GetAll()
         {   
             var lista = new List<Professor>();
             
             for (int i = 0; i < Faker.RandomNumber.Next(1, 20); i++)
             {
-                lista.Add(new Professor(Faker.RandomNumber.Next(1, 10), Faker.Name.First(), Faker.Name.Last(), Faker.Internet.Email(), Faker.RandomNumber.Next(2, 1000), idCurso));
+                lista.Add(new Professor(Faker.RandomNumber.Next(1, 10), Faker.Name.First(), Faker.Name.Last(), Faker.Internet.Email(), Faker.RandomNumber.Next(2, 1000), 0));
             }
 
             return await Task.FromResult(lista);

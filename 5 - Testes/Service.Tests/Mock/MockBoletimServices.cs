@@ -9,11 +9,11 @@ using CursoIdiomas.Domain.Entities;
 using CursoIdiomas.Domain.Interfaces.Service;
 
 namespace CursoIdiomas.Testes.Service.Testes.Mock {
-    public class BoletimService : IBoletimService
+    public class MockBoletimService : IBoletimService
     {
-        public async Task<Boletim> Atualizar(long id, CursoDTO model)
+        public async Task<Boletim> Atualizar(long id, BoletimDTO model)
         {
-            return await Task.FromResult(new Boletim(Faker.RandomNumber.Next(0, 10), Faker.RandomNumber.Next(1, 10)));
+            return await Task.FromResult(new Boletim(model.Nota, id));
         }
 
         public async Task<IEnumerable<Boletim>> GetAll()
@@ -30,7 +30,7 @@ namespace CursoIdiomas.Testes.Service.Testes.Mock {
 
         public async Task<Boletim> Obter(long id)
         {
-            return await Task.FromResult(new Boletim(Faker.RandomNumber.Next(0, 10), Faker.RandomNumber.Next(1, 10)));
+            return await Task.FromResult(new Boletim(id));
         }
 
         public async Task<Boletim> Registrar(long idAluno, BoletimDTO model)

@@ -10,7 +10,7 @@ using CursoIdiomas.Domain.Mensalidades.DTOs;
 namespace CursoIdiomas.Testes.Service.Testes.Mock {
     public class MockMensalidadeServices : IMensalidadesService
     {
-        public async Task<Mensalidade> Atualizar(long id, CursoDTO model)
+        public async Task<Mensalidade> Atualizar(long id, MensalidadeDTO model)
         {
             return await Task.FromResult(new Mensalidade(Faker.Finance.Maturity(), Faker.Finance.Coupon(), Faker.Internet.Url(), Faker.RandomNumber.Next(1, 20)));
         }
