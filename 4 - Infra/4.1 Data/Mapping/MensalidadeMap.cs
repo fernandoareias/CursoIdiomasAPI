@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CursoIdiomas.Infra.Data.Mapping {
-    public class MensalidadesMap : IEntityTypeConfiguration<Cobranca> {
-        public void Configure(EntityTypeBuilder<Cobranca> builder) {
+    public class MensalidadesMap : IEntityTypeConfiguration<Mensalidade> {
+        public void Configure(EntityTypeBuilder<Mensalidade> builder) {
 
 
             builder.ToTable("Cobranca");
@@ -18,7 +18,7 @@ namespace CursoIdiomas.Infra.Data.Mapping {
             builder.Property(x => x.Vencimento);
             builder.Property(x => x.Valor);
 
-            builder.HasOne(x => x.Aluno).WithMany(y => y.Cobrancas);
+            builder.HasOne(x => x.Aluno).WithMany(y => y.Mensalidades);
         }
     }
 }

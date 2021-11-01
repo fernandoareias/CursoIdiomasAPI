@@ -1,4 +1,6 @@
 ﻿using CursoIdiomas.Domain.Cursos.Curso;
+using Flunt.Notifications;
+using Flunt.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,18 +16,28 @@ namespace CursoIdiomas.Domain.Entities
             _matriculas = new List<Matricula>();
         }
 
-        public Turma(int turno) {
-            Turno = turno;
-        }
-
         public Turma(long professorId, int turno) {
 
             ProfessorId = professorId;
             Turno = turno;
+
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+                .IsGreaterThan(professorId, 0, "IdProfessor", "Professor inválido.")
+                .IsGreaterThan(turno, 0, "Turno", "Turno inválido.")
+            );
+
         }
-        public Turma(long id, long idProfessor, int turno) : base(id) {
-            ProfessorId = idProfessor;
+        public Turma(long id, long professorId, int turno) : base(id) {
+            ProfessorId = professorId;
             Turno = turno;
+
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+                .IsGreaterThan(id, 0, "IdTurma", "Turma inválida.")
+                .IsGreaterThan(professorId, 0, "IdProfessor", "Professor inválido.")
+                .IsGreaterThan(turno, 0, "Turno", "Turno inválido.")
+            );
         }
 
 
@@ -35,6 +47,7 @@ namespace CursoIdiomas.Domain.Entities
 
 
         public IEnumerable<Matricula> Matriculas => _matriculas;
+       
         public void AddMatricula(Matricula matricula) {
 
             _matriculas.Add(matricula);

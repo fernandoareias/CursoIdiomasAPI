@@ -57,7 +57,7 @@ namespace CursoIdiomas.Service.CursoServices {
             var _entityBase = await _repository.SelectAsync(idTurma);
             if (_entityBase == null) return null;
 
-            var _entityNova = new Turma(model.Turno);
+            var _entityNova = new Turma(2, model.Turno);
             if (!_entityNova.IsValid) return null;
 
             _entityBase.Update(_entityNova);

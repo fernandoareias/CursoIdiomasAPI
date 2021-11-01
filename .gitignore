@@ -24,7 +24,8 @@
 5 - Tests/5.2 - CursoIdiomas.Service.Test/bin/*
 5 - Tests/5.2 - CursoIdiomas.Service.Test/obj/*
 
-5 - Tests/5.3 - CursoIdiomas.Infra.Test/CursoIdiomas.Infra.CrossCutting.Test/bin/*
+CursoIdiomasAPI/5 - Testes/Domain.Test/bin/*
+CursoIdiomasAPI/5 - Testes/Domain.Test/obj/*
 5 - Tests/5.3 - CursoIdiomas.Infra.Test/CursoIdiomas.Infra.CrossCutting.Test/obj/*
 
 5 - Tests/5.3 - CursoIdiomas.Infra.Test/CursoIdiomas.Infra.Data.Test/bin/*

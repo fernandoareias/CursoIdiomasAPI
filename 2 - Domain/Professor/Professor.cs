@@ -40,6 +40,14 @@ namespace CursoIdiomas.Domain.Entities
             Professor_Email = professor_Email;
             Salario = salario;
             CursoId = idCurso;
+
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+                .IsGreaterThan(salario, 0, "Salario", "O salario deve ser maior que 0.")
+                .IsGreaterThan(idCurso, 0, "IdCurso", "Id do curso inválido.")
+                .IsNotNull(professor_Nome, "Nome", "Nome não pode ser null")
+                .IsNotNull(professor_Email, "Email", "Email não pode ser null")
+            );
         }
 
        

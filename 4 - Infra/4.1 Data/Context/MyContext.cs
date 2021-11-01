@@ -22,7 +22,7 @@ namespace CursoIdiomas.Infra.Data.Context
         public DbSet<Alunos> Alunos { get; set; }
         public DbSet<Matricula> Matriculas { get; set; }
         public DbSet<Boletim> Boletim { get; set; }
-        public DbSet<Cobranca> Mensalidade { get; set; }
+        public DbSet<Mensalidade> Mensalidade { get; set; }
         public MyContext(DbContextOptions<MyContext> options) : base(options)
         {
             
@@ -40,7 +40,7 @@ namespace CursoIdiomas.Infra.Data.Context
             modelBuilder.Entity<Alunos>(new AlunoMap().Configure);
             modelBuilder.Entity<Matricula>(new MatriculaMap().Configure);
             modelBuilder.Entity<Boletim>(new BoletimMap().Configure);
-            modelBuilder.Entity<Cobranca>(new MensalidadesMap().Configure);
+            modelBuilder.Entity<Mensalidade>(new MensalidadesMap().Configure);
         }
     }
 }

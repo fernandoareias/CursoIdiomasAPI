@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursoIdiomas.Infra.Data", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursoIdiomas.Infra.CrossCutting", "4 - Infra\4.2 CrossCutting\CursoIdiomas.Infra.CrossCutting.csproj", "{DDED5802-92A2-4550-A4B9-B031AD079792}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Testes", "5 - Testes", "{3190A49A-A7F4-466F-AB68-FFB68C38EA6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Test", "5 - Testes\Domain.Test\Domain.Test.csproj", "{9792FDCB-CB35-4D84-B31E-F7E92461A958}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,9 +106,22 @@ Global
 		{DDED5802-92A2-4550-A4B9-B031AD079792}.Release|x64.Build.0 = Release|Any CPU
 		{DDED5802-92A2-4550-A4B9-B031AD079792}.Release|x86.ActiveCfg = Release|Any CPU
 		{DDED5802-92A2-4550-A4B9-B031AD079792}.Release|x86.Build.0 = Release|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Debug|x64.Build.0 = Debug|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Debug|x86.Build.0 = Debug|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Release|x64.ActiveCfg = Release|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Release|x64.Build.0 = Release|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Release|x86.ActiveCfg = Release|Any CPU
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4462ABFB-B74C-4537-AB87-BB4D4AEF574C} = {DA61A4DE-4CFF-47DA-8277-D1BF05803852}
 		{DDED5802-92A2-4550-A4B9-B031AD079792} = {DA61A4DE-4CFF-47DA-8277-D1BF05803852}
+		{9792FDCB-CB35-4D84-B31E-F7E92461A958} = {3190A49A-A7F4-466F-AB68-FFB68C38EA6A}
 	EndGlobalSection
 EndGlobal

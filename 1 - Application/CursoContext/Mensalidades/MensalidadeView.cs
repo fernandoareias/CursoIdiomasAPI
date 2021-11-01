@@ -11,7 +11,7 @@ namespace CursoIdiomas.Application.CursoContext.Mensalidades {
         public DateTime DataVencimento { get; set; }
 
 
-        public MensalidadeView(Domain.Entities.Cobranca entity) {
+        public MensalidadeView(Domain.Entities.Mensalidade entity) {
             Valor = entity.Valor;
             URI = entity.Uri;
             DataVencimento = entity.Vencimento;

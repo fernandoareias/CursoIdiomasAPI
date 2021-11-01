@@ -1,4 +1,6 @@
 ﻿using CursoIdiomas.Domain.ValueObjects;
+using Flunt.Notifications;
+using Flunt.Validations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,8 +21,16 @@ namespace CursoIdiomas.Domain.Entities
             this.Matricular(idTurma);
         }
         public Alunos(Nome nome, Email email) {
+            
+            
             Nome = nome;
             Email = email;
+
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+                .IsNotNull(nome, "Nome", "Nome não pode ser null")
+                .IsNotNull(email, "Email", "Email não pode ser null")
+            );
 
             _matriculas = new List<Matricula>();
         }
@@ -36,11 +46,11 @@ namespace CursoIdiomas.Domain.Entities
             _matriculas.Add(matricula);
         }
 
-        public IEnumerable<Cobranca> Cobrancas { get; private set; }
+        public IEnumerable<Mensalidade> Mensalidades { get; private set; }
         public IEnumerable<Boletim> Boletims { get; private set; }
 
         public void Matricular(long idTurma) {
-            var matricula = new Matricula(Id,idTurma);
+            var matricula = new Matricula();
             
             this.AddMatricula(matricula);
         }

@@ -9,12 +9,12 @@ namespace CursoIdiomas.Domain.Entities
 {
     public abstract class Entity : Notifiable<Notification>, IEquatable<Entity>
     {
-        protected Entity()
+        public Entity()
         {
             
         }
 
-        protected Entity(long id)
+        public Entity(long id)
         {
             Id = id;
         }

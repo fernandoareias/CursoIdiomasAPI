@@ -10,12 +10,21 @@ namespace CursoIdiomas.Domain.ValueObjects
 {
     public class Email : ValueObject, IEquatable<Email>
     {
-        public Email() {
-
-        }
+        public Email() {}
         public Email(string address)
         {
-            Address = address;
+
+            AddNotifications(new Contract<Notification>()
+               .Requires()
+               .IsEmail(address, "Email", "Email inválido!")
+            );
+
+            if(Notifications.Count == 0){
+                Address = address;
+            }
+                
+
+
            
         }
 

@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 namespace CursoIdiomas.Domain.Interfaces.Service {
     public interface IMensalidadesService {
 
-        Task<Cobranca> Obter(long id);
-        Task<IEnumerable<Cobranca>> GetAll();
-        Task<Cobranca> Registrar(long idAluno, MensalidadeDTO model);
-        Task<Cobranca> Atualizar(long id, CursoDTO model);
+        Task<Mensalidade> Obter(long id);
+        Task<IEnumerable<Mensalidade>> GetAll();
+        Task<Mensalidade> Registrar(long idAluno, MensalidadeDTO model);
+        Task<Mensalidade> Atualizar(long id, CursoDTO model);
         Task<bool> Remover(long id);
     }
 }

@@ -16,8 +16,21 @@ namespace CursoIdiomas.Domain.ValueObjects
 
         public Nome(string firstName, string lastName)
         {
+
+            AddNotifications(new Contract<Notification>()
+                .Requires()
+                .IsGreaterThan(firstName, 2, "FirstName", "O primeiro nome deve ser maior que 2 caractéres.")
+                .IsLowerThan(firstName, 80, "FirstName", "O primeiro nome deve ser menor que 80 caractéres.")
+                .IsGreaterThan(lastName, 2, "LastName", "O segundo nome horaria deve ser maior que 0.")
+                .IsLowerThan(lastName, 80, "LastName", "O segundo nome deve ser menor que 4")
+                .IsNotNullOrEmpty(firstName, "FirstName", "FirstNome não pode ser null ou void")
+                .IsNotNullOrEmpty(lastName, "LastName", "LastName não pode ser null ou void")
+                );
+
             FirstName = firstName;
             LastName = lastName;
+            
+
         }
 
         public string FirstName { get; private set; }

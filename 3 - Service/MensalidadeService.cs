@@ -9,24 +9,24 @@ using System.Threading.Tasks;
 
 namespace CursoIdiomas.Service.CursoServices {
     public class MensalidadeService : IMensalidadesService {
-        private readonly IRepository<Cobranca> _repository;
+        private readonly IRepository<Mensalidade> _repository;
 
-        public MensalidadeService(IRepository<Cobranca> repository) {
+        public MensalidadeService(IRepository<Mensalidade> repository) {
             _repository = repository;
 
         }
 
-        public async Task<IEnumerable<Cobranca>> GetAll() {
+        public async Task<IEnumerable<Mensalidade>> GetAll() {
             return await _repository.SelectAsync();
         }
 
 
-        public async Task<Cobranca> Obter(long id) {
+        public async Task<Mensalidade> Obter(long id) {
             return await _repository.SelectAsync(id);
         }
 
-        public async Task<Cobranca> Registrar(long idAluno, MensalidadeDTO model) {
-            var _entity = new Cobranca(model.Vencimento, model.Valor, model.Uri, idAluno);
+        public async Task<Mensalidade> Registrar(long idAluno, MensalidadeDTO model) {
+            var _entity = new Mensalidade(model.Vencimento, model.Valor, model.Uri, idAluno);
             if (!_entity.IsValid || _entity == null) return null;
 
             var result = await _repository.InsertAsync(_entity);
@@ -35,7 +35,7 @@ namespace CursoIdiomas.Service.CursoServices {
             return _entity;
         }
 
-        public async Task<Cobranca> Atualizar(long idCurso, CursoDTO model) {
+        public async Task<Mensalidade> Atualizar(long idCurso, CursoDTO model) {
             //var _entity = new Turma(idCurso, model.Nome, (Domain.Enum.EDificuldade)model.Dificuldade, model.CargaHoraria);
 
             //if (!_entity.IsValid)
@@ -45,7 +45,7 @@ namespace CursoIdiomas.Service.CursoServices {
             //if (result == null)
             //    return null;
 
-            return new Cobranca();
+            return new Mensalidade();
 
         }
 
