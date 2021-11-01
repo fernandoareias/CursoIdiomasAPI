@@ -20,7 +20,7 @@ namespace Domain.Test.Entities
         public async void DeveRetornarUmaListaDeAlunos()
         {
             var alunos = await _alunoService.GetAll();
-            Assert.NotEqual(0, alunos.Count());
+            Assert.True(alunos.Any());
         }
 
         [Fact]
