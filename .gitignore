@@ -1,2 +1,4 @@
 src/*/bin/*
 src/*/obj/*
+src/CursoIdiomas.API/appsettings.Development.json
+src/CursoIdiomas.API/appsettings.json
