@@ -1,0 +1,172 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - src", "1 - src", "{663C3AF9-6E9F-458D-9B30-EAC216DC84AA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - tests", "2 - tests", "{8B4209D2-E93C-48E7-B60F-21805AC4A334}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.1 - API", "1.1 - API", "{22FD4F21-F9EC-480A-96AF-8BF6E8EE6036}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.2 - Application", "1.2 - Application", "{F10B9C56-FBAC-4DA1-919E-8D9E0525C4ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.3 - Service", "1.3 - Service", "{21D0643B-582E-4B24-8727-F911C78AE96D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.4 - Domain", "1.4 - Domain", "{C5791499-D889-43E9-88B3-25F31B081609}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.5 - Infra", "1.5 - Infra", "{8415EB0E-72C2-4D7A-9699-ED2A881429CF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.1 - API", "2.1 - API", "{A5901F67-772B-4BC6-BED0-AE2A227ACF15}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.2 - Application", "2.2 - Application", "{73982617-67A5-460B-96F8-0C5BF78E0F16}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.3 - Service", "2.3 - Service", "{316AC2C1-053B-41BC-9244-42CFAC726950}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.4 - Domain", "2.4 - Domain", "{29EB5FB4-7794-48F9-9A61-DF5EDA30A17E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.5 - Infra", "2.5 - Infra", "{34FB1052-8512-414D-859E-FEC8750B18B4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoIdiomas.API.Tests", "tests\CursoIdiomas.API.Tests\CursoIdiomas.API.Tests.csproj", "{8F7FE9F9-3C0C-4E08-A846-95EBF5FFAAFD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoIdiomas.Application.Tests", "tests\CursoIdiomas.Application.Tests\CursoIdiomas.Application.Tests.csproj", "{BD8D62F1-3F66-48AF-BE00-B71B8D03E3DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoIdiomas.Services.Tests", "tests\CursoIdiomas.Services.Tests\CursoIdiomas.Services.Tests.csproj", "{5D64554D-D6FB-4679-BB69-E6231297D8E8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoIdiomas.Domain.Tests", "tests\CursoIdiomas.Domain.Tests\CursoIdiomas.Domain.Tests.csproj", "{8239BAED-414B-4A04-9242-6EA190D4407A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoIdiomas.Infra.Tests", "tests\CursoIdiomas.Infra.Tests\CursoIdiomas.Infra.Tests.csproj", "{BAEB4105-A493-4A11-B24B-67B254CBDD25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Docker", "0 - Docker", "{CD243386-295A-4E12-95BE-3BB5A295E69B}"
+	ProjectSection(SolutionItems) = preProject
+		docker\docker-compose.yaml = docker\docker-compose.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0.1 - Logstash", "0.1 - Logstash", "{DAAE213E-4335-4365-9E21-8731F5B858F7}"
+	ProjectSection(SolutionItems) = preProject
+		docker\Logstash\Dockerfile = docker\Logstash\Dockerfile
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoIdiomas.Application", "src\CursoIdiomas.Application\CursoIdiomas.Application.csproj", "{3A811F08-6CCB-4D79-B055-CBB808C2F997}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoIdiomas.Domain", "src\CursoIdiomas.Domain\CursoIdiomas.Domain.csproj", "{F86F9D8B-FCF8-474E-8E32-D1303FB73912}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoIdiomas.Service", "src\CursoIdiomas.Service\CursoIdiomas.Service.csproj", "{793EF151-F2A8-440B-A17F-30C29D86B0A6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoIdiomas.Infra.Data", "src\CursoIdiomas.Infra\CursoIdiomas.Infra.Data.csproj", "{62FD22FC-A449-4557-A5AB-55F689CF3366}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CursoIdiomas.API", "src\CursoIdiomas.API\CursoIdiomas.API.csproj", "{7DD32A22-76E8-4EA3-B95D-3D7987A3A83D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{3838A59E-EC1C-42D9-AEE9-07D236D6A40F}"
+	ProjectSection(SolutionItems) = preProject
+		docker\Logstash\config\jvm.options = docker\Logstash\config\jvm.options
+		docker\Logstash\config\log4j2.properties = docker\Logstash\config\log4j2.properties
+		docker\Logstash\config\logstash-sample.conf = docker\Logstash\config\logstash-sample.conf
+		docker\Logstash\config\logstash.yml = docker\Logstash\config\logstash.yml
+		docker\Logstash\config\pipelines.yml = docker\Logstash\config\pipelines.yml
+		docker\Logstash\config\startup.options = docker\Logstash\config\startup.options
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Env", "Env", "{8BFEEB02-E268-423A-9B35-8DCEC0F4E11C}"
+	ProjectSection(SolutionItems) = preProject
+		docker\Logstash\env\hmg.env = docker\Logstash\env\hmg.env
+		docker\Logstash\env\prod.env = docker\Logstash\env\prod.env
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pipeline", "Pipeline", "{F049ABAA-A623-4405-BFB5-817967E599FA}"
+	ProjectSection(SolutionItems) = preProject
+		docker\Logstash\pipeline\logstash_dev.conf = docker\Logstash\pipeline\logstash_dev.conf
+		docker\Logstash\pipeline\logstash_hmg.conf = docker\Logstash\pipeline\logstash_hmg.conf
+		docker\Logstash\pipeline\logstash_prod.conf = docker\Logstash\pipeline\logstash_prod.conf
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Queries", "Queries", "{29A1B149-F6B7-4CF3-B0E0-E3FC015EDE61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CursoIdiomas.Infra.CrossCutting", "src\CursoIdiomas.Infra.CrossCutting\CursoIdiomas.Infra.CrossCutting.csproj", "{27529FFA-43D0-42EE-9349-1633BB5D549A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F7FE9F9-3C0C-4E08-A846-95EBF5FFAAFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F7FE9F9-3C0C-4E08-A846-95EBF5FFAAFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F7FE9F9-3C0C-4E08-A846-95EBF5FFAAFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F7FE9F9-3C0C-4E08-A846-95EBF5FFAAFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD8D62F1-3F66-48AF-BE00-B71B8D03E3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD8D62F1-3F66-48AF-BE00-B71B8D03E3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD8D62F1-3F66-48AF-BE00-B71B8D03E3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD8D62F1-3F66-48AF-BE00-B71B8D03E3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D64554D-D6FB-4679-BB69-E6231297D8E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D64554D-D6FB-4679-BB69-E6231297D8E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D64554D-D6FB-4679-BB69-E6231297D8E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D64554D-D6FB-4679-BB69-E6231297D8E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8239BAED-414B-4A04-9242-6EA190D4407A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8239BAED-414B-4A04-9242-6EA190D4407A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8239BAED-414B-4A04-9242-6EA190D4407A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8239BAED-414B-4A04-9242-6EA190D4407A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAEB4105-A493-4A11-B24B-67B254CBDD25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAEB4105-A493-4A11-B24B-67B254CBDD25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAEB4105-A493-4A11-B24B-67B254CBDD25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAEB4105-A493-4A11-B24B-67B254CBDD25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A811F08-6CCB-4D79-B055-CBB808C2F997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A811F08-6CCB-4D79-B055-CBB808C2F997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A811F08-6CCB-4D79-B055-CBB808C2F997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A811F08-6CCB-4D79-B055-CBB808C2F997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F86F9D8B-FCF8-474E-8E32-D1303FB73912}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F86F9D8B-FCF8-474E-8E32-D1303FB73912}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F86F9D8B-FCF8-474E-8E32-D1303FB73912}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F86F9D8B-FCF8-474E-8E32-D1303FB73912}.Release|Any CPU.Build.0 = Release|Any CPU
+		{793EF151-F2A8-440B-A17F-30C29D86B0A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{793EF151-F2A8-440B-A17F-30C29D86B0A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{793EF151-F2A8-440B-A17F-30C29D86B0A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{793EF151-F2A8-440B-A17F-30C29D86B0A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62FD22FC-A449-4557-A5AB-55F689CF3366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62FD22FC-A449-4557-A5AB-55F689CF3366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62FD22FC-A449-4557-A5AB-55F689CF3366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62FD22FC-A449-4557-A5AB-55F689CF3366}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD32A22-76E8-4EA3-B95D-3D7987A3A83D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD32A22-76E8-4EA3-B95D-3D7987A3A83D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD32A22-76E8-4EA3-B95D-3D7987A3A83D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD32A22-76E8-4EA3-B95D-3D7987A3A83D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27529FFA-43D0-42EE-9349-1633BB5D549A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27529FFA-43D0-42EE-9349-1633BB5D549A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27529FFA-43D0-42EE-9349-1633BB5D549A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27529FFA-43D0-42EE-9349-1633BB5D549A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{22FD4F21-F9EC-480A-96AF-8BF6E8EE6036} = {663C3AF9-6E9F-458D-9B30-EAC216DC84AA}
+		{F10B9C56-FBAC-4DA1-919E-8D9E0525C4ED} = {663C3AF9-6E9F-458D-9B30-EAC216DC84AA}
+		{21D0643B-582E-4B24-8727-F911C78AE96D} = {663C3AF9-6E9F-458D-9B30-EAC216DC84AA}
+		{C5791499-D889-43E9-88B3-25F31B081609} = {663C3AF9-6E9F-458D-9B30-EAC216DC84AA}
+		{8415EB0E-72C2-4D7A-9699-ED2A881429CF} = {663C3AF9-6E9F-458D-9B30-EAC216DC84AA}
+		{A5901F67-772B-4BC6-BED0-AE2A227ACF15} = {8B4209D2-E93C-48E7-B60F-21805AC4A334}
+		{73982617-67A5-460B-96F8-0C5BF78E0F16} = {8B4209D2-E93C-48E7-B60F-21805AC4A334}
+		{316AC2C1-053B-41BC-9244-42CFAC726950} = {8B4209D2-E93C-48E7-B60F-21805AC4A334}
+		{29EB5FB4-7794-48F9-9A61-DF5EDA30A17E} = {8B4209D2-E93C-48E7-B60F-21805AC4A334}
+		{34FB1052-8512-414D-859E-FEC8750B18B4} = {8B4209D2-E93C-48E7-B60F-21805AC4A334}
+		{8F7FE9F9-3C0C-4E08-A846-95EBF5FFAAFD} = {A5901F67-772B-4BC6-BED0-AE2A227ACF15}
+		{BD8D62F1-3F66-48AF-BE00-B71B8D03E3DF} = {73982617-67A5-460B-96F8-0C5BF78E0F16}
+		{5D64554D-D6FB-4679-BB69-E6231297D8E8} = {316AC2C1-053B-41BC-9244-42CFAC726950}
+		{8239BAED-414B-4A04-9242-6EA190D4407A} = {29EB5FB4-7794-48F9-9A61-DF5EDA30A17E}
+		{BAEB4105-A493-4A11-B24B-67B254CBDD25} = {34FB1052-8512-414D-859E-FEC8750B18B4}
+		{DAAE213E-4335-4365-9E21-8731F5B858F7} = {CD243386-295A-4E12-95BE-3BB5A295E69B}
+		{3A811F08-6CCB-4D79-B055-CBB808C2F997} = {F10B9C56-FBAC-4DA1-919E-8D9E0525C4ED}
+		{F86F9D8B-FCF8-474E-8E32-D1303FB73912} = {C5791499-D889-43E9-88B3-25F31B081609}
+		{793EF151-F2A8-440B-A17F-30C29D86B0A6} = {21D0643B-582E-4B24-8727-F911C78AE96D}
+		{62FD22FC-A449-4557-A5AB-55F689CF3366} = {8415EB0E-72C2-4D7A-9699-ED2A881429CF}
+		{7DD32A22-76E8-4EA3-B95D-3D7987A3A83D} = {22FD4F21-F9EC-480A-96AF-8BF6E8EE6036}
+		{3838A59E-EC1C-42D9-AEE9-07D236D6A40F} = {DAAE213E-4335-4365-9E21-8731F5B858F7}
+		{8BFEEB02-E268-423A-9B35-8DCEC0F4E11C} = {DAAE213E-4335-4365-9E21-8731F5B858F7}
+		{F049ABAA-A623-4405-BFB5-817967E599FA} = {DAAE213E-4335-4365-9E21-8731F5B858F7}
+		{29A1B149-F6B7-4CF3-B0E0-E3FC015EDE61} = {DAAE213E-4335-4365-9E21-8731F5B858F7}
+		{27529FFA-43D0-42EE-9349-1633BB5D549A} = {8415EB0E-72C2-4D7A-9699-ED2A881429CF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {045F83AF-AAF1-449B-831C-42CC18B40E23}
+	EndGlobalSection
+EndGlobal
