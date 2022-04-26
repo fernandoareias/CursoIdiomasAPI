@@ -12,9 +12,11 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using CursoIdiomas.Application.Identity.Views;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CursoIdiomas.API.Controllers
 {
+    [AllowAnonymous]
     [ApiController]
     [Route("api/v1/identity")]
     public class IdentityController : ControllerBase
@@ -54,7 +56,6 @@ namespace CursoIdiomas.API.Controllers
             return BadRequest();
         }
 
-
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UsuarioLoginDto usuario)
         {
@@ -65,6 +66,8 @@ namespace CursoIdiomas.API.Controllers
 
             return BadRequest();
         }
+
+        #region Token
         private async Task<UsuarioLoginView> GerarJwt(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -129,5 +132,7 @@ namespace CursoIdiomas.API.Controllers
 
         private static long ToUnixEpochDate(DateTime date)
             => (long)Math.Round((date.ToUniversalTime() - new DateTimeOffset(1970, 1, 1, 0, 0, 0, TimeSpan.Zero)).TotalSeconds);
+
+        #endregion
     }
 }

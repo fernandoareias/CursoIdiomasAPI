@@ -37,11 +37,7 @@ namespace CursoIdiomas.API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint(url: "swagger/v1/swagger.json", name: "v1");
-            });
+            
 
 
             if (env.IsDevelopment())
@@ -56,6 +52,13 @@ namespace CursoIdiomas.API
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseMiddleware(typeof(ExceptionMiddleware));
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("v3/swagger.json", "v3");
+            });
+
 
             app.UseEndpoints(endpoints =>
             {
